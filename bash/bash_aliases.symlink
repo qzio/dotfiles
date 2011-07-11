@@ -1,0 +1,12 @@
+export DOTFILES=$HOME/dotfiles
+
+# source every .bash file in this rep
+for config_file in $DOTFILES/**/*.bash
+do
+  source $config_file
+done
+
+for function_file in $DOTFILES/bash/functions/*
+do
+  source $function_file
+done

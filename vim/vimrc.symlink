@@ -1,0 +1,42 @@
+set nocompatible
+filetype plugin indent on
+syntax on
+set t_Co=256
+set background=dark
+set mouse=a
+set mousef
+set shiftwidth=2 softtabstop=2 tabstop=2
+set expandtab 
+set smartindent
+set foldmethod=manual
+set hlsearch
+set encoding=utf8 fileencoding=utf8
+set isk+=_,$,@,%,#,- " those chars is not word separators!
+set autoindent
+set ignorecase
+set laststatus=2
+set number
+" for gvim
+set guioptions-=T
+colorscheme twilight
+
+" use php highlightning on .inc files
+au BufEnter,BufRead,BufNewFile *.inc setf php
+au BufEnter,BufRead,BufNewFile *.thor,Rakefile,*.rake,Capfile,*.ru setf ruby
+au BufEnter,BufRead,BufNewFile *.less setf css
+
+" toggle between paste/paste!
+set pastetoggle=<F2>
+
+" easy way to comment/uncomment lines in visual mode
+vmap <F3> :s/^/#/g<Cr>:noh<Cr>
+vmap <F4> :s/^#//g<Cr>:noh<Cr>
+
+inoremap ' ''<Esc>ha
+inoremap " ""<Esc>ha
+inoremap [ []<Esc>ha
+inoremap ( ()<Esc>ha
+inoremap if<Tab> if()<Esc>ha
+" shortcuts for the flattr project
+inoremap { {}<Esc>ha
+let mapleader=","

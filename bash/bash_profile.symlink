@@ -1,0 +1,8 @@
+#!/bin/bash
+export DOTFILES=$HOME/dotfiles
+force_color_prompt=yes
+
+
+if [ -f ~/.bashrc ]; then
+  . ~/.bashrc
+fi

@@ -1,0 +1,9 @@
+.DS_Store
+tags
+TAGS
+*~
+.#*
+*.swp
+.svn
+*.log
+*.log.*z
