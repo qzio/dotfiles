@@ -7,3 +7,4 @@ TAGS
 .svn
 *.log
 *.log.*z
+.lvimrc
