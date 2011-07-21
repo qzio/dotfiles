@@ -59,7 +59,6 @@ task :install_bins do
     file = linkable.split('/').last
     target = "#{ENV["HOME"]}/bin/#{file}"
     puts "will symlink #{target} = #{file}"
-    return
 
     if File.exists?(target) || File.symlink?(target)
       unless @force_install || skip_all || overwrite_all || backup_all

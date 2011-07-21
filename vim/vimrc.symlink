@@ -11,7 +11,7 @@ set smartindent
 set foldmethod=manual
 set hlsearch
 set encoding=utf8 fileencoding=utf8
-set isk+=_,$,@,%,#,- " those chars is not word separators!
+set isk+=_,- " those chars is not word separators!
 set autoindent
 set ignorecase
 set smartcase
