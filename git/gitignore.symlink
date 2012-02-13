@@ -8,3 +8,5 @@ TAGS
 *.log
 *.log.*z
 .lvimrc
+*-backup/
+backup-*/

@@ -20,13 +20,14 @@ set laststatus=2
 set number
 " for gvim
 set guioptions-=T
-colorscheme twilight
+"colorscheme twilight
+colorscheme molokai
 
 " use php highlightning on .inc files
 au BufEnter,BufRead,BufNewFile *.inc setf php
 au BufEnter,BufRead,BufNewFile *.thor,Rakefile,*.rake,Capfile,*.ru setf ruby
 au BufEnter,BufRead,BufNewFile *.less setf css
-
+autocmd BufNewFile,BufRead *.json set ft=javascript
 " toggle between paste/paste!
 set pastetoggle=<F2>
 
@@ -42,3 +43,10 @@ inoremap if<Tab> if()<Esc>ha
 " shortcuts for the flattr project
 inoremap { {}<Esc>ha
 let mapleader=","
+
+"set list
+set listchars=tab:\ \ ,trail:✖
+
+" ack setting for usage on deb systems
+" are supposed to enable cool documentation on ctrl-x ctrl-o
+"set ofu=syntaxcomplete#Complete

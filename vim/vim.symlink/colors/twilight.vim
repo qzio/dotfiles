@@ -50,6 +50,7 @@ hi Title guifg=#c05000 gui=bold,underline
 
 hi Constant guifg=#cf6a4c
 hi String guifg=#799d6a
+"hi String guifg=#605958
 hi Special guifg=#99fd8a
 "hi Number
 "hi Float
