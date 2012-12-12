@@ -2,6 +2,7 @@ set nocompatible
 filetype plugin indent on
 syntax on
 set t_Co=256
+"set t_Co=16
 set background=dark
 set mouse=a
 set mousef
@@ -21,32 +22,50 @@ set number
 " for gvim
 set guioptions-=T
 "colorscheme twilight
-colorscheme molokai
+"colorscheme nu42dark
+colorscheme qmolokai
+"colorscheme molokai
+"colorscheme Monokai
+"let g:solarized_termcolors=256
+"syntax enable
+"set background=dark
+"colorscheme solarized
+"set background=dark
 
 " use php highlightning on .inc files
 au BufEnter,BufRead,BufNewFile *.inc setf php
 au BufEnter,BufRead,BufNewFile *.thor,Rakefile,*.rake,Capfile,*.ru setf ruby
 au BufEnter,BufRead,BufNewFile *.less setf css
 autocmd BufNewFile,BufRead *.json set ft=javascript
+au BufEnter,BufRead,BufNewFile *.scss setf scss
+
+
+" use 4 for indention in python files
+au BufEnter,BufRead,BufNewFile *.py set shiftwidth=4 softtabstop=4 tabstop=4
+
 " toggle between paste/paste!
 set pastetoggle=<F2>
+" set leader key to ,
+let mapleader=","
 
 " easy way to comment/uncomment lines in visual mode
 vmap <F3> :s/^/#/g<Cr>:noh<Cr>
 vmap <F4> :s/^#//g<Cr>:noh<Cr>
 
-inoremap ' ''<Esc>ha
-inoremap " ""<Esc>ha
-inoremap [ []<Esc>ha
-inoremap ( ()<Esc>ha
-inoremap if<Tab> if()<Esc>ha
+"inoremap ' ''<Esc>ha
+"inoremap " ""<Esc>ha
+"inoremap [ []<Esc>ha
+"inoremap ( ()<Esc>ha
+"inoremap { {}<Esc>ha
+"inoremap if<Tab> if()<Esc>ha
 " shortcuts for the flattr project
-inoremap { {}<Esc>ha
-let mapleader=","
 
-"set list
+"set list (doesnt work?)
 set listchars=tab:\ \ ,trail:✖
 
 " ack setting for usage on deb systems
 " are supposed to enable cool documentation on ctrl-x ctrl-o
 "set ofu=syntaxcomplete#Complete
+if has("statusline")
+ set statusline=%<%f\ %h%m%r%=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
+endif
