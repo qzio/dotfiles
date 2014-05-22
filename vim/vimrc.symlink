@@ -1,8 +1,6 @@
 set nocompatible
 filetype plugin indent on
 syntax on
-set t_Co=256
-"set t_Co=16
 set background=dark
 set mouse=a
 set mousef
@@ -21,16 +19,6 @@ set laststatus=2
 set number
 " for gvim
 set guioptions-=T
-"colorscheme twilight
-"colorscheme nu42dark
-colorscheme qmolokai
-"colorscheme molokai
-"colorscheme Monokai
-"let g:solarized_termcolors=256
-"syntax enable
-"set background=dark
-"colorscheme solarized
-"set background=dark
 
 " use php highlightning on .inc files
 au BufEnter,BufRead,BufNewFile *.inc setf php
@@ -41,31 +29,30 @@ au BufEnter,BufRead,BufNewFile *.scss setf scss
 
 
 " use 4 for indention in python files
+au BufEnter,BufRead,BufNewFile *.* set shiftwidth=2 softtabstop=2 tabstop=2
 au BufEnter,BufRead,BufNewFile *.py set shiftwidth=4 softtabstop=4 tabstop=4
 
-" toggle between paste/paste!
-set pastetoggle=<F2>
 " set leader key to ,
 let mapleader=","
 
-" easy way to comment/uncomment lines in visual mode
-vmap <F3> :s/^/#/g<Cr>:noh<Cr>
-vmap <F4> :s/^#//g<Cr>:noh<Cr>
+" map , t to ctrlp (fuzzy finder)
+nmap <Leader>t :CtrlP<Cr>
+nmap <Leader>b :CtrlPBuffer<Cr>
 
-"inoremap ' ''<Esc>ha
-"inoremap " ""<Esc>ha
-"inoremap [ []<Esc>ha
-"inoremap ( ()<Esc>ha
-"inoremap { {}<Esc>ha
-"inoremap if<Tab> if()<Esc>ha
-" shortcuts for the flattr project
-
-"set list (doesnt work?)
 set listchars=tab:\ \ ,trail:✖
+set list
 
-" ack setting for usage on deb systems
-" are supposed to enable cool documentation on ctrl-x ctrl-o
-"set ofu=syntaxcomplete#Complete
+" no idea, but show the encoding in the status line.
 if has("statusline")
  set statusline=%<%f\ %h%m%r%=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
 endif
+
+" fix pyflakes
+highlight clear SpellBad
+highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
+highlight clear SpellCap
+highlight SpellCap term=underline cterm=underline
+highlight clear SpellRare
+highlight SpellRare term=underline cterm=underline
+highlight clear SpellLocal
+highlight SpellLocal term=underline cterm=underline   
