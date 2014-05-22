@@ -3,7 +3,7 @@
 #unbind-key C-b
 #bind-key C-a send-prefix
 
-# make it look nicer
+# make it look nicer (doesnt work, still need tmux -2)
 set -g default-terminal "screen-256color"
 
 # Set status bar

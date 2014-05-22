@@ -1,7 +1,6 @@
 set nocompatible
 filetype plugin indent on
 syntax on
-set t_Co=256
 set background=dark
 set mouse=a
 set mousef
@@ -20,33 +19,40 @@ set laststatus=2
 set number
 " for gvim
 set guioptions-=T
-"colorscheme twilight
-colorscheme molokai
 
 " use php highlightning on .inc files
 au BufEnter,BufRead,BufNewFile *.inc setf php
 au BufEnter,BufRead,BufNewFile *.thor,Rakefile,*.rake,Capfile,*.ru setf ruby
 au BufEnter,BufRead,BufNewFile *.less setf css
 autocmd BufNewFile,BufRead *.json set ft=javascript
-" toggle between paste/paste!
-set pastetoggle=<F2>
+au BufEnter,BufRead,BufNewFile *.scss setf scss
 
-" easy way to comment/uncomment lines in visual mode
-vmap <F3> :s/^/#/g<Cr>:noh<Cr>
-vmap <F4> :s/^#//g<Cr>:noh<Cr>
 
-inoremap ' ''<Esc>ha
-inoremap " ""<Esc>ha
-inoremap [ []<Esc>ha
-inoremap ( ()<Esc>ha
-inoremap if<Tab> if()<Esc>ha
-" shortcuts for the flattr project
-inoremap { {}<Esc>ha
+" use 4 for indention in python files
+au BufEnter,BufRead,BufNewFile *.* set shiftwidth=2 softtabstop=2 tabstop=2
+au BufEnter,BufRead,BufNewFile *.py set shiftwidth=4 softtabstop=4 tabstop=4
+
+" set leader key to ,
 let mapleader=","
 
-"set list
-set listchars=tab:\ \ ,trail:✖
+" map , t to ctrlp (fuzzy finder)
+nmap <Leader>t :CtrlP<Cr>
+nmap <Leader>b :CtrlPBuffer<Cr>
 
-" ack setting for usage on deb systems
-" are supposed to enable cool documentation on ctrl-x ctrl-o
-"set ofu=syntaxcomplete#Complete
+set listchars=tab:\ \ ,trail:✖
+set list
+
+" no idea, but show the encoding in the status line.
+if has("statusline")
+ set statusline=%<%f\ %h%m%r%=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
+endif
+
+" fix pyflakes
+highlight clear SpellBad
+highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
+highlight clear SpellCap
+highlight SpellCap term=underline cterm=underline
+highlight clear SpellRare
+highlight SpellRare term=underline cterm=underline
+highlight clear SpellLocal
+highlight SpellLocal term=underline cterm=underline   
