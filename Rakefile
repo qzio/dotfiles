@@ -34,7 +34,7 @@ task :install do
       FileUtils.rm_rf(target) if overwrite || overwrite_all || @force_install
       `mv "$HOME/.#{file}" "$HOME/.#{file}.backup"` if backup || backup_all
     end
-    linkit(linkable, target) unless File.exists?(target) && File.symlink?(target)
+    linkit(linkable, target) if !File.exists?(target) && !File.symlink?(target)
   end
 end
 
