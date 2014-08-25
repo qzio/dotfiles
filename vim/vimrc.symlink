@@ -39,6 +39,12 @@ let mapleader=","
 nmap <Leader>t :CtrlP<Cr>
 nmap <Leader>b :CtrlPBuffer<Cr>
 
+" Move faster between windows
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
 set listchars=tab:\ \ ,trail:✖
 set list
 
