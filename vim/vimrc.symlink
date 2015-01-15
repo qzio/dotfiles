@@ -17,6 +17,15 @@ set smartcase
 set hidden
 set laststatus=2
 set number
+
+" make 111 column a red bar
+set textwidth=110
+set colorcolumn=+1
+" Quicker window movement
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
 " for gvim
 set guioptions-=T
 
@@ -45,6 +54,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
+" show trailing whitespaces
 set listchars=tab:\ \ ,trail:✖
 set list
 
@@ -61,4 +71,4 @@ highlight SpellCap term=underline cterm=underline
 highlight clear SpellRare
 highlight SpellRare term=underline cterm=underline
 highlight clear SpellLocal
-highlight SpellLocal term=underline cterm=underline   
+highlight SpellLocal term=underline cterm=underline
