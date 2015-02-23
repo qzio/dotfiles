@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 CURRENT_TIME=`date +%Y%m%d%k%M`
 FORCE=0
