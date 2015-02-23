@@ -1,7 +1,10 @@
 set nocompatible
 filetype plugin indent on
 syntax on
-set background=dark
+" setting light background works better with solarized theme.
+"set background=dark
+set background=light
+
 set mouse=a
 set mousef
 set shiftwidth=2 softtabstop=2 tabstop=2
@@ -47,6 +50,10 @@ let mapleader=","
 " map , t to ctrlp (fuzzy finder)
 nmap <Leader>t :CtrlP<Cr>
 nmap <Leader>b :CtrlPBuffer<Cr>
+
+" map d to jump to definition
+nmap <Leader>d <c-]>
+
 
 " Move faster between windows
 nnoremap <C-j> <C-w>j

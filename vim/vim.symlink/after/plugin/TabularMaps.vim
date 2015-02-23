@@ -46,3 +46,11 @@ AddTabularPattern! trailing_c_comments /\/\*\|\*\/\|\/\//l1
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
+
+" map a to align
+if exists(":Tabularize")
+  "nmap <Leader>a= :Tabularize /=<CR>
+  vmap <Leader>a= :Tabularize /=<CR>
+  "nmap <Leader>a: :Tabularize /:\zs<CR>
+  vmap <Leader>a: :Tabularize /:\zs<CR>
+endif
