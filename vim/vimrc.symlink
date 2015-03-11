@@ -54,6 +54,7 @@ nmap <Leader>b :CtrlPBuffer<Cr>
 
 " map d to jump to definition
 nmap <Leader>d <c-]>
+nmap <Leader>f <c-o>
 
 
 " Move faster between windows
