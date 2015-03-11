@@ -1,7 +1,6 @@
-# use ctrl-a as the prefix.
-#set-option -g prefix C-a
-#unbind-key C-b
-#bind-key C-a send-prefix
+## Start windows and panes at 1, not 0
+set -g base-index 1
+set -g pane-base-index 1
 
 # make it look nicer (doesnt work, still need tmux -2)
 set -g default-terminal "screen-256color"
@@ -17,3 +16,6 @@ bind h select-pane -L
 bind j select-pane -D
 bind k select-pane -U
 bind l select-pane -R
+
+# OSX open cli cmd fix.
+# set-option -g default-command "reattach-to-user-namespace -l $SHELL -l"
