@@ -38,6 +38,7 @@ au BufEnter,BufRead,BufNewFile *.thor,Rakefile,*.rake,Capfile,*.ru setf ruby
 au BufEnter,BufRead,BufNewFile *.less setf css
 autocmd BufNewFile,BufRead *.json set ft=javascript
 au BufEnter,BufRead,BufNewFile *.scss setf scss
+au BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=handlebars
 
 
 " use 4 for indention in python files
