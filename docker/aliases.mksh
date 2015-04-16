@@ -1,5 +1,7 @@
 alias dlist='docker images |grep -v none'
 alias d='docker'
+alias dc='docker-compose'
+alias dm='docker-machine'
 
 function denter()
 {
