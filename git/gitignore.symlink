@@ -10,3 +10,4 @@ TAGS
 .lvimrc
 *-backup/
 backup-*/
+backup/*
