@@ -56,9 +56,9 @@ d_rmi_all_none()
 # Remove a bunch of <none> containers.
 d_rm_all_none()
 {
-  for h in `docker ps -a |grep -v ':' |awk '{print $1}'|grep -v CONTAINER`; do
-    docker rm $h
-  done
+  #for h in `docker ps -a |grep -v ':' |awk '{print $1}'|grep -v CONTAINER`; do
+  #  docker rm --volumes=true $h
+  #done
 }
 
 # Remove <none> images and containers

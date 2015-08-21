@@ -56,7 +56,6 @@ nmap <Leader>b :CtrlPBuffer<Cr>
 nmap <Leader>d <c-]>
 nmap <Leader>f <c-o>
 
-
 " Move faster between windows
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -100,3 +99,6 @@ function! ToggleErrors()
     endif
 endfunction
 nnoremap <silent> <Leader>e :<C-u>call ToggleErrors()<CR>
+
+" osx is funny
+set backspace=indent,eol,start
