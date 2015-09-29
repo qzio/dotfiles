@@ -7,11 +7,14 @@ set -g pane-base-index 1
 # make it look nicer (doesnt work, still need tmux -2)
 set -g default-terminal "screen-256color"
 
+# get ctrl-arrow  to move between words
+set-window-option -g xterm-keys on
+
 # Set status bar
 set -g status-bg black
 set -g status-fg white
 set -g status-left ‘#[fg=green]#H’
-set-window-option -g window-status-current-bg red
+set-window-option -g window-status-current-fg colour9
 
 # vim key bindings to select panes.
 bind h select-pane -L

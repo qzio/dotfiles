@@ -1,4 +1,5 @@
 alias dm='docker-machine'
+alias compose='docker-compose'
 
 # Enter a container, denter <grep on something from docker ps>
 denter()
@@ -66,6 +67,19 @@ d_remove_all_none()
 {
   d_rm_all_none
   d_rmi_all_none
+}
+
+dsyslog()
+{
+  local name=$1
+  local lines=50
+  if [ ! -n "$name" ] ; then
+    name=logstash
+  fi
+  if [ -n "$2" ] ; then
+    lines=$2
+  fi
+  dexec $name "tail -f -n $lines /var/log/syslog"
 }
 
 # tinycore linux doesn't have the host command...
