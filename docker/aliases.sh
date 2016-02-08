@@ -1,6 +1,11 @@
 alias dm='docker-machine'
 alias compose='docker-compose'
 
+m()
+{
+  eval $(docker-machine env $1)
+}
+
 # Enter a container, denter <grep on something from docker ps>
 denter()
 {
@@ -57,9 +62,7 @@ d_rmi_all_none()
 # Remove a bunch of <none> containers.
 d_rm_all_none()
 {
-  #for h in `docker ps -a |grep -v ':' |awk '{print $1}'|grep -v CONTAINER`; do
-  #  docker rm --volumes=true $h
-  #done
+  echo "not doing this"
 }
 
 # Remove <none> images and containers
