@@ -1,39 +1,81 @@
-#!/bin/bash
+#!/bin/sh
+set -e
+curdir=$(pwd)
 
-CURRENT_TIME=`date +%Y%m%d%k%M`
-FORCE=0
-if [ "$1" == "-f" ] ; then
-  echo "will force override all files/directories."
-  FORCE=1
-fi
-CURRENT_DIR=`dirname $0`
-R=$(readlink -f $CURRENT_DIR)
-CURRENT_DIR=$R/
-echo $CURRENT_DIR
+main() {
+  validate_curdir
+  link_dotsymlinks
+  link_home
+}
 
-linkit()
-{
-  if [ -f $2 ] || [ -d $2 ]; then
-    echo "$2 already exists"
-    if [ $FORCE -eq 1 ] ; then
-      echo "creating a copy and removing original"
-      echo "mv $2 $2.$CURRENT_TIME.backup"
-      mv $2 $2.$CURRENT_TIME.backup
+validate_curdir() {
+  if [ "$curdir" != "$HOME/dotfiles" ] ; then
+    echo "*** STOP ***"
+    echo "$curdir != $HOME/dotfiles"
+    echo "you must be in your ~/ (\$HOME) when executing $(basename $0). your current work dir $(pwd)$(dirname $0) "
+    echo "are you sure you want to continue with curdir: $curdir [y/n]?"
+    read _answer
+    if [ "$_answer" != "y" ] ; then
+      echo "ok will exit."
+      exit 1
     fi
-  else
-    echo "ln -sf $1 $2"
-    ln -sf $1 $2
+    echo "wait... ARE YOU REALLY SURE????"
+    read _answer
+    if [ "$_answer" != "y" ] ; then
+      echo "ok will exit."
+      exit 1
+    fi
   fi
 }
 
+link_dotsymlinks() {
+  local filename=
+  local target=
+  local full_source=
 
-echo "will cd too $CURRENT_DIR"
+  cd $curdir
+  for symlink_source in `find . -name "*.symlink" `; do
+    filename=$(basename "$symlink_source")
+    target="$HOME/.${filename%.*}"
+    full_source=$( readlink -f $symlink_source )
+    linkit $full_source $target
+  done ;
+}
 
-cd $CURRENT_DIR
+link_home() {
+  local f=
+  local target=
+  local d=
 
-for symlink_source in `find . -name "*.symlink" `; do
-  filename=$(basename "$symlink_source")
-  TARGET="$HOME/.${filename%.*}"
-  full_source=$( readlink -f $symlink_source )
-  linkit $full_source $TARGET
-done ;
+  cd $curdir
+  for f in $(find home/ -type f | sed 's/^home\///g') ; do
+    target=$HOME/$f
+    linkit $HOME/dotfiles/home/$f $target
+  done
+}
+
+# private
+
+linkit()
+{
+  local from="$1"
+  local target="$2"
+  local filedir=$(dirname $target)
+
+  if [ -f "$target" ] || [ -d "$target" ]; then
+    if [ -L "$target" ] ; then
+      echo "$target is already a symlink"
+    else
+      echo "$target already exists as a normal file"
+    fi
+  else
+    if [ ! -d "$filedir" ] ; then
+      echo "mkdir $filedir"
+      mkdir $filedir
+    fi
+    echo "ln -sf $from $target"
+    ln -sf "$from" "$target"
+  fi
+}
+
+main

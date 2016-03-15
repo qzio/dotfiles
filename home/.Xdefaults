@@ -1,0 +1,49 @@
+URxvt*font: xft:Source\ Code\ Pro\ Medium:pixelsize=13:antialias=true:hinting=true
+
+URxvt*scrollBar:  false
+urxvt*256-color:  true
+URxvt.visualBell: false
+
+! fixes ctrl-shift ...?
+URxvt.iso14755:   False
+URxvt*perl-ext-common: default,matcher
+URxvt*matcher.button:  1
+URxvt*url-launcher:    /usr/local/bin/firefox
+
+
+! intensityStyles from internet re solarized
+URxvt.intensityStyles: false
+
+!  - color scheme
+!urxvt.background:  #102720
+!urxvt.foreground:  #b2b2b2
+urxvt.background:  #101010
+urxvt.foreground:  #bbbbbb
+! black + red
+!urxvt*color0:     #3f3f3f
+urxvt*color0:      #000000
+urxvt*color1:      #bb2520
+! green + yellow
+urxvt*color2:      #00bb00
+urxvt*color3:      #bbbb00
+! blue + purple
+!urxvt*color4:      #0000bb
+!urxvt*color4:      #00bbbb
+!urxvt*color4:      #2299dd
+urxvt*color4:      #4444dd
+urxvt*color5:      #bb00bb
+! cyan + white
+urxvt*color6:      #00bbbb
+urxvt*color7:      #b2b2b2
+! bright-black + bright-red
+urxvt*color8:      #555555
+urxvt*color9:      #ff5555
+! bright-green + bright-yellow
+urxvt*color10:     #55ff55
+urxvt*color11:     #ffff55
+! bright-blue + bright-purple
+urxvt*color12:     #5555ff
+urxvt*color13:     #ff55ff
+! bright-cyan + bright-white
+urxvt*color14:     #55ffff
+urxvt*color15:     #d1d1d1
