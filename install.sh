@@ -48,8 +48,13 @@ link_home() {
 
   cd $curdir
   for f in $(find home/ -type f | sed 's/^home\///g') ; do
-    source=$HOME/dotfiles/home$f
-    target=${HOME}$f
+    if [ "$(uname)" = "Linux" ] ; then
+      source=$HOME/dotfiles/home/$f
+      target=${HOME}/$f
+    else
+      source=$HOME/dotfiles/home$f
+      target=${HOME}$f
+    fi
     linkit $source $target
   done
 }
