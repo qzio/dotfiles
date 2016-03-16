@@ -1,6 +1,13 @@
 alias dm='docker-machine'
 alias compose='docker-compose'
 
+o()
+{
+  echo "previous org: $CHEF_ORG"
+  export CHEF_ORG=$1
+  echo "now: CHEF_ORG=$CHEF_ORG"
+}
+
 m()
 {
   eval $(docker-machine env $1)
