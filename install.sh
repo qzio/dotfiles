@@ -31,26 +31,26 @@ validate_curdir() {
 link_dotsymlinks() {
   local filename=
   local target=
-  local full_source=
+  local source=
 
   cd $curdir
-  for symlink_source in `find . -name "*.symlink" `; do
+  for symlink_source in `find $curdir -name "*.symlink" `; do
     filename=$(basename "$symlink_source")
     target="$HOME/.${filename%.*}"
-    full_source=$( readlink -f $symlink_source )
-    linkit $full_source $target
+    linkit "$symlink_source" "$target"
   done ;
 }
 
 link_home() {
   local f=
   local target=
-  local d=
+  local source=
 
   cd $curdir
   for f in $(find home/ -type f | sed 's/^home\///g') ; do
-    target=$HOME/$f
-    linkit $HOME/dotfiles/home/$f $target
+    source=$HOME/dotfiles/home$f
+    target=${HOME}$f
+    linkit $source $target
   done
 }
 
