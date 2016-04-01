@@ -51,6 +51,9 @@ link_home() {
     if [ "$(uname)" = "Linux" ] ; then
       source=$HOME/dotfiles/home/$f
       target=${HOME}/$f
+    elif [ "$(uname)" = "FreeBSD" ] ; then
+      source=$HOME/dotfiles/home/$f
+      target=${HOME}/$f
     else
       source=$HOME/dotfiles/home$f
       target=${HOME}$f
