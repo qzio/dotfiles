@@ -22,8 +22,8 @@ if [ -f ~/dotfiles/zsh/antigen.zsh ] ; then
   antigen bundle zsh-users/zsh-syntax-highlighting
 
   # Load the theme.
-  #antigen theme qzio/dotfiles zsh/themes/qzio
-  antigen theme sorin
+  antigen theme qzio/dotfiles zsh/themes/qzio
+  #antigen theme sorin
 
   # Tell antigen that you're done.
   antigen apply
