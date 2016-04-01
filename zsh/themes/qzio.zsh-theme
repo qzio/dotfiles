@@ -2,7 +2,7 @@
 # Red server name, green cwd, blue git status
 
 #PROMPT='%{$fg[cyan]%}%m%{$reset_color%}:%{$fg[green]%}%3~ %B%{$reset_color%}$(git_prompt_info) %(!.#.$) '
-PROMPT='%{$fg[cyan]%}%m%{$reset_color%}:%{$fg[green]%}%3~%B%{$reset_color%}$(git_prompt_info) %(!.#.$) '
+PROMPT='%{$fg[magenta]%}%m%{$reset_color%}:%{$fg[green]%}%3~%B%{$reset_color%}$(git_prompt_info) %(!.#.$) '
 
 #ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[blue]%}("
 #ZSH_THEME_GIT_PROMPT_SUFFIX=")%{$reset_color%}"
