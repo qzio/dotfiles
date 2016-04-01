@@ -1,19 +1,33 @@
+export EDITOR=vim
+# Use emacs keybindings even if our EDITOR is set to vi
+bindkey -e
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+export HISTSIZE=10000
+export SAVEHIST=10000
+export HISTFILE=~/.history_zsh
+export PATH=$PATH:~/bin
+if [ -f ~/dotfiles/docker/aliases.sh ] ; then
+  source ~/dotfiles/docker/aliases.sh
+fi
 
-if [ -f ~/dotfiles/zsh/antigen.sh ] ; then
-  echo "loading antigen"
-  source ~/dotfiles/zsh/antigen.sh
+if [ -f ~/dotfiles/zsh/antigen.zsh ] ; then
+  source ~/dotfiles/zsh/antigen.zsh
   # Load the oh-my-zsh's library.
   antigen use oh-my-zsh
 
+  # Nice git helpers
   antigen bundle git
 
   # Syntax highlighting bundle.
   antigen bundle zsh-users/zsh-syntax-highlighting
 
   # Load the theme.
-  #antigen theme robbyrussell
   #antigen theme qzio/dotfiles zsh/themes/qzio
+  antigen theme sorin
 
   # Tell antigen that you're done.
   antigen apply
+else
+  echo "antigen.zsh NOT found; base zsh will be used."
+  ls ~/dotfiles/zsh/antigen.zsh
 fi
