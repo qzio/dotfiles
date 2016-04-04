@@ -2,13 +2,20 @@ export EDITOR=vim
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-export HISTSIZE=10000
+export HISTSIZE=1000
 export SAVEHIST=10000
 export HISTFILE=~/.history_zsh
 export PATH=$PATH:~/bin
 if [ -f ~/dotfiles/docker/aliases.sh ] ; then
   source ~/dotfiles/docker/aliases.sh
 fi
+
+for extra_file in .osx_extras ; do
+  if [ -f ~/$extra_file ] ; then
+    echo "sourcing ~/$extra_file"
+    . ~/$extra_file
+  fi
+done
 
 if [ -f ~/dotfiles/zsh/antigen.zsh ] ; then
   source ~/dotfiles/zsh/antigen.zsh
