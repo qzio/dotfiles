@@ -1,5 +1,6 @@
 clear Lock
-keycode 66 = Escape
+keycode 119 = Super_L
+keycode 66 = Escape NoSymbol Escape
 
 ! fixes pgUp/pgDown on buttons arrow.top/left arrow.top/right on a x220
 keycode 234 = Prior
