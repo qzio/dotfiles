@@ -27,6 +27,7 @@ if [ -f ~/dotfiles/zsh/antigen.zsh ] ; then
 
   # Syntax highlighting bundle.
   antigen bundle zsh-users/zsh-syntax-highlighting
+  antigen bundle zsh-users/zsh-completions src
 
   # Load the theme.
   antigen theme qzio/dotfiles zsh/themes/qzio
