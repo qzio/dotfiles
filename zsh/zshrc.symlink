@@ -5,7 +5,7 @@ bindkey -e
 export HISTSIZE=1000
 export SAVEHIST=10000
 export HISTFILE=~/.history_zsh
-export PATH=$PATH:~/bin
+export PATH=~/bin:$PATH:
 if [ -f ~/dotfiles/docker/aliases.sh ] ; then
   source ~/dotfiles/docker/aliases.sh
 fi
@@ -35,6 +35,5 @@ if [ -f ~/dotfiles/zsh/antigen.zsh ] ; then
   # Tell antigen that you're done.
   antigen apply
 else
-  echo "antigen.zsh NOT found; base zsh will be used."
-  ls ~/dotfiles/zsh/antigen.zsh
+  echo "Antigen not in ~/dotfiles/zsh/antigen.zsh ?!"
 fi
