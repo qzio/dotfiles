@@ -6,15 +6,21 @@ if [ "$(uname)" = "Darwin" ] ; then
   {
       hostname -s|cut -d "-" -f 2
   }
-  PROMPT='%{$fg[magenta]%}$(short_hostname)%{$reset_color%}:%{$fg[blue]%}%3~%B%{$reset_color%}$(git_prompt_info)%(!.#.$) '
+  __docker_machine_prompt()
+  {
+    if [ -n "$DOCKER_MACHINE_NAME" ] ; then
+      echo "%{$fg[grey]%}[$DOCKER_MACHINE_NAME]%{$reset_color%}"
+    fi
+  }
+PROMPT='%{$fg[magenta]%}$(short_hostname)%{$reset_color%}:%{$fg[blue]%}%3~%B%{$reset_color%}$(__docker_machine_prompt)$(git_prompt_info)%(!.#.$) '
 else
   PROMPT='%{$fg[magenta]%}%m%{$reset_color%}:%{$fg[blue]%}%3~%B%{$reset_color%}$(git_prompt_info)%(!.#.$) '
 fi
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[grey]%}("
 ZSH_THEME_GIT_PROMPT_SUFFIX=")%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%}✗%{$fg[grey]%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}✓%{$fg[grey]%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%}✗%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}✓%{$reset_color%}"
 
 ZSH_THEME_GIT_PROMPT_ADDED=""
 ZSH_THEME_GIT_PROMPT_MODIFIED=""
