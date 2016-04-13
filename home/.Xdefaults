@@ -33,7 +33,8 @@ URxvt.depth:                32
 #define S_cyan          #2aa198
 #define S_green         #859900
 ! Dark
-#define S_base03        #002b36
+!#define S_base03        #002b36
+!user-change
 #define S_base02        #073642
 #define S_base01        #586e75
 #define S_base00        #657b83
@@ -51,7 +52,8 @@ URxvt.depth:                32
 ! #define S_base2         #073642
 ! #define S_base3         #002b36
 !
-*background:              S_base03
+! override by user
+!*background:              S_base03
 *foreground:              S_base0
 *fading:                  40
 *fadeColor:               S_base03
@@ -76,3 +78,5 @@ URxvt.depth:                32
 *color14:                 S_base1
 *color15:                 S_base3
 ! End solarized theme.
+
+*background:              #011221
