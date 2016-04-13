@@ -79,7 +79,7 @@ linkit()
   else
     if [ ! -d "$filedir" ] ; then
       echo "mkdir $filedir"
-      mkdir $filedir
+      mkdir -p $filedir
     fi
     echo "ln -sf $from $target"
     ln -sf "$from" "$target"
