@@ -1,9 +1,12 @@
 set nocompatible
 filetype plugin indent on
 syntax on
-" setting light background works better with solarized theme.
-"set background=dark
-set background=light
+" On a solarized terminal, the default vim color scheme is more
+" readable using vim's "light" background.
+" But when using the solzarized vim theme, I want to background to be dark.
+"set background=light
+set background=dark
+colorscheme solarized
 
 set mouse=a
 set mousef

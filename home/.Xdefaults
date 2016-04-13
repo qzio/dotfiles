@@ -23,10 +23,12 @@ URxvt.depth:                32
 ! Solarized ref: http://ethanschoonover.com/solarized
 ! code ref: https://github.com/solarized
 
-! user-override darker, less blue, background
-!#define S_base03        #002b36
+! user-override darker, less blue, background color. base03,base02
+!#define S_base03       #002b36
+!#define S_base02       #073642
 #define S_base03        #01151a
-#define S_base02        #073642
+#define S_base02        #082027
+
 #define S_base01        #586e75
 #define S_base00        #657b83
 #define S_base0         #839496
