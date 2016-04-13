@@ -55,8 +55,9 @@ URxvt.depth:                32
 ! override by user
 !*background:              S_base03
 *foreground:              S_base0
-*fading:                  40
-*fadeColor:               S_base03
+! override by user
+!*fading:                  40
+!*fadeColor:               S_base03
 *cursorColor:             S_base1
 *pointerColorBackground:  S_base01
 *pointerColorForeground:  S_base1
@@ -79,4 +80,7 @@ URxvt.depth:                32
 *color15:                 S_base3
 ! End solarized theme.
 
-*background:              #011221
+! solarized overrides
+*background:              #01151a
+*fadeColor:               #010a0e
+*fading:                  30
