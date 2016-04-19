@@ -47,7 +47,7 @@ link_home() {
   local source=
 
   cd $curdir
-  for f in $(find home/ -type f | sed 's/^home\///g') ; do
+  for f in $(find home/ | sed 's/^home\///g') ; do
     if [ "$(uname)" = "Linux" ] ; then
       source=$HOME/dotfiles/home/$f
       target=${HOME}/$f
@@ -58,7 +58,9 @@ link_home() {
       source=$HOME/dotfiles/home$f
       target=${HOME}$f
     fi
-    linkit $source $target
+    if [ ! -d $source ] ; then
+      linkit $source $target
+    fi
   done
 }
 

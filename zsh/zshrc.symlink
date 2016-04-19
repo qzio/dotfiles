@@ -10,13 +10,6 @@ if [ -f ~/dotfiles/docker/aliases.sh ] ; then
   source ~/dotfiles/docker/aliases.sh
 fi
 
-for extra_file in .osx_extras ; do
-  if [ -f ~/$extra_file ] ; then
-    echo "sourcing ~/$extra_file"
-    . ~/$extra_file
-  fi
-done
-
 if [ -f ~/dotfiles/zsh/antigen.zsh ] ; then
   source ~/dotfiles/zsh/antigen.zsh
   # Load the oh-my-zsh's library.
@@ -38,3 +31,11 @@ if [ -f ~/dotfiles/zsh/antigen.zsh ] ; then
 else
   echo "Antigen not in ~/dotfiles/zsh/antigen.zsh ?!"
 fi
+
+# Need this last since oh-my-zsh ruins variables etc.
+for extra_file in .osx_extras ; do
+  if [ -f ~/$extra_file ] ; then
+    echo "sourcing ~/$extra_file"
+    . ~/$extra_file
+  fi
+done
