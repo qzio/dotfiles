@@ -10,6 +10,10 @@ if [ -f ~/dotfiles/docker/aliases.sh ] ; then
   source ~/dotfiles/docker/aliases.sh
 fi
 
+if [ $(command -v opam | wc -l) -gt 0 ] ; then
+  eval `opam config env`
+fi
+
 if [ -f ~/dotfiles/zsh/antigen.zsh ] ; then
   source ~/dotfiles/zsh/antigen.zsh
   # Load the oh-my-zsh's library.
