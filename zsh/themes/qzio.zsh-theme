@@ -18,7 +18,7 @@ if [ "$(uname)" = "Darwin" ] ; then
       echo "%K{0}{$CHEF_ORG}%{$reset_color%}"
     fi
   }
-  PROMPT='%{$fg[magenta]%}$(short_hostname)%{$reset_color%}:%{$fg[blue]%}%3~%B%{$reset_color%}$(__chef_prompt)$(__docker_machine_prompt)$(git_prompt_info)%(!.#.$) '
+  PROMPT='%{$fg[magenta]%}$(short_hostname)%{$reset_color%}:%{$fg[green]%}%3~%B%{$reset_color%}$(__chef_prompt)$(__docker_machine_prompt)$(git_prompt_info)%(!.#.$) '
 else
   PROMPT='%{$fg[magenta]%}%m%{$reset_color%}:%{$fg[green]%}%3~%B%{$reset_color%}$(git_prompt_info)%(!.#.$) '
 fi
