@@ -9,13 +9,13 @@ if [ "$(uname)" = "Darwin" ] ; then
   __docker_machine_prompt()
   {
     if [ -n "$DOCKER_MACHINE_NAME" ] ; then
-      echo "%{$fg[grey]%}[$DOCKER_MACHINE_NAME]%{$reset_color%}"
+      echo "%K{0}[$DOCKER_MACHINE_NAME]%{$reset_color%}"
     fi
   }
   __chef_prompt()
   {
     if [ -n "$CHEF_ORG" ] && [ "$CHEF_ORG" != "test-joel" ] ; then
-      echo "%{$fg[grey]%}{$CHEF_ORG}%{$reset_color%}"
+      echo "%K{0}{$CHEF_ORG}%{$reset_color%}"
     fi
   }
   PROMPT='%{$fg[magenta]%}$(short_hostname)%{$reset_color%}:%{$fg[blue]%}%3~%B%{$reset_color%}$(__chef_prompt)$(__docker_machine_prompt)$(git_prompt_info)%(!.#.$) '
