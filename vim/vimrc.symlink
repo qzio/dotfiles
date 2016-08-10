@@ -5,6 +5,7 @@ syntax on
 " readable using vim's "light" background.
 " But when using the solzarized vim theme, I want to background to be dark.
 "set background=light
+"let g:solarized_termcolors=256
 set background=dark
 colorscheme solarized
 
@@ -121,3 +122,5 @@ nnoremap <silent> <Leader>e :<C-u>call ToggleErrors()<CR>
 " osx is funny
 set backspace=indent,eol,start
 autocmd BufNewFile,BufReadPost *.md set filetype=ghmarkdown
+
+map <leader>gt :call TimeLapse() <cr> 
