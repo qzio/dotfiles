@@ -9,6 +9,8 @@ syntax on
 set background=dark
 colorscheme solarized
 
+set spell
+
 set mouse=a
 set mousef
 set shiftwidth=2 softtabstop=2 tabstop=2
