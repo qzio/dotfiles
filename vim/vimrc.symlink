@@ -57,7 +57,7 @@ au BufEnter,BufRead,BufNewFile *.py set shiftwidth=4 softtabstop=4 tabstop=4
 " use 4 for indention in erlang files
 au BufEnter,BufRead,BufNewFile *.erl set shiftwidth=4 softtabstop=4 tabstop=4
 " use tab for indention in go files
-au BufEnter,BufRead,BufNewFile *.go set tabstop=4 shiftwidth=4 cindent
+au BufEnter,BufRead,BufNewFile *.go set noexpandtab tabstop=4 shiftwidth=4
 
 " set leader key to ,
 let mapleader=","
