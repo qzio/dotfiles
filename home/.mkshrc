@@ -1,0 +1,30 @@
+#!/usr/bin/env mksh
+# rc for mksh
+
+[ -z "$PS1" ] && return
+
+# . $HOME/dotfiles/mksh/upstream.mkshrc
+
+export HISTSIZE=4200
+export HISTFILE=$HOME/.history_mksh
+export EDITOR=vim
+export PAGER=less
+
+. $HOME/dotfiles/mksh/prompt.mksh.sh
+
+# Load aliases from dotfiles
+for alias_path in $HOME/dotfiles/**/aliases.sh ; do
+  . $alias_path
+done
+
+# Load opam if installed
+if [ $(command -v opam | wc -l) -gt 0 ] ; then
+  eval `opam config env`
+fi
+
+# Load osx_extras and a local shellrc if exists.
+for extra_file in .osx_extras .local.shellrc ; do
+  if [ -f $HOME/$extra_file ] ; then
+    . $HOME/$extra_file
+  fi
+done
