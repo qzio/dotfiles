@@ -126,3 +126,4 @@ set backspace=indent,eol,start
 autocmd BufNewFile,BufReadPost *.md set filetype=ghmarkdown
 
 map <leader>gt :call TimeLapse() <cr> 
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
