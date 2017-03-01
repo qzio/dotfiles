@@ -1,32 +1,37 @@
-
 ! Urxvt specific settings
+! Source Code Pro {Light,Medium,Bold,Black + It suffix}
 URxvt*font: xft:Source\ Code\ Pro\ Medium:pixelsize=13:antialias=true:hinting=true
-URxvt*boldFont: xft:Source\ Code\ Pro\ Medium:pixelsize=13:antialias=true:hinting=true
+URxvt*boldFont: xft:Source\ Code\ Pro\ Black:pixelsize=13:antialias=true:hinting=true
 URxvt*scrollBar:  false
 Urxvt*256-color:  true
 URxvt.termName: xterm-256color
 URxvt.visualBell: false
 ! fixes ctrl-shift ...?
 URxvt.iso14755:   False
+! Make links clickable
 URxvt*perl-ext-common: default,matcher
 URxvt*matcher.button:  1
-URxvt*url-launcher:    /usr/local/bin/firefox
-! intensityStyles from internet re solarized
-URxvt.intensityStyles: false
-URxvt.allow_bold: false
+URxvt*url-launcher:    /usr/bin/firefox
+! color depth!
 URxvt.depth:                32
+! intensityStyles:true removes colors from commands like `ls`...
+URxvt.intensityStyles: false
+! ref: http://www.askapache.com/linux/rxvt-xresources/
+URxvt*skipScroll:  true
+URxvt*scrollWithBuffer:  false
 ! End urxvt settings
 
-*fading:                  30
+! Fade colors when a window is not in focus
+*fading:                  15
 
 ! Solarized color scheme for the X Window System
 ! Solarized ref: http://ethanschoonover.com/solarized
 ! code ref: https://github.com/solarized
 
-! user-override darker, less blue, background color. base03,base02
-!#define S_base03       #002b36
-!#define S_base02       #073642
-#define S_base03        #01151a
+! user-override background with a less blue, darker color (base03,base02)
+! solarized default: #define S_base03       #002b36
+! solarized default: #define S_base02       #073642
+#define S_base03        #011418
 #define S_base02        #082027
 
 #define S_base01        #586e75
@@ -36,13 +41,6 @@ URxvt.depth:                32
 #define S_base2         #eee8d5
 #define S_base3         #fdf6e3
 
-*background:            S_base03
-*foreground:            S_base0
-*fadeColor:             S_base03
-*cursorColor:           S_base1
-*pointerColorBackground:S_base01
-*pointerColorForeground:S_base1
-
 #define S_yellow        #b58900
 #define S_orange        #cb4b16
 #define S_red           #dc322f
@@ -51,6 +49,13 @@ URxvt.depth:                32
 #define S_blue          #268bd2
 #define S_cyan          #2aa198
 #define S_green         #859900
+
+*background:            S_base03
+*foreground:            S_base0
+*fadeColor:             S_base03
+*cursorColor:           S_base1
+*pointerColorBackground:S_base01
+*pointerColorForeground:S_base1
 
 !! black dark/light
 *color0:                S_base02
