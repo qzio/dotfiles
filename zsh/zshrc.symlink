@@ -12,6 +12,9 @@ export HISTSIZE=1000
 export SAVEHIST=10000
 export HISTFILE=~/.history_zsh
 export PATH=~/bin:$PATH:
+for alias_file in $(ls ~/dotfiles/*/aliases.sh) ; do
+  . $alias_file
+done
 if [ -f ~/dotfiles/docker/aliases.sh ] ; then
   source ~/dotfiles/docker/aliases.sh
 fi
