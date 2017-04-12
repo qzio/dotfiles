@@ -67,6 +67,7 @@ if [ "$PLUGIN_MANAGER" = "zgen" ] ; then
     zgen load zsh-users/zsh-syntax-highlighting
     zgen load zsh-users/zsh-completions src
     zgen oh-my-zsh themes/qzio
+    zgen load StackExchange/blackbox
 
     # generate the init script from plugins above
     zgen save
