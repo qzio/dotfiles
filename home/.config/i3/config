@@ -42,7 +42,7 @@ bindsym XF86AudioLowerVolume exec mixer vol -5
 for_window [class="URxvt" instance="urxvt"] floating enable
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec qubes-i3-sensible-terminal || i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
