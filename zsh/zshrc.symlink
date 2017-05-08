@@ -18,12 +18,11 @@ done
 if [ -f ~/dotfiles/docker/aliases.sh ] ; then
   source ~/dotfiles/docker/aliases.sh
 fi
-#echo "after docker-alias"
-#
 if [ $(command -v opam | wc -l) -gt 0 ] ; then
   eval `opam config env`
 fi
-#echo "after opam zshrc"
+
+[ -f /usr/local/share/chruby/chruby.sh ] && echo "sourcing chruby" && source /usr/local/share/chruby/chruby.sh
 
 ##
 # ANTIGEN
@@ -47,7 +46,6 @@ if [ "$PLUGIN_MANAGER" = "antigen" ] && [ -f ~/dotfiles/zsh/antigen.zsh ] ; then
   # Load the theme.
   antigen theme qzio/dotfiles zsh/themes/qzio
   echo "after theme"
-  #antigen theme sorin
 
   # Tell antigen that you're done.
   antigen apply
@@ -75,7 +73,7 @@ if [ "$PLUGIN_MANAGER" = "zgen" ] ; then
 fi
 
 # Need this last since oh-my-zsh ruins variables etc.
-for extra_file in .osx_extras .shell_extras ; do
+for extra_file in .os_extras .osx_extras .shell_extras ; do
   if [ -f ~/$extra_file ] ; then
     echo "sourcing ~/$extra_file"
     . ~/$extra_file
