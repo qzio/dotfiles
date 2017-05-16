@@ -23,6 +23,8 @@ if [ $(command -v opam | wc -l) -gt 0 ] ; then
 fi
 
 [ -f /usr/local/share/chruby/chruby.sh ] && echo "sourcing chruby" && source /usr/local/share/chruby/chruby.sh
+export NVM_HOME=$HOME/.nvm
+[ -f /usr/local/opt/nvm/nvm.sh ] && echo "sourcing nvm.sh" && source /usr/local/opt/nvm/nvm.sh
 
 ##
 # ANTIGEN
