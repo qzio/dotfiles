@@ -1,4 +1,3 @@
-
 export PLUGIN_MANAGER=zgen
 #export PLUGIN_MANAGER=antigen
 
@@ -12,6 +11,11 @@ export HISTSIZE=1000
 export SAVEHIST=10000
 export HISTFILE=~/.history_zsh
 export PATH=~/bin:$PATH:
+export NVM_HOME=$HOME/.nvm
+export TMUX_VERION=""
+if [ -x $(which tmux) ] ; then
+  export TMUX_VERSION="$(tmux -V | cut -d ' ' -f2)"
+fi
 for alias_file in $(ls ~/dotfiles/*/aliases.sh) ; do
   . $alias_file
 done
@@ -23,7 +27,6 @@ if [ $(command -v opam | wc -l) -gt 0 ] ; then
 fi
 
 [ -f /usr/local/share/chruby/chruby.sh ] && echo "sourcing chruby" && source /usr/local/share/chruby/chruby.sh
-export NVM_HOME=$HOME/.nvm
 [ -f /usr/local/opt/nvm/nvm.sh ] && echo "sourcing nvm.sh" && source /usr/local/opt/nvm/nvm.sh
 
 ##
@@ -73,6 +76,8 @@ if [ "$PLUGIN_MANAGER" = "zgen" ] ; then
     zgen save
   fi
 fi
+
+[ -f /usr/local/bin/aws_zsh_completer.sh ] && echo "sourcing aws zsh completer" && source /usr/local/bin/aws_zsh_completer.sh
 
 # Need this last since oh-my-zsh ruins variables etc.
 for extra_file in .os_extras .osx_extras .shell_extras ; do
