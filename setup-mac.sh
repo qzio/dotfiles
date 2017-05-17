@@ -47,17 +47,17 @@ confirm echo "install some brew packages"
 brew install \
      gnupg zsh tmux ruby-install \
      reattach-to-user-namespace readline openssl chruby \
-     openvpn jq git mtr nmap
+     openvpn jq git mtr nmap stow
 
 confirm "install some macos apps through brew/cask"
 brew cask install \
      karabiner-elements vagrant virtualbox \
-     google-chrome firefox
+     google-chrome firefox slack spotify
 
 
 
 confirm "change shell to zsh $(which zsh)"
-#sudo chsh -s $(which zsh) $(whoami)
+sudo chsh -s $(which zsh) $(whoami)
 
 echo "Install docker-for-mac"
 curl -o ~/Downloads/docker-for-mac.dmg -L https://download.docker.com/mac/stable/Docker.dmg 
@@ -65,14 +65,16 @@ open ~/Downloads/docker-for-mac.dmg
 
 echo "ok, auto setup done"
 
-echo "Install java through"
-echo " --> http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html"
+echo "Install java by accepting and downloading the macos jdk package"
 open 'http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html'
-# http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-macosx-x64.dmg
 
+ruby_install_java="ruby-install jruby-9."
 confirm "install some rubies. Make sure you have java installed before continuing!"
-
+if [ $(which -a java | wc -l) -lt 1 ] ; then
+  confirm "continue without java?"
+  ruby_install_java="echo 'when you have the java jdk installed, you can ruby-install jruby-9. to install jruby'"
+fi
 ruby-install -L
-ruby-install jruby-9.
 ruby-install ruby-2.4
 ruby-install ruby-2.3
+$ruby_install_java
