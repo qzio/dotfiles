@@ -23,6 +23,7 @@ if [ -f ~/dotfiles/docker/aliases.sh ] ; then
   source ~/dotfiles/docker/aliases.sh
 fi
 if [ $(command -v opam | wc -l) -gt 0 ] ; then
+  . ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
   eval `opam config env`
 fi
 
@@ -50,7 +51,6 @@ if [ "$PLUGIN_MANAGER" = "antigen" ] && [ -f ~/dotfiles/zsh/antigen.zsh ] ; then
 
   # Load the theme.
   antigen theme qzio/dotfiles zsh/themes/qzio
-  echo "after theme"
 
   # Tell antigen that you're done.
   antigen apply
