@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 
+
 confirm()
 {
   echo "$@"
   echo "continue with enter, ctrl-c to abort"
   read _
 }
+
+confirm "install dotfiles"
+./install.sh
 
 # ref https://github.com/trusche/dotfiles/blob/master/osx
 echo "set some default macos stuff"
@@ -36,18 +40,22 @@ defaults write com.apple.finder DisableAllAnimations -bool true
 defaults write com.apple.Mail DisableSendAnimations -bool true
 defaults write com.apple.Mail DisableReplyAnimations -bool true
 defaults write com.apple.dock mru-spaces -bool false
+defaults write com.apple.dock workspaces-swoosh-animation-off -bool YES
+defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 )
 killall Dock
 
+
+confirm "Download the solarized_dark theme to Terminal.app"
+curl -o ~/Downloads/solarized_dark.terminal -L https://raw.githubusercontent.com/tomislav/osx-terminal.app-colors-solarized/master/Solarized%20Dark.terminal
 
 confirm "setting up brew"
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 confirm echo "install some brew packages"
 brew install \
-     gnupg zsh tmux ruby-install \
-     reattach-to-user-namespace readline openssl chruby \
-     openvpn jq git mtr nmap stow mosh
+     gnupg zsh tmux ruby-install openvpn jq git mtr nmap stow mosh \
+     reattach-to-user-namespace readline openssl chruby nvm
 
 confirm "install some macos apps through brew/cask"
 brew cask install \
@@ -77,4 +85,10 @@ fi
 ruby-install -L
 ruby-install ruby-2.4
 ruby-install ruby-2.3
-$ruby_install_java
+ruby_install_java
+
+confirm "install node --lts through nvm"
+mkdir -p ~/.nvm
+source "/usr/local/opt/nvm/nvm.sh"
+export NVM_DIR="$HOME/.nvm"
+nvm install --lts
