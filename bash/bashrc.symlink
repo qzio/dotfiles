@@ -81,7 +81,6 @@ fi
 #alias ll='ls -l'
 #alias la='ls -A'
 #alias l='ls -CF'
-alias compose='docker-compose'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -91,6 +90,13 @@ alias compose='docker-compose'
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+# source every .bash file in the dotfiles repo
+for config_file in $HOME/dotfiles/**/*.bash
+do
+  source $config_file
+done
+export PATH=$HOME/bin:$PATH:/sbin:/usr/sbin
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
