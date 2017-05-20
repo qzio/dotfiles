@@ -5,3 +5,7 @@ keycode 66 = Escape NoSymbol Escape
 ! fixes pgUp/pgDown on buttons arrow.top/left arrow.top/right on a x220
 keycode 234 = Prior
 keycode 233 = Next
+
+! fixes pgup/gdown on x220
+keycode 174 = Prior
+keycode 172 = Next
