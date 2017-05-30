@@ -25,7 +25,9 @@ defaults write -g NSToolbarFullScreenAnimationDuration -float 0
 defaults write -g NSBrowserColumnAnimationSpeedMultiplier -float 0
 defaults write -g NSGlobalDOmain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write -g com.apple.swipescrolldirection -bool false
-defaults write NSGlobalDOmain ApplePressAndHoldEnabled -bool false
+defaults write -g ApplePressAndHoldEnabled -bool false
+defaults write -g InitialKeyRepeat -int 25 # normal minimum is 15 (225 ms)
+defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 defaults write com.apple.dock static-only -bool true
 defaults write com.apple.dock autohide-time-modifier -float 0
 defaults write com.apple.dock autohide-delay -float 0
@@ -46,7 +48,7 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 killall Dock
 
 
-confirm "Download the solarized_dark theme to Terminal.app"
+confirm "Download the solarized_dark theme to Terminal.app (you have to import this manually afterwards...)"
 curl -o ~/Downloads/solarized_dark.terminal -L https://raw.githubusercontent.com/tomislav/osx-terminal.app-colors-solarized/master/Solarized%20Dark.terminal
 
 confirm "setting up brew"
@@ -54,13 +56,13 @@ confirm "setting up brew"
 
 confirm echo "install some brew packages"
 brew install \
-     gnupg zsh tmux ruby-install openvpn jq git mtr nmap stow mosh \
+     gnupg zsh tmux ruby-install openvpn jq git mtr nmap stow mosh awscli \
      reattach-to-user-namespace readline openssl chruby nvm
 
 confirm "install some macos apps through brew/cask"
 brew cask install \
      karabiner-elements vagrant virtualbox \
-     google-chrome firefox slack spotify
+     google-chrome firefox slack spotify macdown
 
 
 

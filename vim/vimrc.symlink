@@ -74,7 +74,7 @@ nmap <Leader>d <c-]>
 nmap <Leader>f <c-o>
 nnoremap <leader>s :CtrlPTag<cr>
 
-nmap <Leader>t :SyntasticToggleMode<Cr>
+nmap <Leader>y :SyntasticToggleMode<Cr>
 
 " Move faster between windows
 nnoremap <C-j> <C-w>j
