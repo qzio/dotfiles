@@ -56,7 +56,7 @@ confirm "setting up brew"
 
 confirm echo "install some brew packages"
 brew install \
-     gnupg zsh tmux ruby-install openvpn jq git mtr nmap stow mosh awscli \
+     gnupg zsh tmux ruby-install openvpn openconnect jq git mtr nmap stow mosh awscli \
      reattach-to-user-namespace readline openssl chruby nvm
 
 confirm "install some macos apps through brew/cask"
