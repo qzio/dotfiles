@@ -43,9 +43,9 @@ set guioptions-=T
 
 " use php highlightning on .inc files
 au BufEnter,BufRead,BufNewFile *.inc setf php
-au BufEnter,BufRead,BufNewFile *.thor,Rakefile,*.rake,Capfile,Guardfile,*.ru setf ruby
+au BufEnter,BufRead,BufNewFile *.thor,Rakefile,*.rake,Capfile,Guardfile,*.ru,Vagrantfile setf ruby
 au BufEnter,BufRead,BufNewFile *.less setf css
-autocmd BufNewFile,BufRead *.json set ft=javascript
+"autocmd BufNewFile,BufRead *.json set ft=javascript
 au BufEnter,BufRead,BufNewFile *.scss setf scss
 au BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=handlebars
 
@@ -72,8 +72,11 @@ nmap <Leader>' ysiw'
 " map d to jump to definition
 nmap <Leader>d <c-]>
 nmap <Leader>f <c-o>
+
+" ?
 nnoremap <leader>s :CtrlPTag<cr>
 
+" Toggle syntastic on/off
 nmap <Leader>y :SyntasticToggleMode<Cr>
 
 " Move faster between windows
@@ -121,7 +124,9 @@ function! ToggleErrors()
         lclose
     endif
 endfunction
+" Toggle syntastic errors
 nnoremap <silent> <Leader>e :<C-u>call ToggleErrors()<CR>
+nnoremap <Leader>p :set spell!<CR>
 
 " osx is funny
 set backspace=indent,eol,start

@@ -1,5 +1,5 @@
 alias dm='docker-machine'
-alias compose='docker-compose'
+alias dcompose='docker-compose'
 
 o()
 {
