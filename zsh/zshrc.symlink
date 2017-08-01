@@ -13,7 +13,7 @@ export HISTFILE=~/.history_zsh
 export PATH=~/bin:$PATH:
 export NVM_DIR=$HOME/.nvm
 export TMUX_VERION=""
-if [ -x $(which tmux) ] ; then
+if [ -x "$(which tmux)" ] ; then
   export TMUX_VERSION="$(tmux -V | cut -d ' ' -f2)"
 fi
 for alias_file in $(ls ~/dotfiles/*/aliases.sh) ; do
@@ -27,8 +27,9 @@ if [ $(command -v opam | wc -l) -gt 0 ] ; then
   eval `opam config env`
 fi
 
-[ -f /usr/local/share/chruby/chruby.sh ] && echo "sourcing chruby" && source /usr/local/share/chruby/chruby.sh
-[ -f /usr/local/opt/nvm/nvm.sh ] && echo "sourcing nvm.sh" && source /usr/local/opt/nvm/nvm.sh
+#[ -f /usr/local/share/chruby/chruby.sh ] && echo "sourcing chruby" && source /usr/local/share/chruby/chruby.sh
+#[ -f /usr/local/opt/nvm/nvm.sh ] && echo "sourcing nvm.sh" && source /usr/local/opt/nvm/nvm.sh
+#[ -f $HOME/.cargo/env ] && echo "sourcing source ~/.cargo/env" && source $HOME/.cargo/env
 
 ##
 # ANTIGEN
@@ -70,6 +71,7 @@ if [ "$PLUGIN_MANAGER" = "zgen" ] ; then
     zgen load zsh-users/zsh-syntax-highlighting
     zgen load zsh-users/zsh-completions src
     zgen oh-my-zsh themes/qzio
+    zgen oh-my-zsh plugins/docker
     zgen load StackExchange/blackbox
 
     # generate the init script from plugins above
@@ -77,7 +79,7 @@ if [ "$PLUGIN_MANAGER" = "zgen" ] ; then
   fi
 fi
 
-[ -f /usr/local/bin/aws_zsh_completer.sh ] && echo "sourcing aws zsh completer" && source /usr/local/bin/aws_zsh_completer.sh
+#[ -f /usr/local/bin/aws_zsh_completer.sh ] && echo "sourcing aws zsh completer" && source /usr/local/bin/aws_zsh_completer.sh
 
 # Need this last since oh-my-zsh ruins variables etc.
 for extra_file in .os_extras .osx_extras .shell_extras ; do

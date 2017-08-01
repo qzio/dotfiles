@@ -6,3 +6,5 @@ force_color_prompt=yes
 if [ -f ~/.bashrc ]; then
   . ~/.bashrc
 fi
+
+export PATH="$HOME/.cargo/bin:$PATH"
