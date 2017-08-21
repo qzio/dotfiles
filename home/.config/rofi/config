@@ -1,0 +1,5 @@
+! Select previous entry
+rofi.kb-row-up:                      Up,Control+p,Shift+Tab,Control+k
+! Select next entry
+rofi.kb-row-down:                    Down,Control+n,Tab,Control+j
+rofi.kb-accept-entry:                Return,KP_Enter

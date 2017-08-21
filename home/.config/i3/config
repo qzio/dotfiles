@@ -13,12 +13,10 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-#font pango:monospace 8
-font pango:Source Code Pro 8
-
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
+font pango:Source Code Pro 10
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -36,28 +34,31 @@ new_window pixel 1
 # default to floating
 # for_window [class="[.]*"] floating enable
 # Volume buttons
-bindsym XF86AudioRaiseVolume exec mixer vol +5
-bindsym XF86AudioLowerVolume exec mixer vol -5
+#bindsym XF86AudioRaiseVolume exec mixer vol +5
+#bindsym XF86AudioLowerVolume exec mixer vol -5
+bindsym XF86AudioRaiseVolume exec amixer sset Master 10%+
+bindsym XF86AudioLowerVolume exec amixer sset Master 10%-
 # terminal defaults to floating
-for_window [class="URxvt" instance="urxvt"] floating enable
+# for_window [class="URxvt" instance="urxvt"] floating enable
 
 # start a terminal
-bindsym $mod+Return exec qubes-i3-sensible-terminal || i3-sensible-terminal
+#bindsym $mod+Return exec qubes-i3-sensible-terminal || i3-sensible-terminal
+bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-#bindsym $mod+d exec dmenu_run
-#bindsym $mod+d exec dmenu_run -fn 'pango:Source Code Pro 12' -l 100 -i
-bindsym $mod+space exec dmenu_run -fn 'pango:Source Code Pro 12' -l 100 -i
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -nb #d2d2d2 -nf #000000 -sb #63a0ff"
+#bindsym $mod+space exec dmenu_run -fn 'pango:Source Code Pro 12' -l 100 -i
+#bindsym $mod+space exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -fn 'pango:Source Code Pro 12' -l 100 -i"
+#bindsym $mod+y exec --no-startup-id rofi -font 'Source Code Pro 12' -show combi -combi-modi 'window,drun,run'
+#bindsym $mod+y exec --no-startup-id rofi -font 'Source Code Pro 12' 
+bindsym $mod+space exec --no-startup-id  rofi -font 'Source Code Pro 12' -show drun
+bindsym $mod+m exec --no-startup-id  rofi -font 'Source Code Pro 12' -show window
+
 
 # change focus
-# more interested in split than chaning focus, that 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
@@ -87,7 +88,6 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-#bindsym $mod+space focus mode_toggle
 bindsym $mod+Tab focus mode_toggle
 
 # focus the parent container
@@ -128,7 +128,6 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
-bindsym $mod+r mode "resize"
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
         bindsym h resize shrink width 10px or 10ppt
@@ -141,22 +140,18 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
+bindsym $mod+r mode "resize"
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+        #status_command qubes-i3status
         status_command i3status
-        tray_output primary
         position top
 
         colors {
           background #040404
           statusline #fdfdfd
-
-          ## BLUE
-          #focused_workspace  #ffffff #285577
-          #active_workspace   #ffffff #333333
-          #inactive_workspace #888888 #222222
-          #urgent_workspace   #ffffff #900000
 
           ## Green
           focused_workspace  #ffffff #287755
@@ -165,3 +160,10 @@ bar {
           urgent_workspace   #ffffff #009000
         }
 }
+
+# Use a screen locker
+exec --no-startup-id "xautolock -detectsleep -time 3 -locker 'i3lock -d -c 000000' -notify 30 -notifier \"notify-send -t 2000 'Locking screen in 30 seconds'\""
+# Make sure all xdg autostart entries are started, this is (among other things)
+# necessary to make sure transient vm's come up
+#exec --no-startup-id qubes-i3-xdg-autostart
+exec --no-startup-id i3-xdg-autostart
