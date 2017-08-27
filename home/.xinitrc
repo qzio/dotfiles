@@ -33,10 +33,12 @@ else
   xinitlog "no locker found..."
 fi
 
-if [ -x $(command -v urxvtd)] ; then
+if [ -x $(command -v urxvtd) ] ; then
   xinitlog "booting urxvtd"
   urxvtd &
   export TERMINAL=urxvtc
+else
+  xinitlog "no urxvtd"
 fi
 if [ -x $(command -v i3) ] ; then
   xinitlog "execing i3..."
