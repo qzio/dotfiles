@@ -14,6 +14,8 @@ if [ -f ~/.Xmodmaprc ] ; then
   xmodmap ~/.Xmodmaprc
 fi
 
+eval $(ssh-agent)
+
 if [ $(which urxvt | wc -l) -gt 0 ] ; then
   export TERMINAL=urxvt
 fi
