@@ -15,9 +15,8 @@ set $mod Mod4
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 10
-#font pango:monospace 8
-font pango:Source Code Pro 9
+#font pango:DejaVu Sans Mono 8
+font pango:Source Code Pro 10
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -50,11 +49,14 @@ bindsym $mod+Return exec qubes-i3-sensible-terminal || i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -nb #d2d2d2 -nf #000000 -sb #63a0ff"
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -nb #d2d2d2 -nf #000000 -sb #63a0ff"
 #bindsym $mod+space exec dmenu_run -fn 'pango:Source Code Pro 12' -l 100 -i
 #bindsym $mod+space exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -fn 'pango:Source Code Pro 12' -l 100 -i"
+#bindsym $mod+y exec --no-startup-id rofi -font 'Source Code Pro 12' -show combi -combi-modi 'window,drun,run'
+#bindsym $mod+y exec --no-startup-id rofi -font 'Source Code Pro 12' 
 bindsym $mod+space exec --no-startup-id  rofi -font 'Source Code Pro 12' -show drun
 bindsym $mod+m exec --no-startup-id  rofi -font 'Source Code Pro 12' -show window
+
 
 # change focus
 bindsym $mod+h focus left
@@ -142,24 +144,28 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command qubes-i3status
-        position top
-
-        colors {
-          background #040404
-          statusline #fdfdfd
-
-          ## Green
-          focused_workspace  #ffffff #287755
-          active_workspace   #ffffff #333333
-          inactive_workspace #888888 #222222
-          urgent_workspace   #ffffff #009000
-        }
-}
+#bar {
+#        status_command i3status
+#        position top
+#
+#        colors {
+#          background #040404
+#          statusline #fdfdfd
+#
+#          ## Green
+#          focused_workspace  #ffffff #287755
+#          active_workspace   #ffffff #333333
+#          inactive_workspace #888888 #222222
+#          urgent_workspace   #ffffff #009000
+#        }
+#}
+#use polybar
 
 # Use a screen locker
-exec --no-startup-id "xautolock -detectsleep -time 3 -locker 'i3lock -d -c 000000' -notify 30 -notifier \"notify-send -t 2000 'Locking screen in 30 seconds'\""
+#exec --no-startup-id "xautolock -detectsleep -time 3 -locker 'i3lock -d -c 000000' -notify 30 -notifier \"notify-send -t 2000 'Locking screen in 30 seconds'\""
 # Make sure all xdg autostart entries are started, this is (among other things)
 # necessary to make sure transient vm's come up
-exec --no-startup-id qubes-i3-xdg-autostart
+#exec --no-startup-id qubes-i3-xdg-autostart
+exec --no-startup-id i3-xdg-autostart
+exec --no-startup-id sh -c 'xrdb -merge /home/user/.Xresources'
+exec --no-startup-id sh -c '/home/user/dotfiles/home/.config/polybar/launch.sh'
