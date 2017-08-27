@@ -1,3 +1,8 @@
+Xft.antialias:          1
+Xft.hinting:            1
+Xft.rgba:               rgb
+Xft.hintstyle:          hintslight
+Xft.lcdfilter:          lcddefault
 ! Urxvt specific settings
 ! Source Code Pro {Light,Medium,Bold,Black + It suffix}
 URxvt*font: xft:Source\ Code\ Pro\ Medium:pixelsize=13:antialias=true:hinting=true
@@ -12,7 +17,6 @@ URxvt.iso14755:   False
 URxvt*perl-ext-common: default,matcher
 URxvt*matcher.button:  1
 URxvt*url-launcher:    /usr/bin/firefox
-! color depth!
 URxvt.depth:                32
 ! intensityStyles:true removes colors from commands like `ls`...
 URxvt.intensityStyles: false
