@@ -2,9 +2,12 @@
 set -eu
 FONTSIZE='13'
 FONTSTYLE='antialias=true:hinting=true'
+FONTNAME="Source\ Code\ Pro\ Medium"
 if [ -n "$1" ] ; then FONTSIZE="$1" ; fi
 
 FONT="xft:Source\ Code\ Pro\ Medium:pixelsize=$FONTSIZE:$FONTSTYLE"
+#FONT="xft:SauceCodePro\ Nerd\ Font\ Mono:pixelsize=$FONTSIZE:$FONTSTYLE"
+#FONT="xft:$FONTNAME:pixelsize=$FONTSIZE:$FONTSTYLE"
 BOLD_FONT="xft:Source\ Code\ Pro\ Black:pixelsize=$FONTSIZE:$FONTSTYLE"
 
 if [ -n "${TMUX:-}" ]; then

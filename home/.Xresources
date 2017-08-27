@@ -6,6 +6,7 @@ Xft.lcdfilter:          lcddefault
 ! Urxvt specific settings
 ! Source Code Pro {Light,Medium,Bold,Black + It suffix}
 URxvt*font: xft:Source\ Code\ Pro\ Medium:pixelsize=13:antialias=true:hinting=true
+!URxvt*font: xft:SauceCodePro\ Nerd\ Font\ Mono:pixelsize=13:antialias=true:hinting=true
 URxvt*boldFont: xft:Source\ Code\ Pro\ Black:pixelsize=13:antialias=true:hinting=true
 URxvt*scrollBar:  false
 Urxvt*256-color:  true
@@ -27,6 +28,12 @@ URxvt*scrollWithBuffer:  false
 
 ! Fade colors when a window is not in focus
 *fading:                  15
+
+rofi.color-enabled: true
+rofi.color-window: #002b37, #002b37, #003642
+rofi.color-normal: #002b37, #819396, #003643, #008ed4, #ffffff
+rofi.color-active: #002b37, #008ed4, #003643, #008ed4, #66c6ff
+rofi.color-urgent: #002b37, #da4281, #003643, #008ed4, #890661
 
 ! Solarized color scheme for the X Window System
 ! Solarized ref: http://ethanschoonover.com/solarized
