@@ -39,7 +39,7 @@ font-2 = unifont:fontformat=truetype:size=8;1
 font-3 = FontAwesome:size=8;1
 
 modules-left = i3
-modules-right = filesystem-root filesystem-docker volume memory cpu wlan battery date
+modules-right = volume memory cpu wlan battery date
 
 module-margin-left = 1
 module-margin-right = 1
@@ -207,9 +207,9 @@ animation-charging-framerate = 750
 [module/date]
 type = internal/date
 interval = 5
-date = " %Y-%m-%d"
+date = "%Y-%m-%d"
 time = %H:%M
-format-prefix = 
+#format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.foreground}
 label = %date% %time%
