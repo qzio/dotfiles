@@ -1,0 +1,34 @@
+#!/bin/sh
+
+usage()
+{
+  echo "Usage: $0 [az|p] size"
+  echo "example/a-zA-Z0-9 with size 10: $0 az 10"
+  echo "example/printable with size 10: $0 p 10"
+}
+
+main()
+{
+  case ${1} in
+    "az")
+      only_az ${2}
+      ;;
+    "p")
+      printable ${2}
+      ;;
+    *)
+      usage
+  esac
+}
+only_az()
+{
+  local size=${1:-8}
+  head -n 1000 /dev/urandom| tr -cd "[a-zA-Z0-9]" | head -c ${size}
+}
+printable()
+{
+  local size=${1:-8}
+  head -n 1000 /dev/urandom| tr -cd "[:print:]\n" | head -c ${size}
+}
+
+main "$@"
