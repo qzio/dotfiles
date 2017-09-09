@@ -39,7 +39,7 @@ font-2 = unifont:fontformat=truetype:size=8;1
 font-3 = FontAwesome:size=8;1
 
 modules-left = i3
-modules-right = volume memory cpu wlan battery date
+modules-right = volume wlan memory cpu battery date
 
 module-margin-left = 1
 module-margin-right = 1
