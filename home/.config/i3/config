@@ -57,6 +57,8 @@ bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -nb #d2d2d2 
 bindsym $mod+space exec --no-startup-id  rofi -font 'Source Code Pro 12' -show drun
 bindsym $mod+m exec --no-startup-id  rofi -font 'Source Code Pro 12' -show window
 
+bindsym $mod+p exec --no-startup-id keymap_switcher.sh
+
 
 # change focus
 bindsym $mod+h focus left
@@ -168,4 +170,4 @@ bindsym $mod+r mode "resize"
 #exec --no-startup-id qubes-i3-xdg-autostart
 exec --no-startup-id i3-xdg-autostart
 exec --no-startup-id sh -c 'xrdb -merge /home/user/.Xresources'
-exec --no-startup-id sh -c '/home/user/dotfiles/home/.config/polybar/launch.sh'
+exec --no-startup-id sh -c '/home/user/dotfiles/home/.config/polybar/launch.sh && sleep 2'

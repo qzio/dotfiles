@@ -16,7 +16,9 @@ usage()
 
 if [ $(echo "$1" | grep se | wc -l) -gt 0 ] ; then
   KBMAP_NAME=se
-elif [ "$1" = "toggle" ] ; then
+elif [ $(echo "$1" | grep en | wc -l) -gt 0 ] ; then
+  KBMAP_NAME=en_US
+else
   echo "doing toggle"
   if [ "$(cat $CACHE_FILE)" = "se" ] ; then
     KBMAP_NAME=en_US
