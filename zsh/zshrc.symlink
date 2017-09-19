@@ -72,6 +72,7 @@ if [ "$PLUGIN_MANAGER" = "zgen" ] ; then
     zgen load zsh-users/zsh-completions src
     zgen oh-my-zsh themes/qzio
     zgen oh-my-zsh plugins/docker
+    zgen oh-my-zsh plugins/kubectl
     zgen load StackExchange/blackbox
 
     # generate the init script from plugins above
