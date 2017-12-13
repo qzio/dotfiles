@@ -24,7 +24,7 @@ fi
 if [ -x $(command -v xautolock) ] ; then
   if [ -x $(command -v i3lock) ]; then
     xinitlog "using i3lock as locker"
-    xautolock -time 10 -locker i3lock &
+    xautolock -time 10 -locker 'i3lock -c 000000' &
   elif [ -x $(command -v slock) ]; then
     xinitlog "using slock as locker"
     xautolock -time 10 -locker slock &

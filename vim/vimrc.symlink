@@ -44,6 +44,8 @@ set guioptions-=T
 " use php highlightning on .inc files
 au BufEnter,BufRead,BufNewFile *.inc setf php
 au BufEnter,BufRead,BufNewFile *.thor,Rakefile,*.rake,Capfile,Guardfile,*.ru,Vagrantfile setf ruby
+au BufEnter,BufRead,BufNewFile *.ts setf typescript
+
 au BufEnter,BufRead,BufNewFile *.less setf css
 "autocmd BufNewFile,BufRead *.json set ft=javascript
 au BufEnter,BufRead,BufNewFile *.scss setf scss
@@ -58,6 +60,12 @@ au BufEnter,BufRead,BufNewFile *.py set shiftwidth=4 softtabstop=4 tabstop=4
 au BufEnter,BufRead,BufNewFile *.erl set shiftwidth=4 softtabstop=4 tabstop=4
 " use tab for indention in go files
 au BufEnter,BufRead,BufNewFile *.go set noexpandtab tabstop=4 shiftwidth=4
+
+" skip java checks
+"au BufNewFile,BufRead *.java set b:syntastic_skip_checks = 1
+"au BufNewFile,BufRead *.java set g:syntastic_skip_checks=1
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'passive_filetypes': ['nxc', 'java'] }
 
 " set leader key to ,
 let mapleader=","
@@ -139,3 +147,4 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 nnoremap <Leader>g :Ack!<Space>
+

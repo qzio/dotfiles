@@ -23,7 +23,7 @@ main()
 only_az()
 {
   local size=${1:-8}
-  head -n 1000 /dev/urandom| tr -cd "[a-zA-Z0-9]" | head -c ${size}
+  head -n 1000 /dev/urandom| tr -cd "a-zA-Z0-9" | head -c ${size}
 }
 printable()
 {

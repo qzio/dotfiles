@@ -1,5 +1,7 @@
+! unset Control+k
+rofi.kb-remove-to-eol: Control+r
 ! Select previous entry
-rofi.kb-row-up:                      Up,Control+p,Shift+Tab,Control+k
+rofi.kb-row-up:                      Up,Control+k
 ! Select next entry
-rofi.kb-row-down:                    Down,Control+n,Tab,Control+j
 rofi.kb-accept-entry:                Return,KP_Enter
+rofi.kb-row-down:                    Down,Control+n,Control+j
