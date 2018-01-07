@@ -70,7 +70,10 @@ if [ "$PLUGIN_MANAGER" = "zgen" ] ; then
     zgen oh-my-zsh plugins/git
     zgen load zsh-users/zsh-syntax-highlighting
     zgen load zsh-users/zsh-completions src
+
+    [ ! -f $HOME/.zgen/robbyrussell/oh-my-zsh-master/themes/qzio.zsh-theme ] && ln -sf $HOME/dotfiles/zsh/themes/qzio.zsh-theme $HOME/.zgen/robbyrussell/oh-my-zsh-master/themes/qzio.zsh-theme
     zgen oh-my-zsh themes/qzio
+
     zgen oh-my-zsh plugins/docker
     zgen oh-my-zsh plugins/kubectl
     zgen load StackExchange/blackbox
