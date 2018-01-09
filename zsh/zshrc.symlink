@@ -76,7 +76,8 @@ if [ "$PLUGIN_MANAGER" = "zgen" ] ; then
 
     zgen oh-my-zsh plugins/docker
     zgen oh-my-zsh plugins/kubectl
-    zgen load StackExchange/blackbox
+    zgen oh-my-zsh plugins/mosh
+    #zgen load StackExchange/blackbox
 
     # generate the init script from plugins above
     zgen save
