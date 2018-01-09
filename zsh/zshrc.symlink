@@ -22,41 +22,16 @@ done
 if [ -f ~/dotfiles/docker/aliases.sh ] ; then
   source ~/dotfiles/docker/aliases.sh
 fi
-if [ $(command -v opam | wc -l) -gt 0 ] ; then
-  . ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-  eval `opam config env`
+if [ -f ~/.opam/opam-init/init.zsh ] ; then
+  if [ $(command -v opam | wc -l) -gt 0 ] ; then
+    . ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+    eval `opam config env`
+  fi
 fi
 
 #[ -f /usr/local/share/chruby/chruby.sh ] && echo "sourcing chruby" && source /usr/local/share/chruby/chruby.sh
 #[ -f /usr/local/opt/nvm/nvm.sh ] && echo "sourcing nvm.sh" && source /usr/local/opt/nvm/nvm.sh
 #[ -f $HOME/.cargo/env ] && echo "sourcing source ~/.cargo/env" && source $HOME/.cargo/env
-
-##
-# ANTIGEN
-##
-if [ "$PLUGIN_MANAGER" = "antigen" ] && [ -f ~/dotfiles/zsh/antigen.zsh ] ; then
-  source ~/dotfiles/zsh/antigen.zsh
-  echo "after antigen"
-  # Load the oh-my-zsh's library.
-  antigen use oh-my-zsh
-  echo "after oh-my-zsh"
-
-  # Nice git helpers
-  antigen bundle git
-
-  # Syntax highlighting bundle.
-  antigen bundle zsh-users/zsh-syntax-highlighting
-  antigen bundle zsh-users/zsh-completions src
-
-  echo "after plugin load of git/sy/completion"
-
-  # Load the theme.
-  antigen theme qzio/dotfiles zsh/themes/qzio
-
-  # Tell antigen that you're done.
-  antigen apply
-  echo "after all antigen"
-fi
 
 ##
 # ZGEN
@@ -77,6 +52,8 @@ if [ "$PLUGIN_MANAGER" = "zgen" ] ; then
     zgen oh-my-zsh plugins/docker
     zgen oh-my-zsh plugins/kubectl
     zgen oh-my-zsh plugins/mosh
+    zgen oh-my-zsh plugins/sudo
+    zgen oh-my-zsh plugins/autojump
     #zgen load StackExchange/blackbox
 
     # generate the init script from plugins above
