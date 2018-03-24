@@ -1,14 +1,8 @@
 #!/bin/sh
 
-xinitlog()
-{
-  echo "$@" >> /home/user/xinitrc-log
-}
-echo "" > /home/user/xinitrc-log
-
-xinitlog "I am running .xinitrc"
-
 xset -b # disable bell
+
+BG_IMAGE_PATH="${BG_IMAGE_PATH:-$HOME/Downloads/dark-purple-city01.jpg}"
 
 if [ -f ~/.Xmodmaprc ] ; then
   xmodmap ~/.Xmodmaprc
@@ -23,24 +17,20 @@ fi
 # Use slock through xautolock, but only if slock and xautolock exists.
 if [ -x $(command -v xautolock) ] ; then
   if [ -x $(command -v i3lock) ]; then
-    xinitlog "using i3lock as locker"
     xautolock -time 10 -locker 'i3lock -c 000000' &
   elif [ -x $(command -v slock) ]; then
-    xinitlog "using slock as locker"
     xautolock -time 10 -locker slock &
   fi
-else
-  xinitlog "no locker found..."
 fi
 
 if [ -x $(command -v urxvtd) ] ; then
-  xinitlog "booting urxvtd"
   urxvtd &
   export TERMINAL=urxvtc
-else
-  xinitlog "no urxvtd"
+fi
+
+if [ -f "$BG_IMAGE_PATH" ] ; then
+  feh --bg-scale $BG_IMAGE_PATH
 fi
 if [ -x $(command -v i3) ] ; then
-  xinitlog "execing i3..."
   exec i3
 fi

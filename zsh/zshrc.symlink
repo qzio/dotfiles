@@ -10,7 +10,7 @@ bindkey -e
 export HISTSIZE=1000
 export SAVEHIST=10000
 export HISTFILE=~/.history_zsh
-export PATH=~/bin:$PATH:
+export PATH=$HOME/bin:$PATH:/sbin:/usr/sbin:/usr/local/sbin
 export NVM_DIR=$HOME/.nvm
 export TMUX_VERION=""
 if [ -x "$(which tmux)" ] ; then
