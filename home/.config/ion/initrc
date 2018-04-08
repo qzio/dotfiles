@@ -1,0 +1,3 @@
+#!/opt/bin/ion
+
+alias ls='ls --color=always'
