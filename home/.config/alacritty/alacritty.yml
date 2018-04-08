@@ -28,7 +28,8 @@ dpi:
 tabspaces: 4
 
 # When true, bold text is drawn using the bright variant of colors.
-draw_bold_text_with_bright_colors: true
+#draw_bold_text_with_bright_colors: true
+draw_bold_text_with_bright_colors: false
 
 # Font configuration (changes require restart)
 font:
@@ -58,8 +59,8 @@ font:
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
   offset:
-    x: 2.0
-    y: -10.0
+    x: -0.5
+    y: -0.5
 
   # OS X only: use thin stroke font rendering. Thin strokes are suitable
   # for retina displays, but for non-retina you probably want this set to
@@ -161,8 +162,10 @@ visual_bell:
 # (e.g. "\x1b[5~") is? Open another terminal (like xterm) without tmux,
 # then run `showkey -a` to get the sequence associated to a key combination.
 key_bindings:
-  - { key: V,        mods: Control|Shift,    action: Paste               }
-  - { key: C,        mods: Control|Shift,    action: Copy                }
+  #- { key: V,        mods: Control|Shift,    action: Paste               }
+  #- { key: C,        mods: Control|Shift,    action: Copy                }
+  - { key: v,        mods: Control|Space,    action: Paste               }
+  - { key: c,        mods: Control|Space,    action: Copy                }
   - { key: Q,        mods: Command, action: Quit                         }
   - { key: W,        mods: Command, action: Quit                         }
   - { key: Insert,   mods: Shift,   action: PasteSelection               }
