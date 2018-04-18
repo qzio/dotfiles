@@ -74,3 +74,6 @@ done
 #end_time=$(($(date +'%s * 1000 + %-N / 1000000')))
 #diff_time=$(($end_time - $start_time))
 #echo "done (took $diff_time) | end:$end_time"
+if [ -f /usr/share/autojump/autojump.zsh ] ; then
+  source /usr/share/autojump/autojump.zsh
+fi
