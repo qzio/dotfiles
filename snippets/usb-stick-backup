@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+set -eu
+
+luks_name="stick"
+device_path="${1:-}"
+
+usage()
+{
+  echo "-> err: $@"
+  echo "usage: $0 <device>"
+  echo ""
+  echo "example: $0 /dev/xvdi1"
+  exit 1
+}
+
+validate_device()
+{
+  if [ ! -n "$device_path" ] ; then
+    usage "You must supply a device, ie /dev/xvdi1"
+  fi
+  if [ ! -b "$device_path" ] ; then
+    usage "Invalid device"
+  fi
+}
+
+main()
+{
+  validate_device "$1"
+  unlock_and_mount "$1"
+  issue_sync
+  unmount_and_close
+}
+
+unlock_and_mount()
+{
+  [ ! -d "/mnt/$luks_name" ] &&  sudo mkdir -p "/mnt/$luks_name"
+  (set -x
+  sudo cryptsetup luksOpen "$1" $luks_name
+  sudo mount "/dev/mapper/$luks_name" "/mnt/$luks_name")
+}
+
+issue_sync()
+{
+  echo "continue to issue ./sync in /mnt/$luks_name/backups"
+  read _
+  (set -x
+  cd /mnt/$luks_name/backups
+  ./sync.sh)
+}
+
+unmount_and_close()
+{
+  (set -x
+  sudo sync
+  sudo umount /mnt/$luks_name
+  sudo cryptsetup luksClose $luks_name)
+}
+
+main "$device_path"
