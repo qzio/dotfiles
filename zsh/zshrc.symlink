@@ -17,12 +17,7 @@ export GOPATH="$HOME/src/go"
 if [ -x "$(which tmux)" ] ; then
   export TMUX_VERSION="$(tmux -V | cut -d ' ' -f2)"
 fi
-for alias_file in $(ls ~/dotfiles/*/aliases.sh) ; do
-  . $alias_file
-done
-if [ -f ~/dotfiles/docker/aliases.sh ] ; then
-  source ~/dotfiles/docker/aliases.sh
-fi
+
 if [ -f ~/.opam/opam-init/init.zsh ] ; then
   if [ $(command -v opam | wc -l) -gt 0 ] ; then
     . ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
@@ -49,7 +44,7 @@ if [ "$PLUGIN_MANAGER" = "zgen" ] ; then
 
     # specify plugins here
     zgen oh-my-zsh
-    zgen oh-my-zsh plugins/git
+     zgen oh-my-zsh plugins/git
     zgen load zsh-users/zsh-syntax-highlighting
     zgen load zsh-users/zsh-completions src
     zgen load zdharma/fast-syntax-highlighting
@@ -62,12 +57,16 @@ if [ "$PLUGIN_MANAGER" = "zgen" ] ; then
     zgen oh-my-zsh plugins/mosh
     zgen oh-my-zsh plugins/sudo
     zgen oh-my-zsh plugins/autojump
-    #zgen load StackExchange/blackbox
 
     # generate the init script from plugins above
     zgen save
   fi
 fi
+
+# tot enable override of zsh plugins this must come after plugin init
+for alias_file in $(ls ~/dotfiles/*/aliases.sh) ; do
+  source $alias_file
+done
 
 #[ -f /usr/local/bin/aws_zsh_completer.sh ] && echo "sourcing aws zsh completer" && source /usr/local/bin/aws_zsh_completer.sh
 
