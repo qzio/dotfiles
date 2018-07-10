@@ -2,7 +2,7 @@
 
 xset -b # disable bell
 
-BG_IMAGE_PATH="${BG_IMAGE_PATH:-$HOME/Downloads/dark-purple-city01.jpg}"
+BG_IMAGE_PATH="${BG_IMAGE_PATH:-}"
 
 if [ -f ~/.Xmodmaprc ] ; then
   xmodmap ~/.Xmodmaprc
@@ -30,6 +30,8 @@ fi
 
 if [ -f "$BG_IMAGE_PATH" ] ; then
   feh --bg-scale $BG_IMAGE_PATH
+else
+  xsetroot -solid '#303030'
 fi
 if [ -x $(command -v i3) ] ; then
   exec i3

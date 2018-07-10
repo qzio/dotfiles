@@ -10,9 +10,10 @@ bindkey -e
 export HISTSIZE=1000
 export SAVEHIST=10000
 export HISTFILE=~/.history_zsh
-export PATH=$HOME/bin:$PATH:/sbin:/usr/sbin:/usr/local/sbin
+export PATH=$HOME/bin:$HOME/src/go/bin:$PATH:/sbin:/usr/sbin:/usr/local/sbin
 export NVM_DIR=$HOME/.nvm
 export TMUX_VERION=""
+export GOPATH="$HOME/src/go"
 if [ -x "$(which tmux)" ] ; then
   export TMUX_VERSION="$(tmux -V | cut -d ' ' -f2)"
 fi
@@ -29,9 +30,15 @@ if [ -f ~/.opam/opam-init/init.zsh ] ; then
   fi
 fi
 
-#[ -f /usr/local/share/chruby/chruby.sh ] && echo "sourcing chruby" && source /usr/local/share/chruby/chruby.sh
-#[ -f /usr/local/opt/nvm/nvm.sh ] && echo "sourcing nvm.sh" && source /usr/local/opt/nvm/nvm.sh
-#[ -f $HOME/.cargo/env ] && echo "sourcing source ~/.cargo/env" && source $HOME/.cargo/env
+if [ -f $NVM_DIR/nvm.sh ] ; then
+  echo "sourcing nvm.sh"
+  source $NVM_DIR/nvm.sh
+elif [ -f /usr/local/opt/nvm/nvm.sh ] ; then
+  echo "sourcing nvm.sh"
+  source /usr/local/opt/nvm/nvm.sh
+fi
+[ -f /usr/local/share/chruby/chruby.sh ] && echo "sourcing chruby" && source /usr/local/share/chruby/chruby.sh
+[ -f $HOME/.cargo/env ] && echo "sourcing source ~/.cargo/env" && source $HOME/.cargo/env
 
 ##
 # ZGEN
