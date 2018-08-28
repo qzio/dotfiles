@@ -40,7 +40,7 @@ if [ $(connected_monitors | grep $ext | wc -l) -gt 0 ] ; then
     xrandr --output $ext $(ext_mode)
     echo "ok should I shut off the internal monitor?"
     read ans
-    if [ $ans == "y" ] ; then
+    if [ "$ans" == "y" ] ; then
       xrandr --output $(internal_monitor) --off
     fi
   else
