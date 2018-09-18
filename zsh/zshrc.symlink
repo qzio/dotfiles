@@ -71,6 +71,7 @@ for extra_file in .os_extras .osx_extras .shell_extras ; do
     . ~/$extra_file
   fi
 done
+[ -f ~/.zsh-completions/gcloud.zsh.inc ] && source ~/.zsh-completions/gcloud.zsh.inc
 #end_time=$(($(date +'%s * 1000 + %-N / 1000000')))
 #diff_time=$(($end_time - $start_time))
 #echo "done (took $diff_time) | end:$end_time"

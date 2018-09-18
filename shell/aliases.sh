@@ -1,7 +1,7 @@
-alias g=grep
+alias g='grep -i'
 
 if [ $(command -v rg) ] ; then
-  alias g=rg
+  alias g='rg -i'
 elif [ $(command -v ag) ] ; then
   alias g=ag
 elif [ $(command -v ack) ] ; then
