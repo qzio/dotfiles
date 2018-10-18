@@ -38,10 +38,10 @@ if [ "$PLUGIN_MANAGER" = "zgen" ] ; then
 
     # specify plugins here
     zgen oh-my-zsh
-     zgen oh-my-zsh plugins/git
-    zgen load zsh-users/zsh-syntax-highlighting
-    zgen load zsh-users/zsh-completions src
-    zgen load zdharma/fast-syntax-highlighting
+    zgen oh-my-zsh plugins/git
+    #zgen load zsh-users/zsh-syntax-highlighting
+    #zgen load zsh-users/zsh-completions src
+    #zgen load zdharma/fast-syntax-highlighting
 
     [ ! -f $HOME/.zgen/robbyrussell/oh-my-zsh-master/themes/qzio.zsh-theme ] && ln -sf $HOME/dotfiles/zsh/themes/qzio.zsh-theme $HOME/.zgen/robbyrussell/oh-my-zsh-master/themes/qzio.zsh-theme
     zgen oh-my-zsh themes/qzio
@@ -50,7 +50,7 @@ if [ "$PLUGIN_MANAGER" = "zgen" ] ; then
     zgen oh-my-zsh plugins/kubectl
     zgen oh-my-zsh plugins/mosh
     zgen oh-my-zsh plugins/sudo
-    zgen oh-my-zsh plugins/autojump
+    #zgen oh-my-zsh plugins/autojump
 
     # generate the init script from plugins above
     zgen save
