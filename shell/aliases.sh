@@ -1,4 +1,6 @@
 alias g='grep -i'
+alias f='find'
+alias e='nvim'
 
 if [ $(command -v rg) ] ; then
   alias g='rg -i'
