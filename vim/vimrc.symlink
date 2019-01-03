@@ -62,8 +62,10 @@ au BufEnter,BufRead,BufNewFile *.java set shiftwidth=4 softtabstop=4 tabstop=4
 
 " use 4 for indention in erlang files
 au BufEnter,BufRead,BufNewFile *.erl set shiftwidth=4 softtabstop=4 tabstop=4
+" use 4 for indention in rust files
+au BufEnter,BufRead,BufNewFile *.rs set shiftwidth=4 softtabstop=4 tabstop=4
 
-" use tab for indention in go files
+" use tab for indention in go and rust files
 au BufEnter,BufRead,BufNewFile *.go set noexpandtab tabstop=2 shiftwidth=2
 
 " skip java checks
