@@ -12,7 +12,12 @@ if dein#load_state('/home/user/.cache/dein')
   call dein#add('rust-lang/rust.vim')
   call dein#add('racer-rust/vim-racer')
   call dein#add('fatih/vim-go')
+
   call dein#add('udalov/kotlin-vim')
+  " typescript syntax highlightning
+  call dein#add('HerringtonDarkholme/yats.vim')
+  call dein#add('google/vim-jsonnet')
+
   call dein#add('Shougo/deoplete.nvim')
   "call dein#add('zchee/deoplete-go', {'build': 'make'})
   " Required:
@@ -37,6 +42,9 @@ set number
 set backspace=indent,eol,start
 set scrolloff=2
 set sidescrolloff=5
+
+set undofile
+set undodir=~/.config/nvim/undo
 
 colorscheme solarized
 set background=dark
