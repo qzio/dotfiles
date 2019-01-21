@@ -54,16 +54,16 @@ au BufEnter,BufRead,BufNewFile *.thor,Rakefile,*.rake,Capfile,Guardfile,*.ru,Vag
 au BufEnter,BufRead,BufNewFile *.ts setf typescript
 au BufEnter,BufRead,BufNewFile *.less setf css
 au BufEnter,BufRead,BufNewFile *.scss setf scss
-au BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=handlebars
+au BufEnter,BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=handlebars
 au BufEnter,BufRead,BufNewFile *.py,*.java,*.erl,*.rs set shiftwidth=4 softtabstop=4 tabstop=4
 au BufEnter,BufRead,BufNewFile *.go set noexpandtab tabstop=4 shiftwidth=4
-
-" while working with gcloud deployment-manager
-au BufRead,BufNewFile *.jinja set ft=yaml
+au BufEnter,BufRead,BufNewFile *.jinja set ft=yaml
+au BufEnter,BufRead,BufNewFile *.* set shiftwidth=2 softtabstop=2 tabstop=2
 
 let mapleader=","
 nmap <Leader>d <c-]>
-nmap <Leader>f <c-o>
+nmap <Leader>g <c-o>
+nmap <Leader>m :! make<Cr>
 
 " show trailing whitespaces
 set listchars=tab:\ \ ,trail:✖
@@ -94,8 +94,11 @@ let g:go_fmt_command = "goimports"
 
 " fzf configuration
 set rtp+=~/.fzf
-let $FZF_DEFAULT_COMMAND = 'rg --files .'
+let $FZF_DEFAULT_COMMAND = 'find . -type f'
 nmap <Leader>t :FZF<Cr>
+
+
+nmap <Leader>e iif err != nil {<Cr>}<Esc>O
 
 " use deoplete
 let g:deoplete#enable_at_startup = 1
