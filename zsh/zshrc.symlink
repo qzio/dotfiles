@@ -41,7 +41,7 @@ if [ "$PLUGIN_MANAGER" = "zgen" ] ; then
     zgen oh-my-zsh plugins/git
     #zgen load zsh-users/zsh-syntax-highlighting
     #zgen load zsh-users/zsh-completions src
-    #zgen load zdharma/fast-syntax-highlighting
+    zgen load zdharma/fast-syntax-highlighting
 
     [ ! -f $HOME/.zgen/robbyrussell/oh-my-zsh-master/themes/qzio.zsh-theme ] && ln -sf $HOME/dotfiles/zsh/themes/qzio.zsh-theme $HOME/.zgen/robbyrussell/oh-my-zsh-master/themes/qzio.zsh-theme
     zgen oh-my-zsh themes/qzio
