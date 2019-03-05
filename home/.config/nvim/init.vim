@@ -61,9 +61,13 @@ au BufEnter,BufRead,BufNewFile *.jinja set ft=yaml
 au BufEnter,BufRead,BufNewFile *.* set shiftwidth=2 softtabstop=2 tabstop=2
 
 let mapleader=","
+" jump to tag
 nmap <Leader>d <c-]>
+" jump back
 nmap <Leader>g <c-o>
+
 nmap <Leader>m :! make<Cr>
+nmap <Leader>r :! make run<Cr>
 
 " show trailing whitespaces
 set listchars=tab:\ \ ,trail:✖
@@ -103,6 +107,7 @@ nmap <Leader>e iif err != nil {<Cr>}<Esc>O
 
 " use deoplete
 let g:deoplete#enable_at_startup = 1
+set completeopt-=preview
 
 " extra escape when esc, or esc mapping is missin
 imap <C-L> <Esc>
