@@ -10,6 +10,7 @@ if dein#load_state('~/.cache/dein')
   "call dein#add('Shougo/neosnippet-snippets')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-ragtag')
+  call dein#add('posva/vim-vue')
   call dein#add('rust-lang/rust.vim')
   call dein#add('racer-rust/vim-racer')
   call dein#add('fatih/vim-go')
@@ -17,7 +18,9 @@ if dein#load_state('~/.cache/dein')
   call dein#add('udalov/kotlin-vim')
   " typescript syntax highlightning
   call dein#add('HerringtonDarkholme/yats.vim')
+  "jsonnet highlightning
   call dein#add('google/vim-jsonnet')
+  call dein#add('junegunn/fzf.vim')
 
   call dein#add('Shougo/deoplete.nvim')
   "call dein#add('zchee/deoplete-go', {'build': 'make'})
@@ -98,10 +101,12 @@ let g:go_highlight_types = 1
 let g:go_auto_sameids = 1
 let g:go_fmt_command = "goimports"
 
-" fzf configuration
+" fzf configuration (fuzzy find files)
 set rtp+=~/.fzf
-let $FZF_DEFAULT_COMMAND = 'find . -type f'
+let $FZF_DEFAULT_COMMAND = 'find . -type f -not -path "*/\.*" -not -iname "*.class"'
 nmap <Leader>t :FZF<Cr>
+" fzf (rg) grep with nice list
+nmap <Leader>r :Rg <C-r><C-w><Cr>
 
 
 nmap <Leader>e iif err != nil {<Cr>}<Esc>O

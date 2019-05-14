@@ -11,10 +11,11 @@ bindkey -e
 export HISTSIZE=1000
 export SAVEHIST=10000
 export HISTFILE=~/.history_zsh
-export PATH=$HOME/bin:$HOME/src/go/bin:$PATH:/sbin:/usr/sbin:/usr/local/sbin
+export PATH=$HOME/bin:$HOME/src/go/bin:$HOME/.krew/bin:$PATH:/sbin:/usr/sbin:/usr/local/sbin
 export NVM_DIR=$HOME/.nvm
 export TMUX_VERION=""
 export GOPATH="$HOME/src/go"
+export SDKMAN_DIR="/home/user/.sdkman"
 if [ -x "$(which tmux)" ] ; then
   export TMUX_VERSION="$(tmux -V | cut -d ' ' -f2)"
 fi
@@ -28,6 +29,7 @@ fi
 
 [ -f /usr/local/share/chruby/chruby.sh ] && echo "sourcing chruby" && source /usr/local/share/chruby/chruby.sh
 [ -f $HOME/.cargo/env ] && echo "sourcing source ~/.cargo/env" && source $HOME/.cargo/env
+[ -f $HOME/.sdkman/bin/sdkman-init.sh ] && source $HOME/.sdkman/bin/sdkman-init.sh
 
 ##
 # ZGEN
@@ -41,13 +43,14 @@ if [ "$PLUGIN_MANAGER" = "zgen" ] ; then
     zgen oh-my-zsh plugins/git
     #zgen load zsh-users/zsh-syntax-highlighting
     #zgen load zsh-users/zsh-completions src
-    zgen load zdharma/fast-syntax-highlighting
+    #zgen load zdharma/fast-syntax-highlighting
 
     [ ! -f $HOME/.zgen/robbyrussell/oh-my-zsh-master/themes/qzio.zsh-theme ] && ln -sf $HOME/dotfiles/zsh/themes/qzio.zsh-theme $HOME/.zgen/robbyrussell/oh-my-zsh-master/themes/qzio.zsh-theme
     zgen oh-my-zsh themes/qzio
 
     zgen oh-my-zsh plugins/docker
-    zgen oh-my-zsh plugins/kubectl
+    #zgen oh-my-zsh plugins/kubectl
+    zgen load $HOME/dotfiles/zsh/kubectl-completion
     zgen oh-my-zsh plugins/mosh
     zgen oh-my-zsh plugins/sudo
     #zgen oh-my-zsh plugins/autojump
@@ -79,3 +82,4 @@ if [ -f /usr/share/autojump/autojump.zsh ] ; then
   source /usr/share/autojump/autojump.zsh
 fi
 tabs 4
+
