@@ -50,8 +50,8 @@ set sidescrolloff=5
 set undofile
 set undodir=~/.config/nvim/undo
 
-colorscheme solarized
 set background=dark
+colorscheme solarized
 
 au BufEnter,BufRead,BufNewFile *.inc setf php
 au BufEnter,BufRead,BufNewFile *.thor,Rakefile,*.rake,Capfile,Guardfile,*.ru,Vagrantfile setf ruby
@@ -117,3 +117,4 @@ set completeopt-=preview
 
 " extra escape when esc, or esc mapping is missin
 imap <C-L> <Esc>
+let g:ragtag_global_maps = 1
