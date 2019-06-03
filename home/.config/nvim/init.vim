@@ -52,6 +52,7 @@ set undodir=~/.config/nvim/undo
 
 set background=dark
 colorscheme solarized
+"colorscheme default
 
 au BufEnter,BufRead,BufNewFile *.inc setf php
 au BufEnter,BufRead,BufNewFile *.thor,Rakefile,*.rake,Capfile,Guardfile,*.ru,Vagrantfile setf ruby
@@ -72,6 +73,7 @@ nmap <Leader>g <c-o>
 
 nmap <Leader>m :! make<Cr>
 nmap <Leader>r :! make run<Cr>
+nmap <Leader>n :! make test<Cr>
 
 " show trailing whitespaces
 set listchars=tab:\ \ ,trail:✖
@@ -108,6 +110,7 @@ nmap <Leader>t :FZF<Cr>
 " fzf (rg) grep with nice list
 nmap <Leader>r :Rg <C-r><C-w><Cr>
 
+nmap <Leader>w :%s/<C-r><C-w>/
 
 nmap <Leader>e iif err != nil {<Cr>}<Esc>O
 
@@ -118,3 +121,6 @@ set completeopt-=preview
 " extra escape when esc, or esc mapping is missin
 imap <C-L> <Esc>
 let g:ragtag_global_maps = 1
+
+" test remap to allow backticks on ipad keyboard
+imap § `
