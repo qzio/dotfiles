@@ -105,7 +105,7 @@ let g:go_fmt_command = "goimports"
 
 " fzf configuration (fuzzy find files)
 set rtp+=~/.fzf
-let $FZF_DEFAULT_COMMAND = 'find . -type f -not -path "*/\.*" -not -iname "*.class"'
+let $FZF_DEFAULT_COMMAND = 'find . -type f -not -path "*/\.*" -not -path "*/node_modules/*" -not -iname "*.class"'
 nmap <Leader>t :FZF<Cr>
 " fzf (rg) grep with nice list
 nmap <Leader>r :Rg <C-r><C-w><Cr>
