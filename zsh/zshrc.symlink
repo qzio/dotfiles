@@ -15,6 +15,7 @@ export PATH=$HOME/bin:$HOME/src/go/bin:$HOME/.krew/bin:$PATH:/sbin:/usr/sbin:/us
 export NVM_DIR=$HOME/.nvm
 export TMUX_VERION=""
 export GOPATH="$HOME/src/go"
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 export SDKMAN_DIR="/home/user/.sdkman"
 if [ -x "$(which tmux)" ] ; then
   export TMUX_VERSION="$(tmux -V | cut -d ' ' -f2)"
@@ -60,7 +61,7 @@ if [ "$PLUGIN_MANAGER" = "zgen" ] ; then
   fi
 fi
 
-# tot enable override of zsh plugins this must come after plugin init
+# to enable override of zsh plugins this must come after plugin init
 for alias_file in $(ls ~/dotfiles/*/aliases.sh) ; do
   source $alias_file
 done
