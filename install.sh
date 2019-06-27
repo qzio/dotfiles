@@ -60,6 +60,8 @@ link_home() {
     fi
     if [ ! -d $source ] ; then
       linkit $source $target
+    else
+      echo "$source is a directory, not linking(?)"
     fi
   done
 }
@@ -83,8 +85,14 @@ linkit()
       echo "mkdir $filedir"
       mkdir -p $filedir
     fi
-    echo "ln -sf $from $target"
-    ln -sf "$from" "$target"
+    if [ -L "$from" ] ; then
+      echo "$from is a symlink, copying it instead!"
+      echo "cp -d $from $target"
+      cp -d "$from" "$target"
+    else
+      echo "ln -sf $from $target"
+      ln -sf "$from" "$target"
+    fi
   fi
 }
 
