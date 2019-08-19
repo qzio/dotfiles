@@ -17,6 +17,7 @@ export TMUX_VERION=""
 export GOPATH="$HOME/src/go"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 export SDKMAN_DIR="/home/user/.sdkman"
+export LC_TIME=C.UTF-8
 if [ -x "$(which tmux)" ] ; then
   export TMUX_VERSION="$(tmux -V | cut -d ' ' -f2)"
 fi
@@ -31,6 +32,7 @@ fi
 [ -f /usr/local/share/chruby/chruby.sh ] && echo "sourcing chruby" && source /usr/local/share/chruby/chruby.sh
 [ -f $HOME/.cargo/env ] && echo "sourcing source ~/.cargo/env" && source $HOME/.cargo/env
 [ -f $HOME/.sdkman/bin/sdkman-init.sh ] && source $HOME/.sdkman/bin/sdkman-init.sh
+[ -d $HOME/.fzf ] && export PATH=$PATH:$HOME/.fzf/bin
 
 ##
 # ZGEN
