@@ -72,7 +72,6 @@ nmap <Leader>d <c-]>
 nmap <Leader>g <c-o>
 
 nmap <Leader>m :! make<Cr>
-nmap <Leader>r :! make run<Cr>
 nmap <Leader>n :! make test<Cr>
 
 " show trailing whitespaces
