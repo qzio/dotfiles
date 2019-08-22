@@ -1,0 +1,4 @@
+#!/bin/sh
+
+set -xeu
+echo "$1" | xsel -b
