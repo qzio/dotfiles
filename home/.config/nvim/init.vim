@@ -20,6 +20,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('HerringtonDarkholme/yats.vim')
   "jsonnet highlightning
   call dein#add('google/vim-jsonnet')
+
   call dein#add('junegunn/fzf.vim')
 
   call dein#add('Shougo/deoplete.nvim')
@@ -101,6 +102,7 @@ let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 let g:go_auto_sameids = 1
 let g:go_fmt_command = "goimports"
+autocmd FileType go set formatprg=gofmt\ -s
 
 " fzf configuration (fuzzy find files)
 set rtp+=~/.fzf
@@ -123,3 +125,8 @@ let g:ragtag_global_maps = 1
 
 " test remap to allow backticks on ipad keyboard
 imap § `
+
+" node js stuff
+autocmd FileType javascript,typescript set formatexpr=
+autocmd FileType javascript,typescript set formatprg=prettier\ --stdin\ --stdin-filepath\ %
+autocmd FileType javascript,typescript nmap <Leader>f gq
