@@ -1,9 +1,4 @@
 #!/usr/bin/env bash
 set -eux
-FZF_GITHUB=https://github.com/junegunn/fzf.git
-
-git clone $FZF_GITHUB ~/.fzf
-cd ~/.fzf
-./install --bin
-
-
+git clone https://github.com/junegunn/fzf.git ~/.fzf
+$HOME/.fzf/install --bin
