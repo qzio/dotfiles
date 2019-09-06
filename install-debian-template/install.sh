@@ -32,7 +32,7 @@ else
   exit
   mkdir -p /opt/
   pushd opt
-  curl -L https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US -o firefox.tar.gz
+  curl -L https://download.mozilla.org/?product=firefox-nightly-latest-ssl&os=linux64&lang=en-US -o firefox.tar.gz
   tar -xvf firefox.tar.gz
   chown user:user -R firefox
   popd
