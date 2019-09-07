@@ -23,5 +23,3 @@ nmap
 libpng-dev
 build-essential
 jq
-scrot
-feh

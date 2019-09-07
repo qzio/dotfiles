@@ -1,8 +1,8 @@
 neovim
 tmux
 mosh
-keepassx
 zsh
 ripgrep
 fd-find
 golang
+wireguard
