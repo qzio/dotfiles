@@ -24,8 +24,8 @@ apt-get update
 apt-get install -y $(cat apt-packages/third-party)
 apt-get install -t unstable $(cat apt-packages/unstable)
 
-if [ $(echo $@ | grep no-firefox | wc -l) -gt 0 ] ; then
-  echo "not installing firefox"
+if [ $(echo $@ | grep no-install-desktop | wc -l) -gt 0 ] ; then
+  echo "not installing desktop packages"
 else
   set -x
   cp firefox.desktop /usr/share/applications/firefox.desktop
@@ -36,4 +36,5 @@ else
   tar -xvf firefox.tar.gz
   chown user:user -R firefox
   popd
+  apt-get install -y $(cat apt-packages/desktop)
 fi
