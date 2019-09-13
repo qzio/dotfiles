@@ -25,6 +25,7 @@ export PATH=$HOME/bin:$HOME/src/go/bin:$HOME/.yarn/bin:$HOME/.krew/bin:$PATH:/sb
 export NVM_DIR=$HOME/.nvm
 export TMUX_VERION=""
 export GOPATH="$HOME/src/go"
+export GO111MODULE=on
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 export SDKMAN_DIR="/home/user/.sdkman"
 export LC_TIME=C.UTF-8
