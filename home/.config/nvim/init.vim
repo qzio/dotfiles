@@ -5,26 +5,18 @@ if dein#load_state('~/.cache/dein')
   call dein#begin('~/.cache/dein')
   " Let dein manage dein
   call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
-  " Add or remove your plugins here like this:
-  "call dein#add('Shougo/neosnippet.vim')
-  "call dein#add('Shougo/neosnippet-snippets')
+
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-ragtag')
-  call dein#add('posva/vim-vue')
-  call dein#add('rust-lang/rust.vim')
-  call dein#add('racer-rust/vim-racer')
-  call dein#add('fatih/vim-go')
-
-  call dein#add('udalov/kotlin-vim')
-  " typescript syntax highlightning
-  call dein#add('HerringtonDarkholme/yats.vim')
-  "jsonnet highlightning
-  call dein#add('google/vim-jsonnet')
-
   call dein#add('junegunn/fzf.vim')
 
-  call dein#add('Shougo/deoplete.nvim')
-  "call dein#add('zchee/deoplete-go', {'build': 'make'})
+  " golang
+  call dein#add('fatih/vim-go')
+
+  " typescript
+  call dein#add('HerringtonDarkholme/yats.vim')
+
+
   " Required:
   call dein#end()
   call dein#save_state()
@@ -45,28 +37,38 @@ set ignorecase
 set smartcase
 set number
 set backspace=indent,eol,start
+" always show 1 line above cursor
 set scrolloff=2
 set sidescrolloff=5
-
+" forever undo
 set undofile
 set undodir=~/.config/nvim/undo
+" show trailing whitespaces
+set listchars=tab:\ \ ,trail:✖
+set list
 
 set background=dark
 colorscheme solarized
-"colorscheme default
-
-au BufEnter,BufRead,BufNewFile *.inc setf php
-au BufEnter,BufRead,BufNewFile *.thor,Rakefile,*.rake,Capfile,Guardfile,*.ru,Vagrantfile setf ruby
-au BufEnter,BufRead,BufNewFile *.ts setf typescript
-au BufEnter,BufRead,BufNewFile *.less setf css
-au BufEnter,BufRead,BufNewFile *.scss setf scss
-au BufEnter,BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=handlebars
-au BufEnter,BufRead,BufNewFile *.py,*.java,*.erl,*.rs set shiftwidth=4 softtabstop=4 tabstop=4
-au BufEnter,BufRead,BufNewFile *.go set noexpandtab tabstop=4 shiftwidth=4
-au BufEnter,BufRead,BufNewFile *.jinja set ft=yaml
-au BufEnter,BufRead,BufNewFile *.* set shiftwidth=2 softtabstop=2 tabstop=2
-
 let mapleader=","
+
+" FZF configuration
+set rtp+=~/.fzf
+let $FZF_DEFAULT_COMMAND = 'find . -type f -not -path "*/\.*" -not -path "*/node_modules/*" -not -path "*/vendor/*" -not -iname "*.class"'
+nmap <Leader>t :FZF<Cr>
+
+" fzf (rg) grep with nice list
+nmap <Leader>r :Rg <C-r><C-w><Cr>
+
+nmap <Leader>w :%s/<C-r><C-w>/
+
+" vim-surround
+xmap s <Plug>VSurround
+
+" ragtag
+let g:ragtag_global_maps = 1
+
+au BufEnter,BufRead,BufNewFile *.py,*.java,*.erl,*.rs,*.c set shiftwidth=4 softtabstop=4 tabstop=4
+
 " jump to tag
 nmap <Leader>d <c-]>
 " jump back
@@ -75,23 +77,10 @@ nmap <Leader>g <c-o>
 nmap <Leader>m :! make<Cr>
 nmap <Leader>n :! make test<Cr>
 
-" show trailing whitespaces
-set listchars=tab:\ \ ,trail:✖
-set list
-
-" vim-surround
-xmap s   <Plug>VSurround
-
-" rust stuff
-set hidden
-"let g:racer_cmd = "/home/jh/.cargo/bin/racer"
-let g:racer_cmd = "racer"
-let g:racer_experimental_completer = 1
-au FileType rust nmap <Leader>d <Plug>(rust-def)
-au FileType rust nmap <Leader>f :RustFmt<Cr>
 
 " golang stuff
 au FileType go nmap <Leader>f :GoFmt<Cr>:GoLint .<Cr>
+au BufEnter,BufRead,BufNewFile *.go set noexpandtab tabstop=4 shiftwidth=4
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_fields = 1
@@ -101,32 +90,3 @@ let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 let g:go_auto_sameids = 1
-let g:go_fmt_command = "goimports"
-autocmd FileType go set formatprg=gofmt\ -s
-
-" fzf configuration (fuzzy find files)
-set rtp+=~/.fzf
-let $FZF_DEFAULT_COMMAND = 'find . -type f -not -path "*/\.*" -not -path "*/node_modules/*" -not -path "*/vendor/*" -not -iname "*.class"'
-nmap <Leader>t :FZF<Cr>
-" fzf (rg) grep with nice list
-nmap <Leader>r :Rg <C-r><C-w><Cr>
-
-nmap <Leader>w :%s/<C-r><C-w>/
-
-nmap <Leader>e iif err != nil {<Cr>}<Esc>O
-
-" use deoplete
-let g:deoplete#enable_at_startup = 1
-set completeopt-=preview
-
-" extra escape when esc, or esc mapping is missin
-imap <C-L> <Esc>
-let g:ragtag_global_maps = 1
-
-" test remap to allow backticks on ipad keyboard
-imap § `
-
-" node js stuff
-autocmd FileType javascript,typescript set formatexpr=
-autocmd FileType javascript,typescript set formatprg=prettier\ --stdin\ --stdin-filepath\ %
-autocmd FileType javascript,typescript nmap <Leader>f gq
