@@ -25,3 +25,4 @@ build-essential
 jq
 inotify-tools
 sipcalc
+pinentry-tty
