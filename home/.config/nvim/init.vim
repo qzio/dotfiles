@@ -55,6 +55,7 @@ let mapleader=","
 set rtp+=~/.fzf
 let $FZF_DEFAULT_COMMAND = 'find . -type f -not -path "*/\.*" -not -path "*/node_modules/*" -not -path "*/vendor/*" -not -iname "*.class"'
 nmap <Leader>t :FZF<Cr>
+let g:fzf_buffers_jump = 1
 
 " fzf (rg) grep with nice list
 nmap <Leader>r :Rg <C-r><C-w><Cr>
@@ -79,7 +80,7 @@ nmap <Leader>n :! make test<Cr>
 
 
 " golang stuff
-au FileType go nmap <Leader>f :GoFmt<Cr>:GoLint .<Cr>
+au FileType go nmap <Leader>f :GoImports<Cr>:GoFmt<Cr>:GoLint .<Cr>
 au BufEnter,BufRead,BufNewFile *.go set noexpandtab tabstop=4 shiftwidth=4
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
