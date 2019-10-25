@@ -37,6 +37,7 @@ if [ -d /rw ] ; then
 fi
 
 
+# if zsh is installed and the user 'user' is present, change the shell for 'user'
 if [ -x /usr/bin/zsh ] ; then
   if [ $(egrep '^user:' /etc/passwd | wc -l) -gt 0 ] ; then
     if [ $(grep zsh /etc/passwd |grep user | wc -l) -lt 1 ] ; then
@@ -45,9 +46,12 @@ if [ -x /usr/bin/zsh ] ; then
   fi
 fi
 
+# add user 'user' to the docker group, if they exist
 if [ $(grep docker /etc/group | wc -l) -gt 0 ] ; then
-  if [ $(grep docker /etc/group |grep user |wc -l) -lt 1 ] ;then
-    (set -x ; usermod -a -G docker user)
+  if [ $(egrep '^user:' /etc/passwd | wc -l) -gt 0 ] ; then
+    if [ $(grep docker /etc/group |grep user |wc -l) -lt 1 ] ;then
+      (set -x ; usermod -a -G docker user)
+    fi
   fi
 fi
 
@@ -58,6 +62,11 @@ else
 
   mkdir -p /usr/share/fonts/truetype/SourceCodePro
   [ -d ../.fonts/ ] && cp ../.fonts/* /usr/share/fonts/truetype/SourceCodePro/
+
+  if [ $(echo $@ | grep no-install-firefox | wc -l) -lt 0 ] ; then
+    echo "not installing firefox, exit!"
+    exit 0
+  fi
 
   cp firefox-nightly.desktop /usr/share/applications/firefox-nightly.desktop
   mkdir -p /opt/
