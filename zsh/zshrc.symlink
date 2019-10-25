@@ -9,7 +9,6 @@ compinit -C
 
 fpath=(
   $HOME/.zsh-completions
-  $HOME/dotfiles/zsh/completions
   $fpath)
 export PLUGIN_MANAGER=zgen
 #start_time=$(($(date +'%s * 1000 + %-N / 1000000')))
@@ -21,7 +20,7 @@ bindkey -e
 export HISTSIZE=1000
 export SAVEHIST=10000
 export HISTFILE=~/.history_zsh
-export PATH=$HOME/bin:$HOME/src/go/bin:$HOME/.yarn/bin:$HOME/.krew/bin:$PATH:/sbin:/usr/sbin:/usr/local/sbin
+export PATH=$HOME/bin:$HOME/src/go/bin:$HOME/.yarn/bin:$HOME/.krew/bin:$PATH:/sbin:/usr/sbin:/usr/local/sbin:/opt/bin
 export NVM_DIR=$HOME/.nvm
 export TMUX_VERION=""
 export GOPATH="$HOME/src/go"
@@ -29,6 +28,7 @@ export GO111MODULE=on
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 export SDKMAN_DIR="/home/user/.sdkman"
 export LC_TIME=C.UTF-8
+export LC_CTYPE=en_US.UTF-8
 if [ -x "$(which tmux)" ] ; then
   export TMUX_VERSION="$(tmux -V | cut -d ' ' -f2)"
 fi
@@ -59,12 +59,13 @@ if [ "$PLUGIN_MANAGER" = "zgen" ] ; then
     #zgen load zsh-users/zsh-completions src
     #zgen load zdharma/fast-syntax-highlighting
 
+    # load my theme
     [ ! -f $HOME/.zgen/robbyrussell/oh-my-zsh-master/themes/qzio.zsh-theme ] && ln -sf $HOME/dotfiles/zsh/themes/qzio.zsh-theme $HOME/.zgen/robbyrussell/oh-my-zsh-master/themes/qzio.zsh-theme
     zgen oh-my-zsh themes/qzio
 
     zgen oh-my-zsh plugins/docker
     #zgen oh-my-zsh plugins/kubectl
-    zgen load $HOME/dotfiles/zsh/kubectl-completion
+    #zgen load $HOME/dotfiles/zsh/kubectl-completion
     zgen oh-my-zsh plugins/mosh
     zgen oh-my-zsh plugins/sudo
     zgen oh-my-zsh plugins/golang
@@ -89,9 +90,15 @@ for extra_file in .os_extras .osx_extras .shell_extras ; do
     . ~/$extra_file
   fi
 done
+
+# extra completion files
+mkdir -p $HOME/.zsh-completions
 if [ ! -e $HOME/.zsh-completions/_gcloud.zsh ] && [ -f /usr/share/google-cloud-sdk/completion.zsh.inc ] ; then
-  mkdir -p $HOME/.zsh-completions
   ln -sf /usr/share/google-cloud-sdk/completion.zsh.inc $HOME/.zsh-completions/_gcloud.zsh
+fi
+if [ ! -e $HOME/.zsh-completions/kubectl.zsh ] && [ $(command -v kubectl | wc -l) -gt 0 ]; then
+  kubectl completion zsh > $HOME/.zsh-completions/_kubectl.zsh
+
 fi
 for f in $(ls $HOME/.zsh-completions) ; do
   source $HOME/.zsh-completions/$f
