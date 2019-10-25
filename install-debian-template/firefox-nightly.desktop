@@ -3,7 +3,7 @@ Version=1.0
 Type=Application
 Name=Firefox Nightly
 Icon=/opt/firefox/firefox-bin
-Exec/opt/firefox/firefox-bin
+Exec=/opt/firefox/firefox-bin
 Comment=Browse the web
 Categories=Browser
 Terminal=false
