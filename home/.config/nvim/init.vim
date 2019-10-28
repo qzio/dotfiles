@@ -13,10 +13,13 @@ if dein#load_state('~/.cache/dein')
   " golang
   call dein#add('fatih/vim-go')
 
+  " javascript
+  call dein#add('othree/yajs.vim')
   " typescript
   call dein#add('HerringtonDarkholme/yats.vim')
 
   call dein#add('cespare/vim-toml')
+
 
   " Required:
   call dein#end()
