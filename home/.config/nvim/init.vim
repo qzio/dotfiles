@@ -16,6 +16,7 @@ if dein#load_state('~/.cache/dein')
   " typescript
   call dein#add('HerringtonDarkholme/yats.vim')
 
+  call dein#add('cespare/vim-toml')
 
   " Required:
   call dein#end()
