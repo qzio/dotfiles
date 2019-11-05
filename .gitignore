@@ -2,3 +2,4 @@
 *.swp
 .swp*
 vim/vim.symlink/undo/
+home/.config/.nvim/local.vim
