@@ -9,6 +9,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-ragtag')
   call dein#add('junegunn/fzf.vim')
+  call dein#add('cespare/vim-toml')
 
   " golang
   call dein#add('fatih/vim-go')
@@ -17,9 +18,13 @@ if dein#load_state('~/.cache/dein')
   call dein#add('othree/yajs.vim')
   " typescript
   call dein#add('HerringtonDarkholme/yats.vim')
+  call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
 
-  call dein#add('cespare/vim-toml')
+  " lsp
+  call dein#add('dense-analysis/ale')
 
+  " auto completion
+  call dein#add('Shougo/deoplete.vim')
 
   " Required:
   call dein#end()
@@ -69,6 +74,9 @@ nmap <Leader>w :%s/<C-r><C-w>/
 " vim-surround
 xmap s <Plug>VSurround
 
+" deoplete
+let g:deoplete#enable_at_startup = 1
+
 " ragtag
 let g:ragtag_global_maps = 1
 
@@ -81,9 +89,10 @@ nmap <Leader>g <c-o>
 
 nmap <Leader>m :! make<Cr>
 nmap <Leader>n :! make test<Cr>
+nmap <Leader>j :! make run<Cr>
 
 
-" golang stuff
+" golang
 au FileType go nmap <Leader>f :GoImports<Cr>:GoFmt<Cr>:GoLint .<Cr>
 au BufEnter,BufRead,BufNewFile *.go set noexpandtab tabstop=4 shiftwidth=4
 let g:go_highlight_build_constraints = 1
@@ -96,6 +105,15 @@ let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 let g:go_auto_sameids = 1
 
+" node/javascript/typescript
+au BufEnter,BufRead,BufNewFile *.ts setf typescript
+au FileType typescript,typescriptreact nmap <Leader>d :ALEGoToDefinition<Cr>
+au FileType typescript nmap <Leader>f :ALEFix<Cr>
+let g:ale_linters = {'typescript': ['tsserver', 'tslint']}
+let g:ale_fixers = {'typescript': ['tslint', 'prettier'], 'javascript': ['eslint', 'prettier']}
+let g:ale_fixers['*'] = ['remove_trailing_lines', 'trim_whitespace']
+
+
 function! SourceLocal(file)
   if filereadable(expand(a:file))
     exe 'source' a:file
@@ -103,3 +121,4 @@ function! SourceLocal(file)
 endfunction
 
 call SourceLocal('~/.config/nvim/local.vim')
+
