@@ -24,7 +24,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('dense-analysis/ale')
 
   " auto completion
-  call dein#add('Shougo/deoplete.vim')
+  "call dein#add('Shougo/deoplete.vim')
 
   " Required:
   call dein#end()
@@ -75,7 +75,7 @@ nmap <Leader>w :%s/<C-r><C-w>/
 xmap s <Plug>VSurround
 
 " deoplete
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 0
 
 " ragtag
 let g:ragtag_global_maps = 1
@@ -99,6 +99,7 @@ nmap <Leader>j :! make run<Cr>
 
 " golang
 au FileType go nmap <Leader>f :GoImports<Cr>:GoFmt<Cr>:GoLint .<Cr>
+au FileType go nmap <Leader>b :GoBuild<Cr>
 au BufEnter,BufRead,BufNewFile *.go set noexpandtab tabstop=4 shiftwidth=4
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
@@ -108,7 +109,7 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
-let g:go_auto_sameids = 1
+let g:go_auto_sameids = 0
 
 " node/javascript/typescript
 au BufEnter,BufRead,BufNewFile *.ts setf typescript
@@ -117,6 +118,8 @@ au FileType typescript nmap <Leader>f :ALEFix<Cr>
 let g:ale_linters = {'typescript': ['tsserver', 'tslint']}
 let g:ale_fixers = {'typescript': ['tslint', 'prettier'], 'javascript': ['eslint', 'prettier']}
 let g:ale_fixers['*'] = ['remove_trailing_lines', 'trim_whitespace']
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
 
 
 function! SourceLocal(file)
