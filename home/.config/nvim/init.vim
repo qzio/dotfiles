@@ -80,6 +80,11 @@ let g:deoplete#enable_at_startup = 1
 " ragtag
 let g:ragtag_global_maps = 1
 
+" ale
+let g:ale_completion_enabled = 1
+let g:ale_virtualtext_cursor = 1
+let g:ale_virtualtext_delay = 200
+
 au BufEnter,BufRead,BufNewFile *.py,*.java,*.erl,*.rs,*.c set shiftwidth=4 softtabstop=4 tabstop=4
 
 " jump to tag
