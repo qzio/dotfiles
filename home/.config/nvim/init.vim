@@ -1,5 +1,13 @@
 set nocompatible
-"dein Scripts-----------------------------
+
+" custom functions etc -------------------
+function! SourceLocal(file)
+  if filereadable(expand(a:file))
+    exe 'source' a:file
+  endif
+endfunction
+
+" dein Scripts-----------------------------
 set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 if dein#load_state('~/.cache/dein')
   call dein#begin('~/.cache/dein')
@@ -58,18 +66,12 @@ set list
 
 set background=dark
 colorscheme solarized
-let mapleader=","
 
 " FZF configuration
 set rtp+=~/.fzf
 let $FZF_DEFAULT_COMMAND = 'find . -type f -not -path "*/\.*" -not -path "*/node_modules/*" -not -path "*/vendor/*" -not -iname "*.class"'
 nmap <Leader>t :FZF<Cr>
 let g:fzf_buffers_jump = 1
-
-" fzf (rg) grep with nice list
-nmap <Leader>r :Rg <C-r><C-w><Cr>
-
-nmap <Leader>w :%s/<C-r><C-w>/
 
 " vim-surround
 xmap s <Plug>VSurround
@@ -83,9 +85,19 @@ let g:ragtag_global_maps = 1
 " ale
 let g:ale_completion_enabled = 1
 let g:ale_virtualtext_cursor = 1
-let g:ale_virtualtext_delay = 200
+let g:ale_virtualtext_delay = 400
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
 
-au BufEnter,BufRead,BufNewFile *.py,*.java,*.erl,*.rs,*.c set shiftwidth=4 softtabstop=4 tabstop=4
+" short cut mapptings
+let mapleader=","
+
+" fzf (rg) grep with nice list
+nmap <Leader>r :Rg <C-r><C-w><Cr>
+" search/replace in file
+nmap <Leader>w :%s/<C-r><C-w>/
+
+
 
 " jump to tag
 nmap <Leader>d <c-]>
@@ -96,6 +108,9 @@ nmap <Leader>m :! make<Cr>
 nmap <Leader>n :! make test<Cr>
 nmap <Leader>j :! make run<Cr>
 
+
+" generic indention standard
+au BufEnter,BufRead,BufNewFile *.py,*.java,*.erl,*.rs,*.c set shiftwidth=4 softtabstop=4 tabstop=4
 
 " golang
 au FileType go nmap <Leader>f :GoImports<Cr>:GoFmt<Cr>:GoLint .<Cr>
@@ -113,20 +128,14 @@ let g:go_auto_sameids = 0
 
 " node/javascript/typescript
 au BufEnter,BufRead,BufNewFile *.ts setf typescript
+au BufReadPost *.svelte setf html
 au FileType typescript,typescriptreact nmap <Leader>d :ALEGoToDefinition<Cr>
 au FileType typescript nmap <Leader>f :ALEFix<Cr>
 let g:ale_linters = {'typescript': ['tsserver', 'tslint']}
 let g:ale_fixers = {'typescript': ['tslint', 'prettier'], 'javascript': ['eslint', 'prettier']}
 let g:ale_fixers['*'] = ['remove_trailing_lines', 'trim_whitespace']
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '⚠'
 
 
-function! SourceLocal(file)
-  if filereadable(expand(a:file))
-    exe 'source' a:file
-  endif
-endfunction
-
+" always (maybe) include the local configuration
 call SourceLocal('~/.config/nvim/local.vim')
 
