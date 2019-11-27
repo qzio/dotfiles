@@ -70,11 +70,7 @@ colorscheme solarized
 " FZF configuration
 set rtp+=~/.fzf
 let $FZF_DEFAULT_COMMAND = 'find . -type f -not -path "*/\.*" -not -path "*/node_modules/*" -not -path "*/vendor/*" -not -iname "*.class"'
-nmap <Leader>t :FZF<Cr>
 let g:fzf_buffers_jump = 1
-
-" vim-surround
-xmap s <Plug>VSurround
 
 " deoplete
 let g:deoplete#enable_at_startup = 0
@@ -88,6 +84,14 @@ let g:ale_virtualtext_cursor = 1
 let g:ale_virtualtext_delay = 400
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '⚠'
+let g:ale_go_bingo_executable = 'gopls'
+
+" vim-go
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+
+" vim-surround
+xmap s <Plug>VSurround
 
 " short cut mapptings
 let mapleader=","
@@ -96,7 +100,8 @@ let mapleader=","
 nmap <Leader>r :Rg <C-r><C-w><Cr>
 " search/replace in file
 nmap <Leader>w :%s/<C-r><C-w>/
-
+" open file search
+nmap <Leader>t :FZF<Cr>
 
 
 " jump to tag
@@ -115,6 +120,9 @@ au BufEnter,BufRead,BufNewFile *.py,*.java,*.erl,*.rs,*.c set shiftwidth=4 softt
 " golang
 au FileType go nmap <Leader>f :GoImports<Cr>:GoFmt<Cr>:GoLint .<Cr>
 au FileType go nmap <Leader>b :GoBuild<Cr>
+au FileType go nmap <Leader>v :GoTest<Cr>
+" faster :GoImplements using ripgrep
+au FileType go nmap <Leader>c :Rg func \(.[^)]*\) <C-r><C-w>\(<Cr>
 au BufEnter,BufRead,BufNewFile *.go set noexpandtab tabstop=4 shiftwidth=4
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
