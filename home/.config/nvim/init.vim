@@ -34,6 +34,8 @@ if dein#load_state('~/.cache/dein')
   " auto completion
   "call dein#add('Shougo/deoplete.vim')
 
+  call dein#add('challenger-deep-theme/vim', {'name': 'challenger-deep'})
+
   " Required:
   call dein#end()
   call dein#save_state()
@@ -65,7 +67,7 @@ set listchars=tab:\ \ ,trail:✖
 set list
 
 set background=dark
-colorscheme solarized
+colorscheme challenger_deep
 
 " FZF configuration
 set rtp+=~/.fzf
