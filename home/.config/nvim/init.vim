@@ -117,6 +117,7 @@ nmap <Leader>j :! make run<Cr>
 
 
 " generic indention standard
+au BufEnter,BufRead,BufNewFile *.* set shiftwidth=2 softtabstop=2 tabstop=2 expandtab
 au BufEnter,BufRead,BufNewFile *.py,*.java,*.erl,*.rs,*.c set shiftwidth=4 softtabstop=4 tabstop=4
 
 " golang
