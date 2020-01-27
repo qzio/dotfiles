@@ -43,6 +43,7 @@ fi
 [ -f /usr/local/share/chruby/chruby.sh ] && echo "sourcing chruby" && source /usr/local/share/chruby/chruby.sh
 [ -f $HOME/.cargo/env ] && echo "sourcing source ~/.cargo/env" && source $HOME/.cargo/env
 [ -f $HOME/.sdkman/bin/sdkman-init.sh ] && source $HOME/.sdkman/bin/sdkman-init.sh
+[ -f $HOME/.config/broot/launcher/bash/br ] && source $HOME/.config/broot/launcher/bash/br
 [ -d $HOME/.fzf ] && export PATH=$PATH:$HOME/.fzf/bin
 
 ##

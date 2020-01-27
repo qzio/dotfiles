@@ -32,7 +32,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('dense-analysis/ale')
 
   " auto completion
-  "call dein#add('Shougo/deoplete.vim')
+  call dein#add('Shougo/deoplete.vim')
 
   call dein#add('challenger-deep-theme/vim', {'name': 'challenger-deep'})
 
@@ -75,7 +75,7 @@ let $FZF_DEFAULT_COMMAND = 'find . -type f -not -path "*/\.*" -not -path "*/node
 let g:fzf_buffers_jump = 1
 
 " deoplete
-let g:deoplete#enable_at_startup = 0
+let g:deoplete#enable_at_startup = 1
 
 " ragtag
 let g:ragtag_global_maps = 1
@@ -114,6 +114,7 @@ nmap <Leader>g <c-o>
 nmap <Leader>m :! make<Cr>
 nmap <Leader>n :! make test<Cr>
 nmap <Leader>j :! make run<Cr>
+nmap <Leader>h :ALEHover<Cr>
 
 
 " generic indention standard
@@ -121,6 +122,8 @@ au BufEnter,BufRead,BufNewFile *.* set shiftwidth=2 softtabstop=2 tabstop=2 expa
 au BufEnter,BufRead,BufNewFile *.py,*.java,*.erl,*.rs,*.c set shiftwidth=4 softtabstop=4 tabstop=4
 
 " golang
+au BufEnter,BufRead,BufNewFile *.got,*.gogo set ft=go
+au BufEnter,BufRead,BufNewFile *.gots set ft=gohtmltmpl
 au FileType go nmap <Leader>f :GoImports<Cr>:GoFmt<Cr>:GoLint .<Cr>
 au FileType go nmap <Leader>b :GoBuild<Cr>
 au FileType go nmap <Leader>v :GoTest<Cr>
@@ -142,9 +145,10 @@ au BufEnter,BufRead,BufNewFile *.ts setf typescript
 au BufReadPost *.svelte setf html
 au FileType typescript,typescriptreact nmap <Leader>d :ALEGoToDefinition<Cr>
 au FileType typescript nmap <Leader>f :ALEFix<Cr>
-let g:ale_linters = {'typescript': ['tsserver', 'tslint']}
-let g:ale_fixers = {'typescript': ['tslint', 'prettier'], 'javascript': ['eslint', 'prettier']}
+let g:ale_linters = {'typescript': ['tsserver', 'tslint'], 'javascript': ['eslint']}
+let g:ale_fixers = {'typescript': ['prettier'], 'javascript': ['eslint', 'prettier']}
 let g:ale_fixers['*'] = ['remove_trailing_lines', 'trim_whitespace']
+let g:ale_fix_on_save = 'on'
 
 
 " always (maybe) include the local configuration
