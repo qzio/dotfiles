@@ -17,6 +17,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-ragtag')
   call dein#add('junegunn/fzf.vim')
+  call dein#add('junegunn/vim-easy-align')
   call dein#add('cespare/vim-toml')
 
   " golang
@@ -32,7 +33,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('dense-analysis/ale')
 
   " auto completion
-  call dein#add('Shougo/deoplete.vim')
+  call dein#add('Shougo/deoplete.nvim')
 
   call dein#add('challenger-deep-theme/vim', {'name': 'challenger-deep'})
 
@@ -71,7 +72,7 @@ colorscheme challenger_deep
 
 " FZF configuration
 set rtp+=~/.fzf
-let $FZF_DEFAULT_COMMAND = 'find . -type f -not -path "*/\.*" -not -path "*/node_modules/*" -not -path "*/vendor/*" -not -iname "*.class"'
+let $FZF_DEFAULT_COMMAND = 'find . -type f -not -path "*/\.*" -not -path "*/node_modules/*" -not -path "*/vendor/*" -not -iname "*.class" -not -path "*/dist/*"'
 let g:fzf_buffers_jump = 1
 
 " deoplete
@@ -91,9 +92,22 @@ let g:ale_go_bingo_executable = 'gopls'
 " vim-go
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
+"let g:go_doc_popup_window=1
+let g:go_metalinter_command = 'gopls'
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+let g:go_gopls_enabled=1
+let g:go_gopls_staticcheck=1
+let g:go_gopls_complete_unimported=1
+let g:go_gopls_deep_completion=1
+let g:go_gopls_fuzzy_matching=1
+"let g:go_gopls_use_placeholders=1
+let g:go_diagnostics_enabled=1
 
 " vim-surround
 xmap s <Plug>VSurround
+
+" easy align
+xmap ga <Plug>(EasyAlign)
 
 " short cut mapptings
 let mapleader=","
@@ -105,6 +119,10 @@ nmap <Leader>w :%s/<C-r><C-w>/
 " open file search
 nmap <Leader>t :FZF<Cr>
 
+" remove trailing whitespaces
+nmap <Leader>y :%s/\s\+$//g<Cr>
+" cd into the directory of the current file
+nmap <Leader>p :cd %:p:h<Cr>
 
 " jump to tag
 nmap <Leader>d <c-]>
@@ -124,7 +142,7 @@ au BufEnter,BufRead,BufNewFile *.py,*.java,*.erl,*.rs,*.c set shiftwidth=4 softt
 " golang
 au BufEnter,BufRead,BufNewFile *.got,*.gogo set ft=go
 au BufEnter,BufRead,BufNewFile *.gots set ft=gohtmltmpl
-au FileType go nmap <Leader>f :GoImports<Cr>:GoFmt<Cr>:GoLint .<Cr>
+au FileType go nmap <Leader>f :GoImports<Cr>:GoFmt<Cr>:GoDiagnostics<Cr>
 au FileType go nmap <Leader>b :GoBuild<Cr>
 au FileType go nmap <Leader>v :GoTest<Cr>
 " faster :GoImplements using ripgrep
@@ -145,7 +163,10 @@ au BufEnter,BufRead,BufNewFile *.ts setf typescript
 au BufReadPost *.svelte setf html
 au FileType typescript,typescriptreact nmap <Leader>d :ALEGoToDefinition<Cr>
 au FileType typescript nmap <Leader>f :ALEFix<Cr>
-let g:ale_linters = {'typescript': ['tsserver', 'tslint'], 'javascript': ['eslint']}
+let g:ale_linters = {
+      \ 'typescript': ['tsserver', 'tslint'], 'javascript': ['eslint'],
+      \ 'go': ['gopls']
+      \}
 let g:ale_fixers = {'typescript': ['prettier'], 'javascript': ['eslint', 'prettier']}
 let g:ale_fixers['*'] = ['remove_trailing_lines', 'trim_whitespace']
 let g:ale_fix_on_save = 'on'
