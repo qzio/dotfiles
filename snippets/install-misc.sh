@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 set -eu
+echo "
+Installing
+
+- k9s
+- ctop
+- kubectx
+
+"
 set -x
 ARCH=amd64
 MACHINE_TYPE=$(uname -m)
