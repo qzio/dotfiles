@@ -69,7 +69,7 @@ if [ "$PLUGIN_MANAGER" = "zgen" ] ; then
     #zgen load $HOME/dotfiles/zsh/kubectl-completion
     zgen oh-my-zsh plugins/mosh
     zgen oh-my-zsh plugins/sudo
-    zgen oh-my-zsh plugins/golang
+    #zgen oh-my-zsh plugins/golang
     #zgen oh-my-zsh plugins/autojump
 
     # generate the init script from plugins above

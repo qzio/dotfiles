@@ -87,14 +87,16 @@ let g:ale_virtualtext_cursor = 1
 let g:ale_virtualtext_delay = 400
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '⚠'
-let g:ale_go_bingo_executable = 'gopls'
-
+"let g:ale_go_bingo_executable = 'gopls'
+"
 " vim-go
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
-"let g:go_doc_popup_window=1
+let g:go_referrers_mode = 'gopls'
 let g:go_metalinter_command = 'gopls'
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+let g:go_implements_mode = 'gopls'
+"let g:go_doc_popup_window=1
 let g:go_gopls_enabled=1
 let g:go_gopls_staticcheck=1
 let g:go_gopls_complete_unimported=1
@@ -118,6 +120,7 @@ nmap <Leader>r :Rg <C-r><C-w><Cr>
 nmap <Leader>w :%s/<C-r><C-w>/
 " open file search
 nmap <Leader>t :FZF<Cr>
+nmap <Leader>g :Buffers<Cr>
 
 " remove trailing whitespaces
 nmap <Leader>y :%s/\s\+$//g<Cr>
