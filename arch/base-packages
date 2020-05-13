@@ -10,6 +10,8 @@ dialog
 diff-so-fancy
 dmenu
 docker
+ebtables
+ecryptfs-utils
 efibootmgr
 fakeroot
 feh
@@ -30,9 +32,11 @@ gzip
 htop
 i3lock
 i3-wm
+imagemagick
 inotify-tools
 jq
 kubectl
+libpng12
 libtool
 linux
 linux-firmware
@@ -46,6 +50,7 @@ mpv
 mtr
 neovim
 networkmanager
+nmap
 notify-osd
 openbsd-netcat
 pacman
@@ -56,6 +61,7 @@ pulseaudio
 python3
 python-pynvim
 python-pyopenssl
+qemu
 ripgrep
 rofi
 rsync
@@ -69,6 +75,7 @@ ttf-bitstream-vera
 ttf-dejavu
 unzip
 vim
+virt-manager
 which
 whois
 wpa_supplicant

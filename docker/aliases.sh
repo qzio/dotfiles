@@ -1,4 +1,4 @@
-alias dm='docker-machine'
+#alias dm='docker-machine'
 alias dcompose='docker-compose'
 
 o()
@@ -8,7 +8,7 @@ o()
   echo "now: CHEF_ORG=$CHEF_ORG"
 }
 
-m()
+m_DEPRECATED()
 {
   eval $(docker-machine env $1)
 }
@@ -18,6 +18,7 @@ denter()
 {
   dexec $1 bash
 }
+
 dexec()
 {
   grep_for=$1

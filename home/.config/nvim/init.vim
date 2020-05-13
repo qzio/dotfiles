@@ -120,7 +120,7 @@ nmap <Leader>r :Rg <C-r><C-w><Cr>
 nmap <Leader>w :%s/<C-r><C-w>/
 " open file search
 nmap <Leader>t :FZF<Cr>
-nmap <Leader>g :Buffers<Cr>
+nmap <Leader>T :Buffers<Cr>
 
 " remove trailing whitespaces
 nmap <Leader>y :%s/\s\+$//g<Cr>
