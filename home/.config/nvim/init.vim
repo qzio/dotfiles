@@ -135,6 +135,7 @@ nmap <Leader>g <c-o>
 nmap <Leader>m :! make<Cr>
 nmap <Leader>n :! make test<Cr>
 nmap <Leader>j :! make run<Cr>
+nmap <Leader>J :! go run main.go<Cr>
 nmap <Leader>h :ALEHover<Cr>
 
 
