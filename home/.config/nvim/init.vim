@@ -66,9 +66,12 @@ set undodir=~/.config/nvim/undo
 " show trailing whitespaces
 set listchars=tab:\ \ ,trail:✖
 set list
+set foldmethod=indent
+set nofoldenable " do not fold by default.
 
 set background=dark
-colorscheme challenger_deep
+"colorscheme challenger_deep
+colorscheme solarized
 
 " FZF configuration
 set rtp+=~/.fzf
@@ -136,6 +139,7 @@ nmap <Leader>m :! make<Cr>
 nmap <Leader>n :! make test<Cr>
 nmap <Leader>j :! make run<Cr>
 nmap <Leader>J :! go run main.go<Cr>
+nmap <Leader>N :! go test .<Cr>
 nmap <Leader>h :ALEHover<Cr>
 
 

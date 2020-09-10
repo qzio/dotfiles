@@ -14,6 +14,9 @@ export PLUGIN_MANAGER=zgen
 #start_time=$(($(date +'%s * 1000 + %-N / 1000000')))
 #echo "start zshrc $start_time"
 export EDITOR=vim
+if [ -x "$(which nvim)" ] ; then
+  export EDITOR=nvim
+fi
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
@@ -31,6 +34,15 @@ export LC_TIME=C.UTF-8
 export LC_CTYPE=en_US.UTF-8
 if [ -x "$(which tmux)" ] ; then
   export TMUX_VERSION="$(tmux -V | cut -d ' ' -f2)"
+fi
+
+export ANDROID_HOME=$HOME/Android/Sdk
+if [ -d $ANDROID_HOME ] ; then
+  export PATH=$PATH:$ANDROID_HOME/emulator
+  export PATH=$PATH:$ANDROID_HOME/tools
+  export PATH=$PATH:$ANDROID_HOME/tools/bin
+  export PATH=$PATH:$ANDROID_HOME/platform-tools
+  echo "adding android home $ANDROID_HOME"
 fi
 
 if [ -f ~/.opam/opam-init/init.zsh ] ; then
