@@ -7,7 +7,6 @@ function! SourceLocal(file)
   endif
 endfunction
 
-" dein Scripts-----------------------------
 set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 if dein#load_state('~/.cache/dein')
   call dein#begin('~/.cache/dein')
@@ -18,31 +17,22 @@ if dein#load_state('~/.cache/dein')
   call dein#add('tpope/vim-ragtag')
   call dein#add('junegunn/fzf.vim')
   call dein#add('junegunn/vim-easy-align')
-  call dein#add('cespare/vim-toml')
 
-  " golang
   call dein#add('fatih/vim-go')
 
-  " javascript
-  call dein#add('othree/yajs.vim')
-  " typescript
+  " typescript syntax highlightning(and more)
   call dein#add('HerringtonDarkholme/yats.vim')
-  call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
 
-  " lsp
-  call dein#add('dense-analysis/ale')
+  call dein#add('autozimu/LanguageClient-neovim', {'rev': 'next', 'build': 'bash install.sh'})
 
-  " auto completion
-  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'})
+
 
   call dein#add('challenger-deep-theme/vim', {'name': 'challenger-deep'})
-
   " Required:
   call dein#end()
   call dein#save_state()
 endif
-"End dein Scripts-------------------------
-
 " sane defaults
 filetype plugin indent on
 syntax enable
@@ -66,47 +56,22 @@ set undodir=~/.config/nvim/undo
 " show trailing whitespaces
 set listchars=tab:\ \ ,trail:✖
 set list
-set foldmethod=indent
-set nofoldenable " do not fold by default.
 
 set background=dark
-"colorscheme challenger_deep
-colorscheme solarized
+colorscheme challenger_deep
+"colorscheme solarized
+" end defaults
+
+" short cut mapptings
+let mapleader=","
 
 " FZF configuration
 set rtp+=~/.fzf
 let $FZF_DEFAULT_COMMAND = 'find . -type f -not -path "*/\.*" -not -path "*/node_modules/*" -not -path "*/vendor/*" -not -iname "*.class" -not -path "*/dist/*"'
 let g:fzf_buffers_jump = 1
 
-" deoplete
-let g:deoplete#enable_at_startup = 1
-
 " ragtag
 let g:ragtag_global_maps = 1
-
-" ale
-let g:ale_completion_enabled = 1
-let g:ale_virtualtext_cursor = 1
-let g:ale_virtualtext_delay = 400
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '⚠'
-"let g:ale_go_bingo_executable = 'gopls'
-"
-" vim-go
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
-let g:go_referrers_mode = 'gopls'
-let g:go_metalinter_command = 'gopls'
-let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
-let g:go_implements_mode = 'gopls'
-"let g:go_doc_popup_window=1
-let g:go_gopls_enabled=1
-let g:go_gopls_staticcheck=1
-let g:go_gopls_complete_unimported=1
-let g:go_gopls_deep_completion=1
-let g:go_gopls_fuzzy_matching=1
-"let g:go_gopls_use_placeholders=1
-let g:go_diagnostics_enabled=1
 
 " vim-surround
 xmap s <Plug>VSurround
@@ -114,8 +79,19 @@ xmap s <Plug>VSurround
 " easy align
 xmap ga <Plug>(EasyAlign)
 
-" short cut mapptings
-let mapleader=","
+" generic indention standard
+au BufEnter,BufRead,BufNewFile *.* set shiftwidth=2 softtabstop=2 tabstop=2 expandtab
+au BufEnter,BufRead,BufNewFile *.py,*.java,*.erl,*.rs,*.c set shiftwidth=4 softtabstop=4 tabstop=4
+
+" golang
+au BufEnter,BufRead,BufNewFile *.got,*.gogo set ft=go
+au BufEnter,BufRead,BufNewFile *.gots set ft=gohtmltmpl
+"au FileType go nmap <Leader>f :GoImports<Cr>:GoFmt<Cr>:GoDiagnostics<Cr>
+"au FileType go nmap <Leader>b :GoBuild<Cr>
+"au FileType go nmap <Leader>v :GoTest<Cr>
+" faster :GoImplements using ripgrep
+au FileType go nmap <Leader>c :Rg func \(.[^)]*\) <C-r><C-w>\(<Cr>
+au BufEnter,BufRead,BufNewFile *.go set noexpandtab tabstop=4 shiftwidth=4
 
 " fzf (rg) grep with nice list
 nmap <Leader>r :Rg <C-r><C-w><Cr>
@@ -130,55 +106,59 @@ nmap <Leader>y :%s/\s\+$//g<Cr>
 " cd into the directory of the current file
 nmap <Leader>p :cd %:p:h<Cr>
 
-" jump to tag
-nmap <Leader>d <c-]>
-" jump back
-nmap <Leader>g <c-o>
-
 nmap <Leader>m :! make<Cr>
 nmap <Leader>n :! make test<Cr>
 nmap <Leader>j :! make run<Cr>
-nmap <Leader>J :! go run main.go<Cr>
+
+" go stuff
+"nmap <Leader>J :! go run main.go<Cr>
+nmap <Leader>J ::GoRun<Cr>
 nmap <Leader>N :! go test .<Cr>
-nmap <Leader>h :ALEHover<Cr>
-
-
-" generic indention standard
-au BufEnter,BufRead,BufNewFile *.* set shiftwidth=2 softtabstop=2 tabstop=2 expandtab
-au BufEnter,BufRead,BufNewFile *.py,*.java,*.erl,*.rs,*.c set shiftwidth=4 softtabstop=4 tabstop=4
-
-" golang
-au BufEnter,BufRead,BufNewFile *.got,*.gogo set ft=go
-au BufEnter,BufRead,BufNewFile *.gots set ft=gohtmltmpl
-au FileType go nmap <Leader>f :GoImports<Cr>:GoFmt<Cr>:GoDiagnostics<Cr>
-au FileType go nmap <Leader>b :GoBuild<Cr>
-au FileType go nmap <Leader>v :GoTest<Cr>
-" faster :GoImplements using ripgrep
-au FileType go nmap <Leader>c :Rg func \(.[^)]*\) <C-r><C-w>\(<Cr>
-au BufEnter,BufRead,BufNewFile *.go set noexpandtab tabstop=4 shiftwidth=4
+let g:go_gopls_complete_unimported=1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
+
+let g:go_highlight_function_calls = 0
+let g:go_highlight_function_parameters = 0
+let g:go_highlight_methods = 0
+let g:go_highlight_operators = 0
+let g:go_highlight_structs = 0
+let g:go_highlight_types = 0
+
+let g:go_highlight_extra_types = 1
 let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_types = 1
+
 let g:go_auto_sameids = 0
+let g:go_highlight_chan_whitespace_error = 0
+"nmap <Leader>f :! gofmt -w %<Cr><Cr>
+au FileType go nmap <Leader>f :GoImports<Cr>:GoFmt<Cr>:GoDiagnostics<Cr>:GoBuild<Cr>
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 
 " node/javascript/typescript
 au BufEnter,BufRead,BufNewFile *.ts setf typescript
 au BufReadPost *.svelte setf html
-au FileType typescript,typescriptreact nmap <Leader>d :ALEGoToDefinition<Cr>
-au FileType typescript nmap <Leader>f :ALEFix<Cr>
-let g:ale_linters = {
-      \ 'typescript': ['tsserver', 'tslint'], 'javascript': ['eslint'],
-      \ 'go': ['gopls']
-      \}
-let g:ale_fixers = {'typescript': ['prettier'], 'javascript': ['eslint', 'prettier']}
-let g:ale_fixers['*'] = ['remove_trailing_lines', 'trim_whitespace']
-let g:ale_fix_on_save = 'on'
 
+" language server
+let g:LanguageClient_serverCommands={
+  \ 'go': ['gopls'],
+  \ 'javascript': ['typescript-language-server', '--stdio'],
+  \ 'typescript': ['typescript-language-server', '--stdio'],
+\ }
+nmap <Leader>H <Plug>(lcn-menu)
+nmap <Leader>h <Plug>(lcn-hover)
+nmap <Silent> <Leader>F <Plug>(lcn-format)
+nmap <Leader>R <Plug>(lcn-rename)
+
+nmap <Leader>d <Plug>(lcn-definition)
+nmap <Leader>D <Plug>(lcn-type-definition)
+
+" jump back
+nmap <Leader>g <c-o>
+
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
 
 " always (maybe) include the local configuration
 call SourceLocal('~/.config/nvim/local.vim')
