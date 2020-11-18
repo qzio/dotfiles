@@ -28,6 +28,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'})
 
 
+  "call dein#add('neovim/nvim-lspconfig')
   call dein#add('challenger-deep-theme/vim', {'name': 'challenger-deep'})
   " Required:
   call dein#end()
@@ -60,6 +61,8 @@ set list
 set background=dark
 colorscheme challenger_deep
 "colorscheme solarized
+"
+set autoread
 " end defaults
 
 " short cut mapptings
@@ -86,10 +89,7 @@ au BufEnter,BufRead,BufNewFile *.py,*.java,*.erl,*.rs,*.c set shiftwidth=4 softt
 " golang
 au BufEnter,BufRead,BufNewFile *.got,*.gogo set ft=go
 au BufEnter,BufRead,BufNewFile *.gots set ft=gohtmltmpl
-"au FileType go nmap <Leader>f :GoImports<Cr>:GoFmt<Cr>:GoDiagnostics<Cr>
-"au FileType go nmap <Leader>b :GoBuild<Cr>
-"au FileType go nmap <Leader>v :GoTest<Cr>
-" faster :GoImplements using ripgrep
+" fast :GoImplements using ripgrep
 au FileType go nmap <Leader>c :Rg func \(.[^)]*\) <C-r><C-w>\(<Cr>
 au BufEnter,BufRead,BufNewFile *.go set noexpandtab tabstop=4 shiftwidth=4
 
@@ -110,11 +110,13 @@ nmap <Leader>m :! make<Cr>
 nmap <Leader>n :! make test<Cr>
 nmap <Leader>j :! make run<Cr>
 
+
+iabbrev ifer if err != nil {<Cr><Cr>}<Up><Tab>return
+
 " go stuff
-"nmap <Leader>J :! go run main.go<Cr>
+nmap <Leader>J :! go run main.go<Cr>
 nmap <Leader>J ::GoRun<Cr>
 nmap <Leader>N :! go test .<Cr>
-let g:go_gopls_complete_unimported=1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_fields = 1
@@ -132,8 +134,7 @@ let g:go_highlight_operators = 1
 
 let g:go_auto_sameids = 0
 let g:go_highlight_chan_whitespace_error = 0
-"nmap <Leader>f :! gofmt -w %<Cr><Cr>
-au FileType go nmap <Leader>f :GoImports<Cr>:GoFmt<Cr>:GoDiagnostics<Cr>:GoBuild<Cr>
+au FileType go nmap <Leader>f :GoImports<Cr>:GoFmt<Cr>:GoDiagnostics<Cr>:GoBuild<Cr>:GoVet<Cr>
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 
 " node/javascript/typescript
@@ -141,6 +142,7 @@ au BufEnter,BufRead,BufNewFile *.ts setf typescript
 au BufReadPost *.svelte setf html
 
 " language server
+let g:LanguageClient_settingsPath=["~/.config/nvim/lsp-settings.json", ".vim/settings.json"]
 let g:LanguageClient_serverCommands={
   \ 'go': ['gopls'],
   \ 'javascript': ['typescript-language-server', '--stdio'],
@@ -148,9 +150,11 @@ let g:LanguageClient_serverCommands={
 \ }
 nmap <Leader>H <Plug>(lcn-menu)
 nmap <Leader>h <Plug>(lcn-hover)
-nmap <Silent> <Leader>F <Plug>(lcn-format)
+nmap <Leader>F <Plug>(lcn-format)
+nmap <Leader>G <Plug>(lcn-format-sync)
 nmap <Leader>R <Plug>(lcn-rename)
-
+nmap <Leader>a <Plug>(lcn-code-action)
+nmap <Leader>A <Plug>(lcn-code-lens-action)
 nmap <Leader>d <Plug>(lcn-definition)
 nmap <Leader>D <Plug>(lcn-type-definition)
 
@@ -159,6 +163,9 @@ nmap <Leader>g <c-o>
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
+
+" use prettier for javascript format
+au BufEnter,BufRead,BufNewFile *.ts nmap <Leader>f :silent %!prettier --stdin-filepath %<CR>
 
 " always (maybe) include the local configuration
 call SourceLocal('~/.config/nvim/local.vim')

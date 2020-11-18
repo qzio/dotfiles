@@ -1,0 +1,10 @@
+{
+  "initializationOptions": {
+    "usePlaceholders": true,
+    "completeUnimported": true,
+    "staticcheck": true,
+    "analyses": {
+      "unreachable": true
+    }
+  }
+}
