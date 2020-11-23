@@ -2,9 +2,12 @@
   "initializationOptions": {
     "usePlaceholders": true,
     "completeUnimported": true,
+    "completeDocumentation": true,
     "staticcheck": true,
     "analyses": {
-      "unreachable": true
+      "unreachable": true,
+      "fillreturns": true,
+      "nonewvars": true
     }
   }
 }

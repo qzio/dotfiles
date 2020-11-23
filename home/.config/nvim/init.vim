@@ -134,8 +134,8 @@ let g:go_highlight_operators = 1
 
 let g:go_auto_sameids = 0
 let g:go_highlight_chan_whitespace_error = 0
-au FileType go nmap <Leader>f :GoImports<Cr>:GoFmt<Cr>:GoDiagnostics<Cr>:GoBuild<Cr>:GoVet<Cr>
-let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+"au FileType go nmap <Leader>f :GoImports<Cr>:GoFmt<Cr>:GoDiagnostics<Cr>:GoBuild<Cr>:GoVet<Cr>
+"let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 
 " node/javascript/typescript
 au BufEnter,BufRead,BufNewFile *.ts setf typescript
@@ -147,10 +147,12 @@ let g:LanguageClient_serverCommands={
   \ 'go': ['gopls'],
   \ 'javascript': ['typescript-language-server', '--stdio'],
   \ 'typescript': ['typescript-language-server', '--stdio'],
+  \ 'typescriptreact': ['typescript-language-server', '--stdio'],
 \ }
 nmap <Leader>H <Plug>(lcn-menu)
 nmap <Leader>h <Plug>(lcn-hover)
-nmap <Leader>F <Plug>(lcn-format)
+nmap <Leader>f <Plug>(lcn-format)<Cr><Plug>(lcn-code-action)
+nmap <Leader>F <Plug>(lcn-diagnostics-next)
 nmap <Leader>G <Plug>(lcn-format-sync)
 nmap <Leader>R <Plug>(lcn-rename)
 nmap <Leader>a <Plug>(lcn-code-action)
