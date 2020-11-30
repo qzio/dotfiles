@@ -134,6 +134,7 @@ let g:go_highlight_operators = 1
 
 let g:go_auto_sameids = 0
 let g:go_highlight_chan_whitespace_error = 0
+
 "au FileType go nmap <Leader>f :GoImports<Cr>:GoFmt<Cr>:GoDiagnostics<Cr>:GoBuild<Cr>:GoVet<Cr>
 "let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 
