@@ -10,6 +10,10 @@ compinit -C
 fpath=(
   $HOME/.zsh-completions
   $fpath)
+
+# override what ever PATH was before, because we don't want duplicates
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+
 export PLUGIN_MANAGER=zgen
 #start_time=$(($(date +'%s * 1000 + %-N / 1000000')))
 #echo "start zshrc $start_time"
@@ -23,7 +27,7 @@ bindkey -e
 export HISTSIZE=1000
 export SAVEHIST=10000
 export HISTFILE=~/.history_zsh
-export PATH=$HOME/bin:$HOME/src/go/bin:$HOME/.yarn/bin:$HOME/.krew/bin:$HOME/.local/bin:$PATH:/sbin:/usr/sbin:/usr/local/sbin:/opt/bin
+export PATH=$HOME/bin:$HOME/src/go/bin:$HOME/.yarn/bin:$HOME/.krew/bin:$HOME/.local/bin:/sbin:/usr/sbin:/usr/local/sbin:/opt/bin:$PATH
 export NVM_DIR=$HOME/.nvm
 export TMUX_VERION=""
 export GOPATH="$HOME/src/go"

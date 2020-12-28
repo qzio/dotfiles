@@ -151,7 +151,7 @@ let g:LanguageClient_serverCommands={
 \ }
 nmap <Leader>H <Plug>(lcn-menu)
 nmap <Leader>h <Plug>(lcn-hover)
-nmap <Leader>f <Plug>(lcn-format)<Cr><Plug>(lcn-code-action)
+nmap <Leader>f <Plug>(lcn-format)
 nmap <Leader>F <Plug>(lcn-diagnostics-next)
 nmap <Leader>G <Plug>(lcn-format-sync)
 nmap <Leader>R <Plug>(lcn-rename)
@@ -166,8 +166,8 @@ nmap <Leader>g <c-o>
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 
-" use prettier for javascript format
-au BufEnter,BufRead,BufNewFile *.ts nmap <Leader>f :silent %!prettier --stdin-filepath %<CR>
+" use prettier for typescript format
+au BufEnter,BufRead,BufNewFile *.html,*.ts,*.tsx nmap <Leader>q :silent %!prettier --stdin-filepath %<CR>
 
 " always (maybe) include the local configuration
 call SourceLocal('~/.config/nvim/local.vim')
