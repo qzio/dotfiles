@@ -12,7 +12,7 @@ fpath=(
   $fpath)
 
 # override what ever PATH was before, because we don't want duplicates
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+export PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
 
 export PLUGIN_MANAGER=zgen
 #start_time=$(($(date +'%s * 1000 + %-N / 1000000')))
