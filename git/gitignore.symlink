@@ -10,5 +10,8 @@ TAGS
 .lvimrc
 *-backup/
 backup-*/
-backup/*
+**/backup/*
+backups/*
+bak/*
+bak-*/*
 .vim/settings.json

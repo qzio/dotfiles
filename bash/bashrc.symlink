@@ -121,3 +121,5 @@ fi
 if [ -f $HOME/.config/broot/launcher/bash/br ] ; then
   source $HOME/.config/broot/launcher/bash/br
 fi
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"

@@ -1,5 +1,12 @@
 #zmodload zsh/zprof
+mkdir -p $HOME/.zsh-plugins \
+         $HOME/.zsh-completions
+fpath=(
+  $HOME/.zsh-completions
+  $fpath)
+autoload compinit
 autoload -Uz compinit
+compinit -i
 autoload -U +X bashcompinit && bashcompinit
 zmodload -i zsh/parameter
 for dump in ~/.zcompdump(N.mh+24); do
@@ -7,35 +14,39 @@ for dump in ~/.zcompdump(N.mh+24); do
 done
 compinit -C
 
-fpath=(
-  $HOME/.zsh-completions
-  $fpath)
+setopt long_list_jobs
+# mosh plugin from oh-my-zsh
+compdef mosh=ssh
+# recognize comments
+setopt interactivecomments
 
-# override what ever PATH was before, because we don't want duplicates
-export PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+# Override what ever PATH was before, because we don't want duplicates.
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
 
-export PLUGIN_MANAGER=zgen
-#start_time=$(($(date +'%s * 1000 + %-N / 1000000')))
-#echo "start zshrc $start_time"
-export EDITOR=vim
-if [ -x "$(which nvim)" ] ; then
+# Use the most modern vim present
+export EDITOR=vi
+if [ -x "$(which vim)" ] ; then
+  export editor=vim
+elif [ -x "$(which nvim)" ] ; then
   export EDITOR=nvim
 fi
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
-# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-export HISTSIZE=1000
+# Keep history within the shell and save it to ~/.zsh_history:
+export HISTSIZE=50000
 export SAVEHIST=10000
 export HISTFILE=~/.history_zsh
-export PATH=$HOME/bin:$HOME/src/go/bin:$HOME/.yarn/bin:$HOME/.krew/bin:$HOME/.local/bin:/sbin:/usr/sbin:/usr/local/sbin:/opt/bin:$PATH
+export PATH=$HOME/bin:$HOME/src/go/bin:$HOME/.yarn/bin:$HOME/.krew/bin:$HOME/.local/bin:/opt/bin:$PATH
+export PAGER=less
+export LESS='-R'
 export NVM_DIR=$HOME/.nvm
-export TMUX_VERION=""
 export GOPATH="$HOME/src/go"
 export GO111MODULE=on
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
-export SDKMAN_DIR="/home/user/.sdkman"
 export LC_TIME=C.UTF-8
 export LC_CTYPE=en_US.UTF-8
+
+export TMUX_VERION=""
 if [ -x "$(which tmux)" ] ; then
   export TMUX_VERSION="$(tmux -V | cut -d ' ' -f2)"
 fi
@@ -49,6 +60,7 @@ if [ -d $ANDROID_HOME ] ; then
   echo "adding android home $ANDROID_HOME"
 fi
 
+# opam - ocaml's package manager
 if [ -f ~/.opam/opam-init/init.zsh ] ; then
   if [ $(command -v opam | wc -l) -gt 0 ] ; then
     . ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
@@ -56,76 +68,34 @@ if [ -f ~/.opam/opam-init/init.zsh ] ; then
   fi
 fi
 
+if [ -d "$HOME/dotfiles/zsh/oh-my-zsh/lib" ] ; then
+  for f in $HOME/dotfiles/zsh/oh-my-zsh/lib/* ; do
+    source $f
+  done
+fi
+
 [ -f /usr/local/share/chruby/chruby.sh ] && echo "sourcing chruby" && source /usr/local/share/chruby/chruby.sh
 [ -f $HOME/.cargo/env ] && echo "sourcing source ~/.cargo/env" && source $HOME/.cargo/env
-[ -f $HOME/.sdkman/bin/sdkman-init.sh ] && source $HOME/.sdkman/bin/sdkman-init.sh
-[ -f $HOME/.config/broot/launcher/bash/br ] && source $HOME/.config/broot/launcher/bash/br
 [ -d $HOME/.fzf ] && export PATH=$PATH:$HOME/.fzf/bin
 
-##
-# ZGEN
-##
-if [ "$PLUGIN_MANAGER" = "zgen" ] ; then
-  source "${HOME}/dotfiles/zsh/zgen.zsh"
-  if ! zgen saved; then
+[ -f $HOME/.config/broot/launcher/bash/br ] && source $HOME/.config/broot/launcher/bash/br
+[ -f /usr/share/autojump/autojump.zsh ] && source /usr/share/autojump/autojump.zsh
 
-    # specify plugins here
-    zgen oh-my-zsh
-    zgen oh-my-zsh plugins/git
-    #zgen load zsh-users/zsh-syntax-highlighting
-    #zgen load zsh-users/zsh-completions src
-    #zgen load zdharma/fast-syntax-highlighting
+for f in $HOME/.zsh-plugins/* ; do
+  [ -f $f ] && source $f
+done
 
-    # load my theme
-    [ ! -f $HOME/.zgen/robbyrussell/oh-my-zsh-master/themes/qzio.zsh-theme ] && ln -sf $HOME/dotfiles/zsh/themes/qzio.zsh-theme $HOME/.zgen/robbyrussell/oh-my-zsh-master/themes/qzio.zsh-theme
-    zgen oh-my-zsh themes/qzio
-
-    zgen oh-my-zsh plugins/docker
-    #zgen oh-my-zsh plugins/kubectl
-    #zgen load $HOME/dotfiles/zsh/kubectl-completion
-    zgen oh-my-zsh plugins/mosh
-    zgen oh-my-zsh plugins/sudo
-    #zgen oh-my-zsh plugins/golang
-    #zgen oh-my-zsh plugins/autojump
-
-    # generate the init script from plugins above
-    zgen save
-  fi
-fi
+# enable homebrew.
+# This must be done before aliases etc, since it injects the homebrew path into PATH
+[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # to enable override of zsh plugins this must come after plugin init
-for alias_file in $(ls ~/dotfiles/*/aliases.sh) ; do
+for alias_file in $(ls $HOME/dotfiles/*/aliases.sh) ; do
   source $alias_file
 done
-
-#[ -f /usr/local/bin/aws_zsh_completer.sh ] && echo "sourcing aws zsh completer" && source /usr/local/bin/aws_zsh_completer.sh
-
-# Need this last since oh-my-zsh ruins variables etc.
-for extra_file in .os_extras .osx_extras .shell_extras ; do
-  if [ -f ~/$extra_file ] ; then
-    echo "sourcing ~/$extra_file"
-    . ~/$extra_file
-  fi
-done
-
-# extra completion files
-mkdir -p $HOME/.zsh-completions
-if [ ! -e $HOME/.zsh-completions/_gcloud.zsh ] && [ -f /usr/share/google-cloud-sdk/completion.zsh.inc ] ; then
-  ln -sf /usr/share/google-cloud-sdk/completion.zsh.inc $HOME/.zsh-completions/_gcloud.zsh
-fi
-if [ ! -e $HOME/.zsh-completions/kubectl.zsh ] && [ $(command -v kubectl | wc -l) -gt 0 ]; then
-  kubectl completion zsh > $HOME/.zsh-completions/_kubectl.zsh
-
-fi
-for f in $(ls $HOME/.zsh-completions) ; do
-  source $HOME/.zsh-completions/$f
-done
-#end_time=$(($(date +'%s * 1000 + %-N / 1000000')))
-#diff_time=$(($end_time - $start_time))
-#echo "done (took $diff_time) | end:$end_time"
-if [ -f /usr/share/autojump/autojump.zsh ] ; then
-  source /usr/share/autojump/autojump.zsh
-fi
+[ -f $HOME/.shell_extras ] && source $HOME/.shell_extras
+[ -f $HOME/.zprofile ] && source $HOME/.zprofile
+[ -f $HOME/.zshenv ] && source $HOME/.zshenv
 tabs 4
 
 #zprof

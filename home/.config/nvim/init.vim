@@ -1,6 +1,5 @@
 set nocompatible
 
-" custom functions etc -------------------
 function! SourceLocal(file)
   if filereadable(expand(a:file))
     exe 'source' a:file
@@ -13,28 +12,35 @@ if dein#load_state('~/.cache/dein')
   " Let dein manage dein
   call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
+  " theme
+  call dein#add('challenger-deep-theme/vim', {'name': 'challenger-deep'})
+
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-ragtag')
   call dein#add('junegunn/fzf.vim')
   call dein#add('junegunn/vim-easy-align')
+  call dein#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'})
 
+  " lsp support, deprecate after nvim 0.5(?)
+  call dein#add('autozimu/LanguageClient-neovim', {'rev': 'next', 'build': 'bash install.sh'})
+  "call dein#add('neovim/nvim-lspconfig')
+
+  " go
   call dein#add('fatih/vim-go')
 
   " typescript syntax highlightning(and more)
   call dein#add('HerringtonDarkholme/yats.vim')
+  " more typescript/jsx stuffy
+  call dein#add('maxmellon/vim-jsx-pretty')
+  " svelte
+  call dein#add('evanleck/vim-svelte')
 
-  call dein#add('autozimu/LanguageClient-neovim', {'rev': 'next', 'build': 'bash install.sh'})
-
-  call dein#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'})
-
-
-  "call dein#add('neovim/nvim-lspconfig')
-  call dein#add('challenger-deep-theme/vim', {'name': 'challenger-deep'})
   " Required:
   call dein#end()
   call dein#save_state()
 endif
-" sane defaults
+
+" my defaults
 filetype plugin indent on
 syntax enable
 set shiftwidth=2 softtabstop=2 tabstop=2
@@ -48,7 +54,7 @@ set ignorecase
 set smartcase
 set number
 set backspace=indent,eol,start
-" always show 1 line above cursor
+" always show 2 line above cursor
 set scrolloff=2
 set sidescrolloff=5
 " forever undo
@@ -57,16 +63,13 @@ set undodir=~/.config/nvim/undo
 " show trailing whitespaces
 set listchars=tab:\ \ ,trail:✖
 set list
-
 set background=dark
-colorscheme challenger_deep
-"colorscheme solarized
-"
 set autoread
+set foldmethod=syntax
+set foldlevelstart=8
 " end defaults
 
-" short cut mapptings
-let mapleader=","
+colorscheme challenger_deep
 
 " FZF configuration
 set rtp+=~/.fzf
@@ -93,6 +96,8 @@ au BufEnter,BufRead,BufNewFile *.gots set ft=gohtmltmpl
 au FileType go nmap <Leader>c :Rg func \(.[^)]*\) <C-r><C-w>\(<Cr>
 au BufEnter,BufRead,BufNewFile *.go set noexpandtab tabstop=4 shiftwidth=4
 
+" shortcut mappings
+let mapleader=","
 " fzf (rg) grep with nice list
 nmap <Leader>r :Rg <C-r><C-w><Cr>
 " search/replace in file
@@ -112,6 +117,7 @@ nmap <Leader>j :! make run<Cr>
 
 
 iabbrev ifer if err != nil {<Cr><Cr>}<Up><Tab>return
+"iabbrev logf WithCtx(ctx).WithFields(logrus.Fields{<Cr>}).
 
 " go stuff
 nmap <Leader>J :! go run main.go<Cr>
@@ -140,7 +146,6 @@ let g:go_highlight_chan_whitespace_error = 0
 
 " node/javascript/typescript
 au BufEnter,BufRead,BufNewFile *.ts setf typescript
-au BufReadPost *.svelte setf html
 
 " language server
 let g:LanguageClient_settingsPath=["~/.config/nvim/lsp-settings.json", ".vim/settings.json"]
@@ -160,6 +165,8 @@ nmap <Leader>a <Plug>(lcn-code-action)
 nmap <Leader>A <Plug>(lcn-code-lens-action)
 nmap <Leader>d <Plug>(lcn-definition)
 nmap <Leader>D <Plug>(lcn-type-definition)
+nmap <Leader>E <Plug>(lcn-explain-error)
+
 
 " jump back
 nmap <Leader>g <c-o>
@@ -167,9 +174,15 @@ nmap <Leader>g <c-o>
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 
+" use typescript
+let g:svelte_preprocessors = ['typescript']
+
 " use prettier for typescript format
+" note, different hotkey than lsp/formatting
 au BufEnter,BufRead,BufNewFile *.html,*.ts,*.tsx nmap <Leader>q :silent %!prettier --stdin-filepath %<CR>
+
+" register .tsx and .jsx extenstions
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 
 " always (maybe) include the local configuration
 call SourceLocal('~/.config/nvim/local.vim')
-

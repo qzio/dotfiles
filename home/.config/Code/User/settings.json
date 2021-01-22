@@ -1,0 +1,8 @@
+{
+    "redhat.telemetry.enabled": true,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "go.toolsManagement.autoUpdate": true,
+    "window.zoomLevel": 1
+}

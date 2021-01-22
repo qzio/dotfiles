@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+mainBranch=master
+
+[ $(git branch | grep -c main) -eq 1 ] && mainBranch=main
+
+set -x
+git fetch --prune --tags origin
+git fetch --prune --tags upstream
+git fetch --prune --all
+git checkout $mainBranch
+git rebase origin/$mainBranch
+git rebase -i upstream/$mainBranch
+git push origin $mainBranch
+
