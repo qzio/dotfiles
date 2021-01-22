@@ -4,6 +4,7 @@ curdir=$(pwd)
 
 main() {
   validate_curdir
+  sub_installs
   link_dotsymlinks
   link_home
 }
@@ -26,6 +27,13 @@ validate_curdir() {
       exit 1
     fi
   fi
+}
+
+sub_installs() {
+  for f in */install.sh ; do
+    echo "installing $f"
+    ./$f
+  done
 }
 
 link_dotsymlinks() {

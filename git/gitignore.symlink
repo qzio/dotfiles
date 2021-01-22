@@ -11,4 +11,6 @@ TAGS
 *-backup/
 backup-*/
 backup/*
+bak/*
+bak-*/*
 .vim/settings.json
