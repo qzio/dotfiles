@@ -1,5 +1,6 @@
 #!/bin/sh
 
+mkdir -p $HOME/.zsh-plugins
 # extra completion files
 if [ ! -e $HOME/.zsh-plugins/_gcloud.zsh ] && [ -f /usr/share/google-cloud-sdk/completion.zsh.inc ] ; then
   (set -x; ln -sf /usr/share/google-cloud-sdk/completion.zsh.inc $HOME/.zsh-plugins/_gcloud.zsh)
