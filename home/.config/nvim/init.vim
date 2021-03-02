@@ -22,6 +22,8 @@ if dein#load_state('~/.cache/dein')
 
   " typescript syntax highlightning(and more)
   call dein#add('HerringtonDarkholme/yats.vim')
+  " svelte
+  call dein#add('evanleck/vim-svelte')
 
   call dein#add('autozimu/LanguageClient-neovim', {'rev': 'next', 'build': 'bash install.sh'})
 
@@ -140,7 +142,7 @@ let g:go_highlight_chan_whitespace_error = 0
 
 " node/javascript/typescript
 au BufEnter,BufRead,BufNewFile *.ts setf typescript
-au BufReadPost *.svelte setf html
+"au BufReadPost *.svelte setf html
 
 " language server
 let g:LanguageClient_settingsPath=["~/.config/nvim/lsp-settings.json", ".vim/settings.json"]
@@ -166,6 +168,9 @@ nmap <Leader>g <c-o>
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
+
+" use typescript
+let g:svelte_preprocessors = ['typescript']
 
 " use prettier for typescript format
 au BufEnter,BufRead,BufNewFile *.html,*.ts,*.tsx nmap <Leader>q :silent %!prettier --stdin-filepath %<CR>
