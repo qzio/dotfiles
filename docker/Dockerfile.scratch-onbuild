@@ -1,0 +1,11 @@
+FROM alpine as alpine
+RUN apk add -u ca-certificates tzdata
+
+FROM scratch as release
+COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=alpine /usr/share/zoneinfo /usr/share/zoneinfo
+COPY --from=alpine /etc/passwd /etc/passwd
+USER nobody
+ENTRYPOINT ["/service"]
+ONBUILD ARG BIN=./service # default
+ONBUILD COPY $BIN /service
