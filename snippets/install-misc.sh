@@ -12,7 +12,7 @@ set -x
 ARCH=amd64
 MACHINE_TYPE=$(uname -m)
 KERNEL_NAME=$(uname -s)
-K9S_VERSION=0.8.4
+K9S_VERSION=0.24.4
 DOCKER_COMPOSE_VERSION=1.24.1
 CTOP_VERSION=0.7.2
 KUBECTX_VERSION=0.6.3
@@ -47,8 +47,9 @@ install_k9s()
     return 0
   fi
   pushd $HOME/Downloads
-  curl -OL https://github.com/derailed/k9s/releases/download/$K9S_VERSION/k9s_${K9S_VERSION}_${KERNEL_NAME}_${MACHINE_TYPE}.tar.gz
-  tar xf k9s_${K9S_VERSION}_${KERNEL_NAME}_${MACHINE_TYPE}.tar.gz
+  filename=k9s_${KERNEL_NAME}_${MACHINE_TYPE}.tar.gz
+  curl -OL https://github.com/derailed/k9s/releases/download/v$K9S_VERSION/${filename}
+  tar xf ${filename}
   mv k9s $HOME/bin/
   popd
 }

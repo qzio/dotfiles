@@ -1,5 +1,5 @@
 {
-  "initializationOptions": {
+  "gopls": {
     "usePlaceholders": true,
     "completeUnimported": true,
     "completeDocumentation": true,
