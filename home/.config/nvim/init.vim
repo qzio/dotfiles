@@ -30,7 +30,7 @@ if dein#load_state('~/.cache/dein')
   " typescript syntax highlightning(and more)
   call dein#add('HerringtonDarkholme/yats.vim')
   " more typescript/jsx stuffy
-  call dein#add('peitalin/vim-jsx-typescript')
+  call dein#add('maxmellon/vim-jsx-pretty')
   " svelte
   call dein#add('evanleck/vim-svelte')
 

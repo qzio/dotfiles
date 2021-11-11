@@ -10,7 +10,7 @@ TAGS
 .lvimrc
 *-backup/
 backup-*/
-backup/*
+**/backup/*
 backups/*
 bak/*
 bak-*/*
