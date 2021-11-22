@@ -4,8 +4,6 @@ linux-firmware
 linux-headers
 dhclient
 ecryptfs-utils
-efibootmgr
-feh
 file
 fzf
 git
