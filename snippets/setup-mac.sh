@@ -84,6 +84,7 @@ if [ $(which -a java | wc -l) -lt 1 ] ; then
   confirm "continue without java?"
   ruby_install_java="echo 'when you have the java jdk installed, you can ruby-install jruby-9. to install jruby'"
 fi
+brew install reattach-to-user-namespace
 ruby-install -L
 ruby-install ruby-2.4
 ruby-install ruby-2.3
