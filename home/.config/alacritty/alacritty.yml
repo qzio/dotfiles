@@ -91,7 +91,8 @@
 font:
   # Normal (roman) font face
   normal:
-    family: "Source Code Pro Medium" # should be "Menlo" or something on macOS.
+    #family: "Source Code Pro Medium" # should be "Menlo" or something on macOS.
+    family: Menlo
     # Font family
     #
     # Default:
@@ -105,7 +106,9 @@ font:
 
   # Bold font face
   bold:
-    family: "Source Code Pro Black" # should be "Menlo" or something on macOS.
+    #family: "Source Code Pro Black" # should be "Menlo" or something on macOS.
+    family: Menlo
+    style: Bold
     # Font family
     #
     # If the bold family is not specified, it will fall back to the
@@ -117,7 +120,8 @@ font:
 
   # Italic font face
   italic:
-    family: "Source Code Pro Medium" # should be "Menlo" or something on macOS.
+    #family: "Source Code Pro Medium" # should be "Menlo" or something on macOS.
+    family: Menlo
     # Font family
     #
     # If the italic family is not specified, it will fall back to the
@@ -126,6 +130,7 @@ font:
 
     # The `style` can be specified to pick a specific face.
     #style: Italic
+    style: Italic
 
   # Bold italic font face
   #bold_italic:
@@ -139,7 +144,7 @@ font:
     #style: Bold Italic
 
   # Point size
-  size: 12.0
+  size: 16.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -369,6 +374,7 @@ colors:
 #winpty_backend: false
 
 # Send ESC (\x1b) before characters when alt is pressed.
+# this doesn't work at all
 #alt_send_esc: true
 
 #mouse:
@@ -533,6 +539,17 @@ colors:
 #
 # If the same trigger is assigned to multiple actions, all of them are executed
 # at once.
+key_bindings:
+  - { key: K,      mods: Alt,  chars: "\x1bk" }
+  - { key: J,      mods: Alt,  chars: "\x1bj" }
+  - { key: L,      mods: Alt,  chars: "\x1bl" }
+  - { key: H,      mods: Alt,  chars: "\x1bh" }
+  - { key: P,      mods: Alt,  chars: "\x1bp" }
+  - { key: N,      mods: Alt,  chars: "\x1bn" }
+  - { key: Up,     mods: Alt,  chars: "\x1b[1;5A" }
+  - { key: Down,   mods: Alt,  chars: "\x1b[1;5B" }
+  - { key: Left,   mods: Alt,  chars: "\x1bb"     }
+  - { key: Right,  mods: Alt,  chars: "\x1bf"     }
 #key_bindings:
   # (Windows, Linux, and BSD only)
   #- { key: V,        mods: Control|Shift, action: Paste            }

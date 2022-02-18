@@ -23,6 +23,7 @@ if dein#load_state('~/.cache/dein')
 
   " lsp support, deprecate after nvim 0.5(?)
   call dein#add('autozimu/LanguageClient-neovim', {'rev': 'next', 'build': 'bash install.sh'})
+  "call dein#add('neovim/nvim-lspconfig')
 
   " go
   call dein#add('fatih/vim-go')
@@ -163,6 +164,7 @@ nmap <Leader>A <Plug>(lcn-code-lens-action)
 nmap <Leader>d <Plug>(lcn-definition)
 nmap <Leader>D <Plug>(lcn-type-definition)
 nmap <Leader>E <Plug>(lcn-explain-error)
+
 
 " jump back
 nmap <Leader>g <c-o>

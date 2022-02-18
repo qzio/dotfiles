@@ -1,16 +1,18 @@
 #zmodload zsh/zprof
+mkdir -p $HOME/.zsh-plugins \
+         $HOME/.zsh-completions
+fpath=(
+  $HOME/.zsh-completions
+  $fpath)
+autoload compinit
 autoload -Uz compinit
+compinit -i
 autoload -U +X bashcompinit && bashcompinit
 zmodload -i zsh/parameter
 for dump in ~/.zcompdump(N.mh+24); do
   compinit
 done
 compinit -C
-
-mkdir -p $HOME/.zsh-plugins
-fpath=(
-  $HOME/.zsh-plugins
-  $fpath)
 
 setopt long_list_jobs
 # mosh plugin from oh-my-zsh
@@ -38,13 +40,13 @@ export PATH=$HOME/bin:$HOME/src/go/bin:$HOME/.yarn/bin:$HOME/.krew/bin:$HOME/.lo
 export PAGER=less
 export LESS='-R'
 export NVM_DIR=$HOME/.nvm
-export TMUX_VERION=""
 export GOPATH="$HOME/src/go"
 export GO111MODULE=on
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
-export SDKMAN_DIR="/home/user/.sdkman"
 export LC_TIME=C.UTF-8
 export LC_CTYPE=en_US.UTF-8
+
+export TMUX_VERION=""
 if [ -x "$(which tmux)" ] ; then
   export TMUX_VERSION="$(tmux -V | cut -d ' ' -f2)"
 fi
@@ -58,6 +60,7 @@ if [ -d $ANDROID_HOME ] ; then
   echo "adding android home $ANDROID_HOME"
 fi
 
+# opam - ocaml's package manager
 if [ -f ~/.opam/opam-init/init.zsh ] ; then
   if [ $(command -v opam | wc -l) -gt 0 ] ; then
     . ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
@@ -73,21 +76,26 @@ fi
 
 [ -f /usr/local/share/chruby/chruby.sh ] && echo "sourcing chruby" && source /usr/local/share/chruby/chruby.sh
 [ -f $HOME/.cargo/env ] && echo "sourcing source ~/.cargo/env" && source $HOME/.cargo/env
-[ -f $HOME/.sdkman/bin/sdkman-init.sh ] && source $HOME/.sdkman/bin/sdkman-init.sh
-[ -f $HOME/.config/broot/launcher/bash/br ] && source $HOME/.config/broot/launcher/bash/br
 [ -d $HOME/.fzf ] && export PATH=$PATH:$HOME/.fzf/bin
+
+[ -f $HOME/.config/broot/launcher/bash/br ] && source $HOME/.config/broot/launcher/bash/br
 [ -f /usr/share/autojump/autojump.zsh ] && source /usr/share/autojump/autojump.zsh
 
 for f in $HOME/.zsh-plugins/* ; do
   [ -f $f ] && source $f
 done
 
+# enable homebrew.
+# This must be done before aliases etc, since it injects the homebrew path into PATH
+[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # to enable override of zsh plugins this must come after plugin init
 for alias_file in $(ls $HOME/dotfiles/*/aliases.sh) ; do
   source $alias_file
 done
-
 [ -f $HOME/.shell_extras ] && source $HOME/.shell_extras
+[ -f $HOME/.zprofile ] && source $HOME/.zprofile
+[ -f $HOME/.zshenv ] && source $HOME/.zshenv
 tabs 4
 
 #zprof
