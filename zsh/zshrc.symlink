@@ -42,6 +42,7 @@ export LESS='-R'
 export NVM_DIR=$HOME/.nvm
 export GOPATH="$HOME/src/go"
 export GO111MODULE=on
+export CGO_ENABLED=0
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 export LC_TIME=C.UTF-8
 export LC_CTYPE=en_US.UTF-8
