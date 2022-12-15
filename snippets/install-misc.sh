@@ -4,7 +4,6 @@ echo "
 Installing
 
 - k9s
-- ctop
 - kubectx
 
 "
@@ -13,8 +12,6 @@ ARCH=amd64
 MACHINE_TYPE=$(uname -m)
 KERNEL_NAME=$(uname -s)
 K9S_VERSION=0.24.4
-DOCKER_COMPOSE_VERSION=1.24.1
-CTOP_VERSION=0.7.2
 KUBECTX_VERSION=0.6.3
 
 
@@ -29,8 +26,6 @@ main()
 {
   setup
   install_k9s
-  install_docker_compose
-  install_ctop
   install_kubectx
 }
 
@@ -54,26 +49,6 @@ install_k9s()
   popd
 }
 
-install_docker_compose()
-{
-  if [ $(command -v docker-compose | wc -l) -gt 0 ] ; then
-    echo "docker-compose already installed"
-    return 0
-  fi
-  curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-${KERNEL_NAME}-${MACHINE_TYPE} -o $HOME/bin/docker-compose
-  chmod +x $HOME/bin/docker-compose
-}
-
-install_ctop()
-{
-  if [ $(command -v ctop | wc -l) -gt 0 ] ; then
-    echo "ctop already installed"
-    return 0
-  fi
-  curl -L https://github.com/bcicen/ctop/releases/download/v${CTOP_VERSION}/ctop-${CTOP_VERSION}-${KERNEL_NAME,,}-${ARCH} -o $HOME/bin/ctop
-  chmod +x $HOME/bin/ctop
-}
-
 install_kubectx()
 {
   if [ $(command -v kubectx | wc -l) -gt 0 ] ; then
@@ -87,7 +62,4 @@ install_kubectx()
   popd
 }
 
-
 main
-
-
