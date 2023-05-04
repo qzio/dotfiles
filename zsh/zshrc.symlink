@@ -97,6 +97,8 @@ done
 [ -f $HOME/.shell_extras ] && source $HOME/.shell_extras
 [ -f $HOME/.zprofile ] && source $HOME/.zprofile
 [ -f $HOME/.zshenv ] && source $HOME/.zshenv
+[ -f $HOME/.fzf.zsh ] && source ~/.fzf.zsh
 tabs 4
+
 
 #zprof

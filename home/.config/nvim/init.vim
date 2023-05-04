@@ -35,6 +35,9 @@ if dein#load_state('~/.cache/dein')
   " svelte
   call dein#add('evanleck/vim-svelte')
 
+  " copilot
+  call dein#add('github/copilot.vim')
+
   " Required:
   call dein#end()
   call dein#save_state()
@@ -73,7 +76,11 @@ colorscheme challenger_deep
 
 " FZF configuration
 set rtp+=~/.fzf
-let $FZF_DEFAULT_COMMAND = 'find . -type f -not -path "*/\.*" -not -path "*/node_modules/*" -not -path "*/vendor/*" -not -iname "*.class" -not -path "*/dist/*"'
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files'
+else
+  let $FZF_DEFAULT_COMMAND = 'find . -type f -not -path "*/\.*" -not -path "*/node_modules/*" -not -path "*/vendor/*" -not -iname "*.class" -not -path "*/dist/*"'
+endif
 let g:fzf_buffers_jump = 1
 
 " ragtag

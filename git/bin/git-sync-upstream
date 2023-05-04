@@ -4,6 +4,16 @@ mainBranch=master
 
 [ $(git branch | grep -c main) -eq 1 ] && mainBranch=main
 
+
+repo=$(git remote -v |grep origin | awk '{print $2}' | cut -d ':' -f 2 | sort -u | tr '\/' '-')
+echo "repo: $repo"
+lockfile=/tmp/lock-git-sync-$repo
+
+[ -f "$lockfile" ] && echo "lock file exists: $lockfile"
+
+[ $(git tag --list | grep QA | wc -l) -gt 0 ] && git tag -d  QA
+
+(set -x ; touch "$lockfile")
 set -x
 git fetch --prune --tags origin
 git fetch --prune --tags upstream
@@ -13,3 +23,4 @@ git rebase origin/$mainBranch
 git rebase -i upstream/$mainBranch
 git push origin $mainBranch
 
+(set -x ; rm "$lockfile")
