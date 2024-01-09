@@ -4,15 +4,12 @@ echo "
 Installing
 
 - k9s
-- kubectx
-
 "
 set -x
 ARCH=amd64
 MACHINE_TYPE=$(uname -m)
 KERNEL_NAME=$(uname -s)
 K9S_VERSION=0.24.4
-KUBECTX_VERSION=0.6.3
 
 
 usage()
@@ -26,7 +23,6 @@ main()
 {
   setup
   install_k9s
-  install_kubectx
 }
 
 setup()
@@ -46,19 +42,6 @@ install_k9s()
   curl -OL https://github.com/derailed/k9s/releases/download/v$K9S_VERSION/${filename}
   tar xf ${filename}
   mv k9s $HOME/bin/
-  popd
-}
-
-install_kubectx()
-{
-  if [ $(command -v kubectx | wc -l) -gt 0 ] ; then
-    echo "kubectx already installed"
-    return 0
-  fi
-  pushd $HOME/Downloads
-  curl -OL https://github.com/ahmetb/kubectx/archive/v${KUBECTX_VERSION}.tar.gz
-  tar -xf v${KUBECTX_VERSION}.tar.gz
-  mv kubectx-${KUBECTX_VERSION}/kubectx $HOME/bin/kubectx
   popd
 }
 

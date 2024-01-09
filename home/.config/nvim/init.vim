@@ -38,6 +38,8 @@ if dein#load_state('~/.cache/dein')
   " copilot
   call dein#add('github/copilot.vim')
 
+  call dein#add('wuelnerdotexe/vim-astro')
+
   " Required:
   call dein#end()
   call dein#save_state()
@@ -186,10 +188,11 @@ let g:svelte_preprocessors = ['typescript']
 
 " use prettier for typescript format
 " note, different hotkey than lsp/formatting
-au BufEnter,BufRead,BufNewFile *.html,*.ts,*.tsx nmap <Leader>q :silent %!prettier --stdin-filepath %<CR>
+au BufEnter,BufRead,BufNewFile *.html,*.ts,*.tsx,*.astro nmap <Leader>q :silent %!prettier --stdin-filepath %<CR>
 
 " register .tsx and .jsx extenstions
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 
+let g:astro_typescript = 'enable'
 " always (maybe) include the local configuration
 call SourceLocal('~/.config/nvim/local.vim')
