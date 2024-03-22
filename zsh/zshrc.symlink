@@ -105,3 +105,6 @@ fi
 tabs 4
 
 #zprof
+
+# bun completions
+[ -s "/Users/user/.bun/_bun" ] && source "/Users/user/.bun/_bun"
