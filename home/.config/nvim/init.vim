@@ -40,11 +40,12 @@ if dein#load_state('~/.cache/dein')
 
   call dein#add('wuelnerdotexe/vim-astro')
 
+  call dein#add('hashivim/vim-terraform')
+
   " Required:
   call dein#end()
   call dein#save_state()
 endif
-
 " my defaults
 filetype plugin indent on
 syntax enable
@@ -72,6 +73,9 @@ set background=dark
 set autoread
 set foldmethod=syntax
 set foldlevelstart=8
+set formatoptions+=j
+let g:is_posix=1
+runtime! macros/matchit.vim
 " end defaults
 
 colorscheme challenger_deep
@@ -188,7 +192,7 @@ let g:svelte_preprocessors = ['typescript']
 
 " use prettier for typescript format
 " note, different hotkey than lsp/formatting
-au BufEnter,BufRead,BufNewFile *.html,*.ts,*.tsx,*.astro nmap <Leader>q :silent %!prettier --stdin-filepath %<CR>
+au BufEnter,BufRead,BufNewFile *.html,*.ts,*.tsx,*.astro,*.tmpl nmap <Leader>q :silent %!prettier --stdin-filepath %<CR>
 
 " register .tsx and .jsx extenstions
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact

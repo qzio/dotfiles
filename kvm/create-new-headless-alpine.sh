@@ -1,6 +1,9 @@
 #!/bin/sh
 set -eu
 
+ALPINE_VER="3.20.0"
+OSVARIANT="alpinelinux3.17"
+
 usage() {
   echo $@
   echo "usage: $0 <name> <vcpus> <memory> <disk size>"
@@ -24,14 +27,16 @@ disk=${4:-}
 [ ! -n "$memory" ] && usage "missing memory"
 [ ! -n "$disk" ] && usage "missing disk"
 
+[ ! -f "./alpine-virt-${ALPINE_VER}-x86_64.iso" ] && usage "missing alpine iso\ncurl -OL https://dl-cdn.alpinelinux.org/alpine/v3.20/releases/x86_64/alpine-virt-${ALPINE_VER}-x86_64.iso"
+
 
 echo "sudo virt-install \
   --name $name \
   --vcpus=$vcpus \
   --memory=$memory \
-  --cdrom ./alpine-virt-3.17.1-x86_64.iso \
+  --cdrom ./alpine-virt-${ALPINE_VER}-x86_64.iso \
   --disk size=$disk \
-  --os-variant=alpinelinux3.15 \
+  --os-variant=$OSVARIANT \
   --graphics none \
   --network default
 "
