@@ -55,11 +55,14 @@ link_home() {
   local source=
 
   cd $curdir
-  for f in $(find home/ | sed 's/^home\///g' | grep -v .swp) ; do
+  for f in $(find home/ -type f| sed 's/^home\///g' | grep -v .swp) ; do
     if [ "$(uname)" = "Linux" ] ; then
       source=$HOME/dotfiles/home/$f
       target=${HOME}/$f
     elif [ "$(uname)" = "FreeBSD" ] ; then
+      source=$HOME/dotfiles/home/$f
+      target=${HOME}/$f
+    elif [ $(uname) = "Darwin" ] ; then
       source=$HOME/dotfiles/home/$f
       target=${HOME}/$f
     else
