@@ -1,0 +1,10 @@
+#theme = tokyonight_moon
+theme = cyberpunk
+#theme = Solarized Dark - Patched
+#font-family = Liga SFMono Nerd Font
+#font-family = GoMono Nerd Font
+#font-family = GoMono Nerd Font
+#font-family = Menlo
+font-family = Agave Nerd Font Mono
+
+background-opacity = 0.95

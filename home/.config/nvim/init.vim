@@ -13,7 +13,9 @@ if dein#load_state('~/.cache/dein')
   call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
   " theme
-  call dein#add('challenger-deep-theme/vim', {'name': 'challenger-deep'})
+  "call dein#add('challenger-deep-theme/vim', {'name': 'challenger-deep'})
+  call dein#add('nvim-treesitter/nvim-treesitter')
+  call dein#add('sainnhe/everforest')
 
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-ragtag')
@@ -31,16 +33,17 @@ if dein#load_state('~/.cache/dein')
   " typescript syntax highlightning(and more)
   call dein#add('HerringtonDarkholme/yats.vim')
   " more typescript/jsx stuffy
+  "
   call dein#add('maxmellon/vim-jsx-pretty')
-  " svelte
   call dein#add('evanleck/vim-svelte')
-
-  " copilot
-  call dein#add('github/copilot.vim')
-
-  call dein#add('wuelnerdotexe/vim-astro')
-
   call dein#add('hashivim/vim-terraform')
+  "call dein#add('wuelnerdotexe/vim-astro')
+
+
+  " ai plugins
+  call dein#add('github/copilot.vim')
+  call dein#add('David-Kunz/gen.nvim')
+  call dein#add('robitx/gp.nvim')
 
   " Required:
   call dein#end()
@@ -78,7 +81,8 @@ let g:is_posix=1
 runtime! macros/matchit.vim
 " end defaults
 
-colorscheme challenger_deep
+"colorscheme challenger_deep
+colorscheme everforest
 
 " FZF configuration
 set rtp+=~/.fzf
@@ -133,26 +137,27 @@ iabbrev ifer if err != nil {<Cr><Cr>}<Up><Tab>return
 "iabbrev logf WithCtx(ctx).WithFields(logrus.Fields{<Cr>}).
 
 " go stuff
-nmap <Leader>J :! go run main.go<Cr>
+"nmap <Leader>J :! go run main.go<Cr>
 nmap <Leader>J ::GoRun<Cr>
 nmap <Leader>N :! go test .<Cr>
+" configure go highlightning
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 
-let g:go_highlight_function_calls = 0
-let g:go_highlight_function_parameters = 0
-let g:go_highlight_methods = 0
-let g:go_highlight_operators = 0
-let g:go_highlight_structs = 0
-let g:go_highlight_types = 0
+let g:go_highlight_function_calls = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
 
 let g:go_highlight_extra_types = 1
 let g:go_highlight_operators = 1
 
-let g:go_auto_sameids = 0
-let g:go_highlight_chan_whitespace_error = 0
+let g:go_auto_sameids = 1
+let g:go_highlight_chan_whitespace_error = 1
 
 "au FileType go nmap <Leader>f :GoImports<Cr>:GoFmt<Cr>:GoDiagnostics<Cr>:GoBuild<Cr>:GoVet<Cr>
 "let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
@@ -187,7 +192,7 @@ nmap <Leader>g <c-o>
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 
-" use typescript
+" use typescript for svelte
 let g:svelte_preprocessors = ['typescript']
 
 " use prettier for typescript format
@@ -197,6 +202,6 @@ au BufEnter,BufRead,BufNewFile *.html,*.ts,*.tsx,*.astro,*.tmpl nmap <Leader>q :
 " register .tsx and .jsx extenstions
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 
-let g:astro_typescript = 'enable'
+"let g:astro_typescript = 'enable'
 " always (maybe) include the local configuration
 call SourceLocal('~/.config/nvim/local.vim')
