@@ -26,7 +26,7 @@ export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/li
 # Use the most modern vim present
 export EDITOR=vi
 if [ -x "$(which vim)" ] ; then
-  export editor=vim
+  export EDITOR=vim
 elif [ -x "$(which nvim)" ] ; then
   export EDITOR=nvim
 fi
@@ -102,7 +102,9 @@ if [ -f $HOME/.fzf.zsh ] ; then
   source ~/.fzf.zsh
   alias kubectx='kubectl config use-context $(kubectl config get-contexts -o name | fzf --height=10 --prompt="Kubernetes context")'
 fi
-tabs 4
+
+# this doesnt work as expected.
+# tabs 4
 
 #zprof
 
