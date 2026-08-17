@@ -1,73 +1,69 @@
-require("config.lazy")
-require("lazy").setup({
-  spec = {
-    -- import your plugins
-    {'tpope/vim-surround'},
-    {'tpope/vim-ragtag'},
-    {'junegunn/vim-easy-align'},
-    {'junegunn/fzf', dir = '~/.fzf', build = './install -all'},
-    {'junegunn/fzf.vim'},
-    {'nvim-treesitter/nvim-treesitter', lazy = false, branch = 'main', build = ':TSUpdate', opts = {
-      highlight = { enable = true, },
-      ensure_installed = { "go", "javascript", "typescript", "tsx", "html", "css", "json", "lua", "bash", "yaml", "markdown", "markdown_inline"},
-    }},
-
-    -- ai plugins and configurations
-    {'github/copilot.vim'},
-    --{ "David-Kunz/gen.nvim" },
-    {
-      'Robitx/gp.nvim', config = function()
-        local conf = {
-          copilot = {
-            openai = { disable = true, },
-            ollama = {
-              disable = true,
-              endpoint = "http://localhost:11434/api/chat",
-              secret = "dummy_secret",
-            },
-            copilot = {
-              disable = false,
-              endpoint = "https://api.githubcopilot.com/chat/completions",
-              secret = {
-		"bash",
-		"-c",
-                "cat ~/.config/github-copilot/apps.json | cat .config/github-copilot/apps.json | jq \'. | to_entries | .[0].value.githubAppId\'",
-              }
-            },
-          },
-        }
-        require('gp').setup(conf)
-      end,
-    },
-    --I rather copy relevant bits from https://github.com/neovim/nvim-lspconfig/tree/master/lsp
-    --than to use a whole plugin just for config.
-    --{'neovim/nvim-lspconfig'},
-
-    --Not sure if I need this since lsp is builtin now
-    --{'fatih/vim-go'},
-
-    -- enable golangci-lint through the native lsp client
-    {
-      "mfussenegger/nvim-lint",
-      event = { "BufReadPre", "BufNewFile" },
-      config = function()
-        local lint = require("lint")
-
-        lint.linters_by_ft = {
-          go = { "golangcilint" },
-        }
-
-        vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave", "BufReadPost" }, {
-          callback = function()
-            lint.try_lint()
-          end,
-        })
-      end,
-    },
-  },
-  -- automatically check for plugin updates
-  --checker = { enabled = true },
+vim.pack.add({
+'https://github.com/tpope/vim-surround',
+'https://github.com/tpope/vim-ragtag',
+'https://github.com/junegunn/vim-easy-align',
+'https://github.com/junegunn/fzf.vim',
+'https://github.com/nvim-treesitter/nvim-treesitter',
+'https://github.com/mfussenegger/nvim-lint'
 })
+
+require('lint').linters_by_ft = {
+  go = { "golangcilint" }
+}
+--    {'nvim-treesitter/nvim-treesitter', lazy = false, branch = 'main', build = ':TSUpdate', opts = {
+--      highlight = { enable = true, },
+--      ensure_installed = { "go", "javascript", "typescript", "tsx", "html", "css", "json", "lua", "bash", "yaml", "markdown", "markdown_inline"},
+--    }},
+--
+--    {
+--      'Robitx/gp.nvim', config = function()
+--        local conf = {
+--          copilot = {
+--            openai = { disable = true, },
+--            ollama = {
+--              disable = true,
+--              endpoint = "http://localhost:11434/api/chat",
+--              secret = "dummy_secret",
+--            },
+--            copilot = {
+--              disable = false,
+--              endpoint = "https://api.githubcopilot.com/chat/completions",
+--              secret = {
+--		"bash",
+--		"-c",
+--                "cat ~/.config/github-copilot/apps.json | cat .config/github-copilot/apps.json | jq \'. | to_entries | .[0].value.githubAppId\'",
+--              }
+--            },
+--          },
+--        }
+--        require('gp').setup(conf)
+--      end,
+--    },
+--    --Not sure if I need this since lsp is builtin now
+--    --{'fatih/vim-go'},
+--
+--    -- enable golangci-lint through the native lsp client
+--    {
+--      "mfussenegger/nvim-lint",
+--      event = { "BufReadPre", "BufNewFile" },
+--      config = function()
+--        local lint = require("lint")
+--
+--        lint.linters_by_ft = {
+--          go = { "golangcilint" },
+--        }
+--
+--        vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave", "BufReadPost" }, {
+--          callback = function()
+--            lint.try_lint()
+--          end,
+--        })
+--      end,
+--    },
+--  },
+--  -- automatically check for plugin updates
+--  --checker = { enabled = true },
+--})
 -- fix/start configuration and setup of plugins
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { '<filetype>' },
@@ -174,7 +170,6 @@ vim.lsp.config["astro"] = {
 -- enable the servers
 vim.lsp.enable("gopls")
 vim.lsp.enable("ts_ls")
-vim.lsp.enable("astro")
 
 -- add some hotkeys for lsp commands
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -192,19 +187,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
     bufmap('n', '<leader>e', vim.diagnostic.goto_next)
 
-    -- These keymaps are the defaults in Neovim v0.11
-    --    local bufmap = function(mode,rhs,action)
-      --      vim.keymap.set(mode,rhs,action, {buffer = event.buf})
-      --    end
-      --    bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
-      --    bufmap('n', 'grr', '<cmd>lua vim.lsp.buf.references()<cr>')
-      --    bufmap('n', 'gri', '<cmd>lua vim.lsp.buf.implementation()<cr>')
-      --    bufmap('n', 'grn', '<cmd>lua vim.lsp.buf.rename()<cr>')
-      --    bufmap('n', 'gra', '<cmd>lua vim.lsp.buf.code_action()<cr>')
-      --    bufmap('n', 'gO', '<cmd>lua vim.lsp.buf.document_symbol()<cr>')
-      --    bufmap({'i', 's'}, '<C-s>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
-    end,
-  })
+  end,
+})
 -- vim.keymap.set('n', '<Leader>i', "<cmd> lua vim.lsp.buf.code_action({context = { only = { 'source.organizeImports' }, diagnostics = vim.lsp.diagnostic.get_line_diagnostics() }, apply = true, })<cr>")
 vim.keymap.set('n', '<Leader>i', "<cmd> lua vim.lsp.buf.code_action({context = { only = { 'source.organizeImports' } }, apply = true, })<cr>")
 --v im.keymap.set('n', '<leader>e', '<cmd> lua vim.lsp.util.show_line_diagnostics()<CR>')
@@ -221,7 +205,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd(
   { "BufEnter", "BufRead", "BufNewFile" },
   {
-    pattern = { "*.ts", "*.tsx", "*.astro" },
+    pattern = { "*.ts", "*.tsx" },
     callback = function()
       vim.keymap.set("n", "<leader>q", function()
         vim.cmd("silent %!prettier --stdin-filepath %")
