@@ -167,9 +167,22 @@ vim.lsp.config["astro"] = {
   end,
 
 }
+vim.lsp.config["python"] = {
+  cmd = { 'pylsp' },
+  filetypes = { 'python' },
+  root_markers = {
+    'pyproject.toml',
+    'seutp.py',
+    'setup.cfg',
+    'requirements.txt',
+    'Pipfile',
+    '.git',
+  },
+}
 -- enable the servers
 vim.lsp.enable("gopls")
 vim.lsp.enable("ts_ls")
+vim.lsp.enable("python")
 
 -- add some hotkeys for lsp commands
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -212,4 +225,17 @@ vim.api.nvim_create_autocmd(
       end, { buffer = true })
     end,
   }
+
 )
+
+-- python
+vim.api.nvim_create_autocmd(
+  {"BufEnter", "BufWinEnter"},
+  {
+    pattern = {".py"},
+    callback = function ()
+	    vim.o.tabstop=2
+    end,
+  }
+)
+
