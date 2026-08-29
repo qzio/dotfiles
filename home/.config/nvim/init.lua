@@ -4,41 +4,21 @@ vim.pack.add({
 'https://github.com/junegunn/vim-easy-align',
 'https://github.com/junegunn/fzf.vim',
 'https://github.com/nvim-treesitter/nvim-treesitter',
-'https://github.com/mfussenegger/nvim-lint'
+'https://github.com/mfussenegger/nvim-lint',
+'https://github.com/ggml-org/llama.vim'
 })
+vim.cmd('packadd nvim-treesitter')
 
 require('lint').linters_by_ft = {
   go = { "golangcilint" }
 }
---    {'nvim-treesitter/nvim-treesitter', lazy = false, branch = 'main', build = ':TSUpdate', opts = {
---      highlight = { enable = true, },
---      ensure_installed = { "go", "javascript", "typescript", "tsx", "html", "css", "json", "lua", "bash", "yaml", "markdown", "markdown_inline"},
---    }},
---
---    {
---      'Robitx/gp.nvim', config = function()
---        local conf = {
---          copilot = {
---            openai = { disable = true, },
---            ollama = {
---              disable = true,
---              endpoint = "http://localhost:11434/api/chat",
---              secret = "dummy_secret",
---            },
---            copilot = {
---              disable = false,
---              endpoint = "https://api.githubcopilot.com/chat/completions",
---              secret = {
---		"bash",
---		"-c",
---                "cat ~/.config/github-copilot/apps.json | cat .config/github-copilot/apps.json | jq \'. | to_entries | .[0].value.githubAppId\'",
---              }
---            },
---          },
---        }
---        require('gp').setup(conf)
---      end,
---    },
+
+vim.g.llama_config = {
+	-- show_info = 0,
+	auto_fim = true,
+	api_key = 'somekey'
+}
+
 --    --Not sure if I need this since lsp is builtin now
 --    --{'fatih/vim-go'},
 --
@@ -64,16 +44,36 @@ require('lint').linters_by_ft = {
 --  -- automatically check for plugin updates
 --  --checker = { enabled = true },
 --})
+
 -- fix/start configuration and setup of plugins
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { '<filetype>' },
-  callback = function() vim.treesitter.start() end,
+--vim.api.nvim_create_autocmd('FileType', {
+ -- pattern = { '<filetype>' },
+  --callback = function() vim.treesitter.start() end,
+--})
+--
+-- treesitter stuff to get it working
+-- Force load the plugin paths right now
+vim.cmd('packadd nvim-treesitter')
+-- install parsers
+require('nvim-treesitter').install({
+  "go", "javascript", "typescript", "tsx", "html", 
+  "css", "json", "lua", "bash", "yaml", "markdown", 
+  "markdown_inline"
 })
-vim.treesitter.language.register('gohtml', { 'html.tmpl'})
-vim.api.nvim_create_autocmd({'BufNewFile','BufRead'}, {
-  pattern = { '*.html.tmpl' },
-  callback = function() vim.bo.filetype = 'html.gotmpl' end,
-})
+-- register a custom treesitter file ending that should use gohtml as parser
+vim.treesitter.language.register('gohtml', { 'html.tmpl' })
+
+-- 3. ENABLE SYNTAX HIGHLIGHTING (Native Neovim Way)
+-- This replaces the old "highlight = { enable = true }" block
+--vim.api.nvim_create_autocmd("FileType", {
+--  group = vim.api.nvim_create_augroup("TreesitterHighlight", { clear = true }),
+--  desc = "Enable Tree-sitter syntax highlighting",
+--  pattern = "*", 
+--  callback = function()
+--    pcall(vim.treesitter.start)
+--  end,
+--})
+
 
 vim.opt.rtp:append('~/.fzf')
 
@@ -153,20 +153,6 @@ vim.lsp.config["ts_ls"] = {
     'typescript.tsx',
   },
 }
-vim.lsp.config["astro"] = {
-  cmd = { 'astro-ls', '--stdio' },
-  filetypes = { 'astro' },
-  root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' },
-  init_options = {
-    typescript = {},
-  },
-  before_init = function(_, config)
-    if config.init_options and config.init_options.typescript and not config.init_options.typescript.tsdk then
-      config.init_options.typescript.tsdk = "./node_modules/typescript/lib"
-    end
-  end,
-
-}
 vim.lsp.config["python"] = {
   cmd = { 'pylsp' },
   filetypes = { 'python' },
@@ -214,7 +200,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- typescript, js and astro should use prettier formatting
+-- typescript/js should use prettier formatting
 vim.api.nvim_create_autocmd(
   { "BufEnter", "BufRead", "BufNewFile" },
   {

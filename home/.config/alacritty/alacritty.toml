@@ -1,0 +1,5 @@
+[font]
+  size = 8
+[selection]
+  # Automatically copies text to the primary selection buffer when highlighted
+  save_to_clipboard = true
