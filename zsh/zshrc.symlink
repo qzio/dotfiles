@@ -45,6 +45,7 @@ elif [ $(command -v ack) ] ; then
 else
   alias g='grep -i'
 fi
+alias gp='git push'
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
 # Keep history within the shell and save it to ~/.zsh_history:

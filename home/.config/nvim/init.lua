@@ -5,7 +5,7 @@ vim.pack.add({
 'https://github.com/junegunn/fzf.vim',
 'https://github.com/nvim-treesitter/nvim-treesitter',
 'https://github.com/mfussenegger/nvim-lint',
-'https://github.com/ggml-org/llama.vim'
+-- 'https://github.com/ggml-org/llama.vim'
 })
 vim.cmd('packadd nvim-treesitter')
 
@@ -13,44 +13,13 @@ require('lint').linters_by_ft = {
   go = { "golangcilint" }
 }
 
-vim.g.llama_config = {
-	-- show_info = 0,
-	auto_fim = true,
-	api_key = 'somekey'
-}
+-- vim.g.llama_config = {
+--   show_info = 0,
+--   auto_fim = true,
+--   api_key = 'somekey',
+--   keymap_fim_accept_line = '<Ctrl-Tab>',
+-- }
 
---    --Not sure if I need this since lsp is builtin now
---    --{'fatih/vim-go'},
---
---    -- enable golangci-lint through the native lsp client
---    {
---      "mfussenegger/nvim-lint",
---      event = { "BufReadPre", "BufNewFile" },
---      config = function()
---        local lint = require("lint")
---
---        lint.linters_by_ft = {
---          go = { "golangcilint" },
---        }
---
---        vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave", "BufReadPost" }, {
---          callback = function()
---            lint.try_lint()
---          end,
---        })
---      end,
---    },
---  },
---  -- automatically check for plugin updates
---  --checker = { enabled = true },
---})
-
--- fix/start configuration and setup of plugins
---vim.api.nvim_create_autocmd('FileType', {
- -- pattern = { '<filetype>' },
-  --callback = function() vim.treesitter.start() end,
---})
---
 -- treesitter stuff to get it working
 -- Force load the plugin paths right now
 vim.cmd('packadd nvim-treesitter')
@@ -63,16 +32,14 @@ require('nvim-treesitter').install({
 -- register a custom treesitter file ending that should use gohtml as parser
 vim.treesitter.language.register('gohtml', { 'html.tmpl' })
 
--- 3. ENABLE SYNTAX HIGHLIGHTING (Native Neovim Way)
--- This replaces the old "highlight = { enable = true }" block
---vim.api.nvim_create_autocmd("FileType", {
---  group = vim.api.nvim_create_augroup("TreesitterHighlight", { clear = true }),
---  desc = "Enable Tree-sitter syntax highlighting",
---  pattern = "*", 
---  callback = function()
---    pcall(vim.treesitter.start)
---  end,
---})
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("TreesitterHighlight", { clear = true }),
+  desc = "Enable Tree-sitter syntax highlighting",
+  pattern = "*",
+  callback = function()
+    pcall(vim.treesitter.start)
+  end,
+})
 
 
 vim.opt.rtp:append('~/.fzf')
@@ -186,6 +153,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
     bufmap('n', '<leader>e', vim.diagnostic.goto_next)
 
+    vim.lsp.completion.enable()
   end,
 })
 -- vim.keymap.set('n', '<Leader>i', "<cmd> lua vim.lsp.buf.code_action({context = { only = { 'source.organizeImports' }, diagnostics = vim.lsp.diagnostic.get_line_diagnostics() }, apply = true, })<cr>")
@@ -211,7 +179,6 @@ vim.api.nvim_create_autocmd(
       end, { buffer = true })
     end,
   }
-
 )
 
 -- python
@@ -225,3 +192,13 @@ vim.api.nvim_create_autocmd(
   }
 )
 
+-- custom keymaps
+vim.keymap.set("n", "<leader>T", function()
+  local cur_dir = vim.fn.expand("%:h")
+  local cur_word = vim.fn.expand("<cword>")
+  if cur_dir == "" or cur_dir == "." then
+    cur_dir = ""
+  end
+  local cmd = string.format("!go test ./%s -run %s", cur_dir, cur_word)
+  vim.cmd(cmd)
+end)

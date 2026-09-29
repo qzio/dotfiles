@@ -8,7 +8,7 @@ apt_qubes="qubes-core-agent-passwordless-root "\
   "qubes-core-agent-networking qubes-usb-proxy "\
   "qubes-utils qubes-vm-dependencies qubes-notification-agent" \
   ""
-apt_extras="minisign netcat-openbsd iproute2 openssl nmap nftables xsel"
+apt_extras="minisign netcat-openbsd iproute2 openssl nmap nftables xsel ldnsutils"
 
 read -p "what kind of template?" templateKind
 
