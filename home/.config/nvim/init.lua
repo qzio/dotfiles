@@ -154,6 +154,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     bufmap('n', '<leader>e', vim.diagnostic.goto_next)
 
     vim.lsp.completion.enable()
+    vim.lsp.inline_completion.enable()
   end,
 })
 -- vim.keymap.set('n', '<Leader>i', "<cmd> lua vim.lsp.buf.code_action({context = { only = { 'source.organizeImports' }, diagnostics = vim.lsp.diagnostic.get_line_diagnostics() }, apply = true, })<cr>")
