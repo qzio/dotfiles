@@ -2,13 +2,14 @@
 
 set -eu
 
-apt_useful="alacritty git ripgrep tmux curl libnotify-bin"
-apt_secure="qubes-gpg-split openssh-client keepassxc ssh-askpass"
+apt_useful="alacritty git ripgrep tmux libnotify-bin"
+apt_secure="openssh-client keepassxc ssh-askpass minisign "\
+  "qubes-gpg-split qubes-notification-agent"
 apt_qubes="qubes-core-agent-passwordless-root "\
   "qubes-core-agent-networking qubes-usb-proxy "\
-  "qubes-utils qubes-vm-dependencies qubes-notification-agent" \
+  "qubes-utils qubes-vm-dependencies" \
   ""
-apt_extras="minisign netcat-openbsd iproute2 openssl nmap nftables xsel ldnsutils"
+apt_extras="netcat-openbsd iproute2 openssl nmap nftables xsel ldnsutils curl"
 
 read -p "what kind of template?" templateKind
 
@@ -16,10 +17,10 @@ echo "got templateKind: $templateKind"
 
 case $templateKind in
   app)
-    (set -x; apt install -y $apt_useful $apt_secure $apt_qubes)
+    (set -x; apt install -y $apt_useful $apt_secure $apt_qubes $apt_extras)
     ;;
   vault)
-    (set -x; apt install -y $apt_useful $apt_secure $apt_extras)
+    (set -x; apt install -y $apt_useful $apt_secure)
     ;;
   *)
     echo "unsupported template $templateKind, [app|vault]"
@@ -35,4 +36,4 @@ echo "
     go1.26.6 download
   will download into $HOME/sdk/go1.26.6
   symlink that to $HOME/sdk/go and add $HOME/sdk/go/bin to \$PATH
-
+"
