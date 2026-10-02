@@ -1,5 +1,4 @@
 # apt-packages/default -----
-debian-keyring
 whois
 resolvconf
 openvpn
@@ -14,42 +13,35 @@ hdparm
 dnsutils
 curl
 cryptsetup
-apt-transport-https
-gnupg-agent
 rsync
 htop
 netcat-openbsd
 tcpdump
 nmap
-libpng-dev
 build-essential
 jq
 inotify-tools
 sipcalc
 pinentry-tty
+tmux
+zsh
+ripgrep
+wireguard-tools
 
 # apt-packages/desktop -----
-google-chrome-beta
-wire-desktop
 zathura
-rxvt-unicode-256color
+alacritty
 xsel
-keepassx
+keepassxc
 scrot
 feh
 gimp
 
 # apt-packages/third-party -----
-kubectl
-google-cloud-sdk
-docker-ce
+# kubectl
+# google-cloud-sdk
+# google-chrome
+# docker-ce
 
 # apt-packages/unstable -----
 neovim
-tmux
-mosh
-zsh
-ripgrep
-fd-find
-golang
-wireguard-tools
