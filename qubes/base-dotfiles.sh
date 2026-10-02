@@ -40,6 +40,29 @@ EOF
 
 fi
 
+if [ $(command -v tmux) ] ; then
+  if [ ! -f $HOME/.tmux.conf ] ; then
+    echo "writing $HOME/.tmux.conf"
+    cat > $HOME/.tmux.conf <<EOF
+# Increase scrollback
+set-option -g history-limit 10000
+set -g default-terminal "screen-256color"
+# get ctrl-arrow  to move between words
+set-window-option -g xterm-keys on
+
+# use vi-based
+set-window-option -g mode-keys vi
+# fix slow escape times (annoying to have slow escape as a vim user)
+set -sg escape-time 0
+# vim key bindings to select panes.
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+  EOF
+  fi
+fi
+
 if [ $(command -v zsh) ] ; then
   if [ ! -f $HOME/.zshrc ] ; then
     echo "writing .zshrc"

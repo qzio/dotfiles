@@ -1,0 +1,55 @@
+# apt-packages/default -----
+debian-keyring
+whois
+resolvconf
+openvpn
+oathtool
+mtr
+openconnect
+git-crypt
+git
+gettext-base
+gnupg
+hdparm
+dnsutils
+curl
+cryptsetup
+apt-transport-https
+gnupg-agent
+rsync
+htop
+netcat-openbsd
+tcpdump
+nmap
+libpng-dev
+build-essential
+jq
+inotify-tools
+sipcalc
+pinentry-tty
+
+# apt-packages/desktop -----
+google-chrome-beta
+wire-desktop
+zathura
+rxvt-unicode-256color
+xsel
+keepassx
+scrot
+feh
+gimp
+
+# apt-packages/third-party -----
+kubectl
+google-cloud-sdk
+docker-ce
+
+# apt-packages/unstable -----
+neovim
+tmux
+mosh
+zsh
+ripgrep
+fd-find
+golang
+wireguard-tools
