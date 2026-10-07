@@ -16,13 +16,13 @@ if [ ! -f $HOME/.bash_aliases ] ; then
 # Use the most modern vim present
 export EDITOR=vi
 alias vim=vi
-if [ -x "\$(which vim)" ] ; then
-  export EDITOR=vim
-  unalias vim
-elif [ -x "\$(which nvim)" ] ; then
+if [ -x "\$(which nvim)" ] ; then
   export EDITOR=nvim
   unalias vim
   alias vim=nvim
+elif [ -x "\$(which vim)" ] ; then
+  export EDITOR=vim
+  unalias vim
 fi
 
 # use the best grep-like command
@@ -59,7 +59,17 @@ bind h select-pane -L
 bind j select-pane -D
 bind k select-pane -U
 bind l select-pane -R
-  EOF
+
+# base theme
+set -g status-style "bg=default,fg=#7c7f8f"
+set -g status-left " #H "
+set -g status-right " %Y-%m-%d %H:%M "
+set -g status-left-style "fg=#b744a1,bold"
+set -g status-justify left
+set -g window-status-format "#W "
+set -g window-status-current-format "#W "
+set -g window-status-current-style "fg=#e6e9ef,bold"
+EOF
   fi
 fi
 
@@ -67,16 +77,33 @@ if [ $(command -v zsh) ] ; then
   if [ ! -f $HOME/.zshrc ] ; then
     echo "writing .zshrc"
     cat > $HOME/.zshrc <<EOF
-autoload compinit
-autoload -Uz compinit
-compinit -i
+autoload -Uz compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
+autoload -U promptinit && promptinit
+autoload -U colors && colors
 bindkey -e
+setopt  prompt_subst
+export PROMPT='%{\$fg[magenta]%}%m%{\$reset_color%}:%{\$fg[green]%}%3~%B%{\$reset_color%}%(!.#.$) '
 export HISTSIZE=10000
 export SAVEHIST=5000
 export HISTFILE=~/.history_zsh
-[ -f $HOME/.bash_aliases ] && source $HOME/.bash_aliases
+export LC_TIME=C.UTF-8
+export LC_CTYPE=en_US.UTF-8
+[ -f \$HOME/.bash_aliases ] && source \$HOME/.bash_aliases
+[ -f \$HOME/.shell_extras ] && source \$HOME/.shell_extras
+# default bashrc has this
+alias ls='ls --color=auto'
 
+
+# [Ctrl-RightArrow] - move forward one word
+bindkey -M emacs '^[[1;5C' forward-word
+bindkey -M viins '^[[1;5C' forward-word
+bindkey -M vicmd '^[[1;5C' forward-word
+# [Ctrl-LeftArrow] - move backward one word
+bindkey -M emacs '^[[1;5D' backward-word
+bindkey -M viins '^[[1;5D' backward-word
+bindkey -M vicmd '^[[1;5D' backward-word
+bindkey '^r' history-incremental-search-backward
 EOF
 
     cat $HOME/.zshrc
