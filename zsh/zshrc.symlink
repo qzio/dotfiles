@@ -63,7 +63,7 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 export LC_TIME=C.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
-export TMUX_VERION=""
+export TMUX_VERSION=""
 if [ -x "$(which tmux)" ] ; then
   export TMUX_VERSION="$(tmux -V | cut -d ' ' -f2)"
 fi
